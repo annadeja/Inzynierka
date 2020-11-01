@@ -18,15 +18,17 @@ public class DialogNodeView : GraphView
 
     private void createRootNode()
     {
-        DialogNode root = new DialogNode("root", true);
-        root.SetPosition(new Rect(200, 200, 100, 100));
+        DialogNode root = new DialogNode(true, "root");
+        root.SetPosition(new Rect(200, 200, 200, 200));
+        root.capabilities &= ~Capabilities.Movable;
+        root.capabilities &= ~Capabilities.Deletable;
         AddElement(root);
     }
 
     public void createNode()
     {
         DialogNode node = new DialogNode();
-        node.SetPosition(new Rect(0, 0, 100, 100));
+        node.SetPosition(new Rect(200, 200, 200, 200));
         AddElement(node);
     }
 

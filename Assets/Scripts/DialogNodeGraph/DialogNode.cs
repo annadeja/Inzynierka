@@ -20,9 +20,9 @@ public class DialogNode: Node
         controlsSetup();
     }
 
-    public DialogNode(string title, bool isRoot, string dialogLine = "SAMPLE TEXT.", string speaker = "DUMMY")
+    public DialogNode(bool isRoot, string speaker = "DUMMY", string dialogLine = "SAMPLE TEXT.")
     {
-        this.title = title;
+        this.title = speaker;
         this.isRoot = isRoot;
         this.dialogLine = dialogLine;
         this.speaker = speaker;
@@ -34,15 +34,48 @@ public class DialogNode: Node
             controlsSetup();
     }
 
-    private void createPort(string name, Direction direction, Port.Capacity capacity = Port.Capacity.Single)
+    public DialogNode(NodeDataContainer data)
+    {
+        title = data.Speaker;
+        dialogLine = data.DialogLine;
+        speaker = data.Speaker;
+        guid = data.Guid;
+        controlsSetup();
+    }
+
+    public void createPort(string name, Direction direction, Port.Capacity capacity = Port.Capacity.Single)
     {
         Port port = InstantiatePort(Orientation.Horizontal, direction, capacity, typeof(bool));
         port.portName = name;
         if (direction == Direction.Input)
             inputContainer.Add(port);
         else
-            outputContainer.Add(port);
+        {
+            if(!isRoot)
+            {
+                Button removeBtn = new Button(delegate { removePort(port); });
+                removeBtn.text = "x";
+                TextField portNameField = new TextField();
+                portNameField.value = name;
+                portNameField.RegisterCallback<InputEvent, Port>(setPortName, port);
 
+                port.contentContainer.Add(removeBtn);
+                port.contentContainer.Add(portNameField);
+            }
+            outputContainer.Add(port);
+        }
+
+        refreshNode();
+    }
+
+    public void removePort(Port port)
+    {
+        foreach(Edge edge in port.connections)
+        {
+            edge.input.Disconnect(edge);
+            edge.RemoveFromHierarchy();
+        }
+        outputContainer.Remove(port);
         refreshNode();
     }
 
@@ -72,6 +105,7 @@ public class DialogNode: Node
         speakerLabel.value = speaker;
         speakerLabel.RegisterCallback<InputEvent>(setSpeaker);
 
+        extensionContainer.Add(speakerLabel);
         extensionContainer.Add(lineLabel);
         extensionContainer.Add(addOutput);
         refreshNode();
@@ -85,5 +119,11 @@ public class DialogNode: Node
     private void setSpeaker(InputEvent e)
     {
         this.speaker = speakerLabel.value;
+        this.title = speakerLabel.value;
+    }
+
+    private void setPortName(InputEvent e, Port port)
+    {
+        port.portName = e.newData;
     }
 }
