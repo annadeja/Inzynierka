@@ -1,6 +1,9 @@
-﻿using UnityEngine;
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using UnityEngine;
 using UnityEditor.Experimental.GraphView;
-using System;
 using UnityEngine.UIElements;
 
 public class DialogNode: Node
@@ -125,5 +128,11 @@ public class DialogNode: Node
     private void setPortName(InputEvent e, Port port)
     {
         port.portName = e.newData;
+    }
+
+    public List<Port> getOutputPorts()
+    {
+        List<Port> ports = outputContainer.Children().ToList().Cast<Port>().ToList();
+        return ports;
     }
 }

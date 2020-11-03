@@ -21,13 +21,27 @@ MonoBehaviour:
     TargetGuid: cc9de62c-8af2-432c-a2da-732d74ae1c29
   - NodeGuid: cc9de62c-8af2-432c-a2da-732d74ae1c29
     PortName: New response
-    TargetGuid: 5a7f4dc2-68e9-479f-a0cd-e4e635345a40
+    TargetGuid: e4c4349a-56bb-4051-ba24-690cb049a23f
   nodeData:
   - Guid: cc9de62c-8af2-432c-a2da-732d74ae1c29
     DialogLine: jjj
     Speaker: j
     Position: {x: 356, y: 201}
+    OutputPorts:
+    - NodeGuid: cc9de62c-8af2-432c-a2da-732d74ae1c29
+      PortName: jj
+      TargetGuid: 5a7f4dc2-68e9-479f-a0cd-e4e635345a40
+    - NodeGuid: cc9de62c-8af2-432c-a2da-732d74ae1c29
+      PortName: New response
+      TargetGuid: e4c4349a-56bb-4051-ba24-690cb049a23f
   - Guid: 5a7f4dc2-68e9-479f-a0cd-e4e635345a40
     DialogLine: SAMPLE TEXT.
     Speaker: DUMMY
     Position: {x: 765, y: 216}
+    OutputPorts: []
+  - Guid: e4c4349a-56bb-4051-ba24-690cb049a23f
+    DialogLine: gffgh
+    Speaker: DUMMY
+    Position: {x: 739, y: 408}
+    OutputPorts: []
+  firstNodeGuid: cc9de62c-8af2-432c-a2da-732d74ae1c29

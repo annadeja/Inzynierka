@@ -34,15 +34,6 @@ public class GraphIO
             if (edge.input.node != null)
                 connectedPorts.Add(edge);
 
-        foreach(Edge edge in connectedPorts)
-        {
-            DialogNode outputNode = (DialogNode)edge.output.node;
-            DialogNode inputNode = (DialogNode)edge.input.node;
-
-            NodeConnection connection = new NodeConnection(outputNode.guid, edge.output.portName, inputNode.guid);
-            dialogContainer.connections.Add(connection);
-        }
-
         foreach(DialogNode node in nodes)
         {
             if (node.isRoot)
@@ -51,6 +42,21 @@ public class GraphIO
             NodeDataContainer data = new NodeDataContainer(node.guid, node.dialogLine, node.speaker, node.GetPosition().position);
             dialogContainer.nodeData.Add(data);
         }
+
+        foreach(Edge edge in connectedPorts)
+        {
+            DialogNode outputNode = (DialogNode)edge.output.node;
+            DialogNode inputNode = (DialogNode)edge.input.node;
+
+            NodeConnection connection = new NodeConnection(outputNode.guid, edge.output.portName, inputNode.guid);
+            dialogContainer.connections.Add(connection);
+
+            if (edge.output.portName == "root")
+                dialogContainer.firstNodeGuid = inputNode.guid;
+            else
+                dialogContainer.nodeData.Find(x => x.Guid == outputNode.guid).OutputPorts.Add(connection);
+        }
+
         AssetDatabase.CreateAsset(dialogContainer, "Assets/Resources/Dialogs/" + fileName + ".asset");
         AssetDatabase.SaveAssets();
     }
@@ -80,7 +86,7 @@ public class GraphIO
         {
             DialogNode output = nodes.Find(x => x.guid == portConnection.NodeGuid);
             DialogNode input = nodes.Find(x => x.guid == portConnection.TargetGuid);
-            List<Port> ports = output.outputContainer.Children().ToList().Cast<Port>().ToList();
+            List<Port> ports = output.getOutputPorts();
             Port outputPort = ports.Find(x => x.portName == portConnection.PortName);
             view.Add(outputPort.ConnectTo((Port)input.inputContainer[0]));
         }
