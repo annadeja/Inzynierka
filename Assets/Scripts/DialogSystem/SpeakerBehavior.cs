@@ -8,6 +8,7 @@ public class SpeakerBehavior : MonoBehaviour
     [Header("UI elements")]
     [SerializeField] Text popup;
     [SerializeField] Image dialogBackground;
+    [SerializeField] Text speaker;
     [SerializeField] Text dialogLine;
     [SerializeField] List<Button> choiceButtons;
 
@@ -48,6 +49,7 @@ public class SpeakerBehavior : MonoBehaviour
     {
         popup.gameObject.SetActive(false);
         dialogBackground.gameObject.SetActive(false);
+        speaker.gameObject.SetActive(false);
         dialogLine.gameObject.SetActive(false);
         foreach(Button button in choiceButtons)
             button.gameObject.SetActive(false);
@@ -58,6 +60,7 @@ public class SpeakerBehavior : MonoBehaviour
     {
         popup.gameObject.SetActive(false);
         dialogBackground.gameObject.SetActive(true);
+        speaker.gameObject.SetActive(true);
         dialogLine.gameObject.SetActive(true);
     }
 
@@ -77,6 +80,7 @@ public class SpeakerBehavior : MonoBehaviour
 
     private void displayNextDialog()
     {
+        speaker.text = currentNode.Speaker;
         dialogLine.text = currentNode.DialogLine;
         foreach (Button button in choiceButtons)
             button.gameObject.SetActive(false);
