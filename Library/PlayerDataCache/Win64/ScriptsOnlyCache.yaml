@@ -6,8 +6,6 @@ ScriptsOnlyBuild:
     - SpeakerBehavior
     Unity.Rider.Editor.dll:
     - Packages.Rider.Editor.UnitTesting.CallbackData
-    Unity.Timeline.Editor.dll:
-    - TimelinePreferences
     UnityEditor.Graphs.dll:
     - UnityEditor.Graphs.AnimationBlendTree.Graph
     - UnityEditor.Graphs.AnimationBlendTree.GraphGUI
@@ -449,7 +447,7 @@ ScriptsOnlyBuild:
     className: TMP_StyleSheet
   - hash:
       serializedVersion: 2
-      Hash: 3c39f10bc0c86afcbffb702032f32419
+      Hash: de75be6e325997476d6206bfd5cec363
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: SpeakerBehavior

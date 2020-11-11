@@ -18,8 +18,8 @@ public class SpeakerBehavior : MonoBehaviour
     private NodeDataContainer currentNode;
 
     [Header("Positions")]
-    [SerializeField] Vector3 playerPosition;
     [SerializeField] Vector3 cameraPosition;
+    [SerializeField] Vector3 playerPosition;
 
     private PlayerController playerControl;
     private bool isInRange = false;
@@ -27,7 +27,6 @@ public class SpeakerBehavior : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        getNextTree();
         disableUI();
         if(choiceButtons.Count == 3)
         {
@@ -40,12 +39,13 @@ public class SpeakerBehavior : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetButtonDown("Submit") && currentTree)
+        if (Input.GetButtonDown("Submit"))
             startDialog();
     }
 
     private void startDialog()
     {
+        getNextTree();
         enableUI();
         disablePlayerControls();
         displayNextDialog();
@@ -78,6 +78,7 @@ public class SpeakerBehavior : MonoBehaviour
         playerControl.animator.Rebind();
         playerControl.animator.Update(0f);
         playerControl.animator.enabled = false;
+        //playerControl.transform.position = playerPosition;
         playerControl.canMove = false;
     }
 
@@ -117,7 +118,7 @@ public class SpeakerBehavior : MonoBehaviour
 
     private void endConversation()
     {
-        getNextTree();
+        //getNextTree();
         disableUI();
         enablePlayerControls();
     }
@@ -154,7 +155,7 @@ public class SpeakerBehavior : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (currentTree)
+        if (dialogTrees.Count != 0)
             popup.gameObject.SetActive(true);
         isInRange = true;
         playerControl = other.gameObject.GetComponentInChildren<PlayerController>();

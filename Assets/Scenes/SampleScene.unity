@@ -1432,6 +1432,8 @@ MonoBehaviour:
   dialogTrees:
   - {fileID: 11400000, guid: f88d4ca02a47c98418fafccdaa5859e5, type: 2}
   - {fileID: 11400000, guid: 39929c1e603cbce43a09483991251eef, type: 2}
+  cameraPosition: {x: 0, y: 0, z: 0}
+  playerPosition: {x: 23, y: 0, z: -5}
 --- !u!1 &1893500421
 GameObject:
   m_ObjectHideFlags: 0
