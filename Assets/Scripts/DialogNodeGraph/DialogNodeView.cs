@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿#if UNITY_EDITOR
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine.UIElements;
@@ -43,3 +44,4 @@ public class DialogNodeView : GraphView
         return compatiblePorts;
     }
 }
+#endif

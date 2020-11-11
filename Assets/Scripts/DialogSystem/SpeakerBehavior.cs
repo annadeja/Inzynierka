@@ -17,42 +17,49 @@ public class SpeakerBehavior : MonoBehaviour
     private DialogContainer currentTree;
     private NodeDataContainer currentNode;
 
+    [Header("Positions")]
+    [SerializeField] Vector3 playerPosition;
+    [SerializeField] Vector3 cameraPosition;
+
     private PlayerController playerControl;
+    private bool isInRange = false;
 
     // Start is called before the first frame update
     void Start()
     {
-        if (dialogTrees.Count != 0)
-        {
-            currentTree = dialogTrees[0];
-            dialogTrees.Remove(currentTree);
-            currentNode = currentTree.getFirstNode();
-        }
-
-        //Vector2 displacement = new Vector2(5, 5);
-        //displacement.x = gameObject.transform.position.x;
-        //displacement.y = gameObject.transform.position.y;
-        //popup.gameObject.transform.position = displacement;
+        getNextTree();
         disableUI();
-        choiceButtons[0].onClick.AddListener(delegate { makeChoice(0); });
-        choiceButtons[1].onClick.AddListener(delegate { makeChoice(1); });
-        choiceButtons[2].onClick.AddListener(delegate { makeChoice(2); });
+        if(choiceButtons.Count == 3)
+        {
+            choiceButtons[0].onClick.AddListener(delegate { makeChoice(0); });
+            choiceButtons[1].onClick.AddListener(delegate { makeChoice(1); });
+            choiceButtons[2].onClick.AddListener(delegate { makeChoice(2); });
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if (Input.GetButtonDown("Submit") && currentTree)
+            startDialog();
+    }
+
+    private void startDialog()
+    {
+        enableUI();
+        disablePlayerControls();
+        displayNextDialog();
     }
 
     private void disableUI()
     {
         popup.gameObject.SetActive(false);
+        foreach(Button button in choiceButtons)
+            button.gameObject.SetActive(false);
         dialogBackground.gameObject.SetActive(false);
         speaker.gameObject.SetActive(false);
         dialogLine.gameObject.SetActive(false);
-        foreach(Button button in choiceButtons)
-            button.gameObject.SetActive(false);
+        Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }
 
@@ -62,6 +69,8 @@ public class SpeakerBehavior : MonoBehaviour
         dialogBackground.gameObject.SetActive(true);
         speaker.gameObject.SetActive(true);
         dialogLine.gameObject.SetActive(true);
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
     }
 
     private void disablePlayerControls()
@@ -81,14 +90,14 @@ public class SpeakerBehavior : MonoBehaviour
     private void displayNextDialog()
     {
         speaker.text = currentNode.Speaker;
-        dialogLine.text = currentNode.DialogLine;
-        foreach (Button button in choiceButtons)
-            button.gameObject.SetActive(false);
+        dialogLine.text = "";
+        StartCoroutine("typeText");
 
         if (currentNode.isLeaf())
         {
             choiceButtons[0].gameObject.SetActive(true);
             choiceButtons[0].GetComponentInChildren<Text>().text = "Goodbye.";
+            choiceButtons[0].onClick.RemoveAllListeners();
             choiceButtons[0].onClick.AddListener(endConversation);
             return;
         }
@@ -102,39 +111,58 @@ public class SpeakerBehavior : MonoBehaviour
 
     public void makeChoice(int i)
     {
-        if (!currentNode.isLeaf())
-        {
-            currentNode = currentTree.getNode(currentNode.OutputPorts[i].TargetGuid);
-            displayNextDialog();
-        }
+        currentNode = currentTree.getNode(currentNode.OutputPorts[i].TargetGuid);
+        displayNextDialog();
     }
 
     private void endConversation()
     {
+        getNextTree();
         disableUI();
         enablePlayerControls();
-        Cursor.visible = false;
+    }
+
+    private void getNextTree()
+    {
+        if (dialogTrees.Count != 0)
+        {
+            currentTree = dialogTrees[0];
+            dialogTrees.Remove(currentTree);
+            currentNode = currentTree.getFirstNode();
+            choiceButtons[0].onClick.RemoveAllListeners();
+            choiceButtons[0].onClick.AddListener(delegate { makeChoice(0); });
+        }
+        else
+            currentTree = null;
+    }
+
+    private IEnumerator typeText()
+    {
+        foreach (Button button in choiceButtons)
+            button.gameObject.SetActive(false);
+        foreach (char character in currentNode.DialogLine.ToCharArray())
+        {
+            if (Input.GetMouseButton(0))
+            {
+                dialogLine.text = currentNode.DialogLine;
+                yield break;
+            }
+            dialogLine.text += character;
+            yield return new WaitForSeconds(0.1f);
+        }
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        popup.gameObject.SetActive(true);
-    }
-
-    private void OnTriggerStay(Collider other)
-    {
-        if (Input.GetButtonDown("Submit"))
-        {
-            enableUI();
-            playerControl = other.gameObject.GetComponentInChildren<PlayerController>();
-            disablePlayerControls();
-            Cursor.visible = true;
-            displayNextDialog();
-        }
+        if (currentTree)
+            popup.gameObject.SetActive(true);
+        isInRange = true;
+        playerControl = other.gameObject.GetComponentInChildren<PlayerController>();
     }
 
     private void OnTriggerExit(Collider other)
     {
         popup.gameObject.SetActive(false);
+        isInRange = false;
     }
 }

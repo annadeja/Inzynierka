@@ -1,7 +1,8 @@
-﻿using UnityEngine;
+﻿#if UNITY_EDITOR
+using UnityEngine;
+using UnityEngine.UIElements;
 using UnityEditor;
 using UnityEditor.Experimental.GraphView;
-using UnityEngine.UIElements;
 using UnityEditor.UIElements;
 
 public class DialogNodeGraph : GraphViewEditorWindow
@@ -82,3 +83,4 @@ public class DialogNodeGraph : GraphViewEditorWindow
         rootVisualElement.Remove(view);
     }
 }
+#endif

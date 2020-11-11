@@ -1430,6 +1430,7 @@ MonoBehaviour:
   - {fileID: 649822649}
   - {fileID: 1768591520}
   dialogTrees:
+  - {fileID: 11400000, guid: f88d4ca02a47c98418fafccdaa5859e5, type: 2}
   - {fileID: 11400000, guid: 39929c1e603cbce43a09483991251eef, type: 2}
 --- !u!1 &1893500421
 GameObject:

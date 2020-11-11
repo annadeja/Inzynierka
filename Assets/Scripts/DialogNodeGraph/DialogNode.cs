@@ -1,10 +1,11 @@
-﻿using System;
+﻿#if UNITY_EDITOR
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine.UIElements;
+using UnityEditor.Experimental.GraphView;
 
 public class DialogNode: Node
 {
@@ -136,3 +137,4 @@ public class DialogNode: Node
         return ports;
     }
 }
+#endif
