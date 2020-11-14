@@ -10,6 +10,8 @@ public class SpeakerBehavior : MonoBehaviour
     [SerializeField] Image dialogBackground;
     [SerializeField] Text speaker;
     [SerializeField] Text dialogLine;
+    [SerializeField] Image icon;
+    [SerializeField] float textDelay = 0.1f;
     [SerializeField] List<Button> choiceButtons;
 
     [Header("Dialog trees")]
@@ -23,6 +25,7 @@ public class SpeakerBehavior : MonoBehaviour
 
     private PlayerController playerControl;
     private bool isInRange = false;
+    private CharacterData currentCharacter;
 
     // Start is called before the first frame update
     void Start()
@@ -57,6 +60,7 @@ public class SpeakerBehavior : MonoBehaviour
         foreach(Button button in choiceButtons)
             button.gameObject.SetActive(false);
         dialogBackground.gameObject.SetActive(false);
+        icon.gameObject.SetActive(false);
         speaker.gameObject.SetActive(false);
         dialogLine.gameObject.SetActive(false);
         Cursor.lockState = CursorLockMode.Locked;
@@ -67,6 +71,7 @@ public class SpeakerBehavior : MonoBehaviour
     {
         popup.gameObject.SetActive(false);
         dialogBackground.gameObject.SetActive(true);
+        icon.gameObject.SetActive(true);
         speaker.gameObject.SetActive(true);
         dialogLine.gameObject.SetActive(true);
         Cursor.visible = true;
@@ -92,6 +97,12 @@ public class SpeakerBehavior : MonoBehaviour
     {
         speaker.text = currentNode.Speaker;
         dialogLine.text = "";
+        currentCharacter = Resources.Load<CharacterData>("Dialogs/Character_data/" + currentNode.Speaker);
+        if (currentCharacter)
+        {
+            icon.sprite = currentCharacter.Icon;
+            dialogLine.color = currentCharacter.TextColor;
+        }
         StartCoroutine("typeText");
 
         if (currentNode.isLeaf())
@@ -118,7 +129,6 @@ public class SpeakerBehavior : MonoBehaviour
 
     private void endConversation()
     {
-        //getNextTree();
         disableUI();
         enablePlayerControls();
     }
@@ -149,7 +159,7 @@ public class SpeakerBehavior : MonoBehaviour
                 yield break;
             }
             dialogLine.text += character;
-            yield return new WaitForSeconds(0.1f);
+            yield return new WaitForSeconds(textDelay);
         }
     }
 

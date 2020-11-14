@@ -58,13 +58,13 @@ public class GraphIO
                 dialogContainer.nodeData.Find(x => x.Guid == outputNode.guid).OutputPorts.Add(connection);
         }
 
-        AssetDatabase.CreateAsset(dialogContainer, "Assets/Resources/Dialogs/" + fileName + ".asset");
+        AssetDatabase.CreateAsset(dialogContainer, "Assets/Resources/Dialogs/Trees/" + fileName + ".asset");
         AssetDatabase.SaveAssets();
     }
 
     public void load(string fileName)
     {
-        DialogContainer dialogContainer = Resources.Load<DialogContainer>("Dialogs/" + fileName);
+        DialogContainer dialogContainer = Resources.Load<DialogContainer>("Dialogs/Trees/" + fileName);
         if (dialogContainer == null)
             return;
 

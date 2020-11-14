@@ -122,7 +122,7 @@ MonoBehaviour:
   m_MinSize: {x: 679, y: 492}
   m_MaxSize: {x: 14002, y: 14042}
   vertical: 0
-  controlID: 2773
+  controlID: 26960
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -147,7 +147,7 @@ MonoBehaviour:
   m_MinSize: {x: 403, y: 492}
   m_MaxSize: {x: 10001, y: 14042}
   vertical: 1
-  controlID: 2774
+  controlID: 26938
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -172,7 +172,7 @@ MonoBehaviour:
   m_MinSize: {x: 403, y: 221}
   m_MaxSize: {x: 8003, y: 4021}
   vertical: 0
-  controlID: 2775
+  controlID: 26939
 --- !u!114 &8
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -406,9 +406,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 112.89875, y: -85.389145, z: 83.73564}
+    m_Target: {x: 224.0954, y: 218.02151, z: 43.384827}
     speed: 2
-    m_Value: {x: 112.89875, y: -85.389145, z: 83.73564}
+    m_Value: {x: 224.0954, y: 218.02151, z: 43.384827}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -459,9 +459,9 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: -0.18841577, y: -0.15542142, z: 0.030213118, w: -0.9692434}
   m_Size:
-    m_Target: 198.62952
+    m_Target: 209.26443
     speed: 2
-    m_Value: 198.62952
+    m_Value: 209.26443
   m_Ortho:
     m_Target: 0
     speed: 2
@@ -600,9 +600,9 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 
+      m_SelectedIDs: 2e9dffff
       m_LastClickedID: 0
-      m_ExpandedIDs: 14e6ffff34e6ffff36e6ffff7ee6ffff9ee6ffff36e7ffff3ceaffff5ceaffff5eeaffff9eeaffffbeeaffffc0eafffffceaffff1cebffff1eebffff62ebffff82ebffff1aecffff3efbffff
+      m_ExpandedIDs: 0293ffff2293ffffc093ffff1a96ffff3a96ffffd496ffffc29affffe29affff7e9bffff8cceffffacceffff44cfffff54ddffff74ddffff0cdeffff60fbfffffe36000034370000444c0000284d0000dc5d0000c05e0000969000007a910000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -664,21 +664,21 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Resources/Dialogs
+    - Assets/Resources/Dialogs/Character_data
     m_Globs: []
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Resources/Dialogs
+  - Assets/Resources/Dialogs/Character_data
   m_LastFoldersGridSize: -1
   m_LastProjectPath: "D:\\Program Files\\Unity\\In\u017Cynierka\\Inzynierka"
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 5a390000
-    m_LastClickedID: 14682
-    m_ExpandedIDs: 0000000042390000443900004639000000ca9a3b
+    scrollPos: {x: 0, y: 57}
+    m_SelectedIDs: e0390000
+    m_LastClickedID: 14816
+    m_ExpandedIDs: 000000004239000044390000463900005439000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -706,7 +706,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 0000000042390000443900004639000000ca9a3b
+    m_ExpandedIDs: 000000004239000044390000463900005439000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 

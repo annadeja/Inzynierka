@@ -1,6 +1,7 @@
 ScriptsOnlyBuild:
   usedScripts:
     Assembly-CSharp.dll:
+    - CharacterData
     - DialogContainer
     - PlayerController
     - SpeakerBehavior
@@ -80,6 +81,8 @@ ScriptsOnlyBuild:
       Script: {instanceID: 13702}
     - Class: 114
       Script: {instanceID: 13846}
+    - Class: 114
+      Script: {instanceID: 14788}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -447,7 +450,7 @@ ScriptsOnlyBuild:
     className: TMP_StyleSheet
   - hash:
       serializedVersion: 2
-      Hash: de75be6e325997476d6206bfd5cec363
+      Hash: 20ee917c1d1215496b61b82349ed70e5
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: SpeakerBehavior
@@ -547,6 +550,12 @@ ScriptsOnlyBuild:
     assemblyName: Unity.Timeline.dll
     namespaceName: UnityEngine.Timeline
     className: PlayableTrack
+  - hash:
+      serializedVersion: 2
+      Hash: af52df1ad3c4d29d9148f46936ebb6cb
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: CharacterData
   platform: 19
   scenePathNames:
   - Assets/Scenes/SampleScene.unity
