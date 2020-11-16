@@ -122,7 +122,7 @@ MonoBehaviour:
   m_MinSize: {x: 679, y: 492}
   m_MaxSize: {x: 14002, y: 14042}
   vertical: 0
-  controlID: 26960
+  controlID: 33687
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -147,7 +147,7 @@ MonoBehaviour:
   m_MinSize: {x: 403, y: 492}
   m_MaxSize: {x: 10001, y: 14042}
   vertical: 1
-  controlID: 26938
+  controlID: 33688
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -172,7 +172,7 @@ MonoBehaviour:
   m_MinSize: {x: 403, y: 221}
   m_MaxSize: {x: 8003, y: 4021}
   vertical: 0
-  controlID: 26939
+  controlID: 33689
 --- !u!114 &8
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -406,9 +406,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 224.0954, y: 218.02151, z: 43.384827}
+    m_Target: {x: 426.39542, y: 321.5628, z: 69.41317}
     speed: 2
-    m_Value: {x: 224.0954, y: 218.02151, z: 43.384827}
+    m_Value: {x: 426.39542, y: 321.5628, z: 69.41317}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -437,17 +437,17 @@ MonoBehaviour:
       m_Size: {x: 1, y: 1}
     yGrid:
       m_Fade:
-        m_Target: 1
+        m_Target: 0
         speed: 2
-        m_Value: 1
+        m_Value: 0
       m_Color: {r: 0.5, g: 0.5, b: 0.5, a: 0.4}
       m_Pivot: {x: 0, y: 0, z: 0}
       m_Size: {x: 1, y: 1}
     zGrid:
       m_Fade:
-        m_Target: 0
+        m_Target: 1
         speed: 2
-        m_Value: 0
+        m_Value: 1
       m_Color: {r: 0.5, g: 0.5, b: 0.5, a: 0.4}
       m_Pivot: {x: 0, y: 0, z: 0}
       m_Size: {x: 1, y: 1}
@@ -455,17 +455,17 @@ MonoBehaviour:
     m_GridAxis: 1
     m_gridOpacity: 0.5
   m_Rotation:
-    m_Target: {x: 0.18841578, y: 0.15542142, z: -0.03021312, w: 0.9692434}
+    m_Target: {x: 0, y: 0, z: 0, w: 1}
     speed: 2
-    m_Value: {x: -0.18841577, y: -0.15542142, z: 0.030213118, w: -0.9692434}
+    m_Value: {x: -0, y: 0, z: -0, w: -1}
   m_Size:
-    m_Target: 209.26443
+    m_Target: 464.17773
     speed: 2
-    m_Value: 209.26443
+    m_Value: 464.17773
   m_Ortho:
-    m_Target: 0
+    m_Target: 1
     speed: 2
-    m_Value: 0
+    m_Value: 1
   m_CameraSettings:
     m_Speed: 1.1
     m_SpeedNormalized: 0.54773873
@@ -600,9 +600,9 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 2e9dffff
+      m_SelectedIDs: 
       m_LastClickedID: 0
-      m_ExpandedIDs: 0293ffff2293ffffc093ffff1a96ffff3a96ffffd496ffffc29affffe29affff7e9bffff8cceffffacceffff44cfffff54ddffff74ddffff0cdeffff60fbfffffe36000034370000444c0000284d0000dc5d0000c05e0000969000007a910000
+      m_ExpandedIDs: 5293ffff7293ffff7095ffff7495ffffe0d1ffff28d4ffff88d8ffffa8d8ffff0adaffff0edaffff5edaffff7edaffff1adbffff82dcffff0cedffff5eedffff60fbffff48440000d8680000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -664,21 +664,21 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Resources/Dialogs/Character_data
+    - Assets/Scenes
     m_Globs: []
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Resources/Dialogs/Character_data
+  - Assets/Scenes
   m_LastFoldersGridSize: -1
   m_LastProjectPath: "D:\\Program Files\\Unity\\In\u017Cynierka\\Inzynierka"
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 57}
-    m_SelectedIDs: e0390000
-    m_LastClickedID: 14816
-    m_ExpandedIDs: 000000004239000044390000463900005439000000ca9a3b
+    scrollPos: {x: 0, y: 120}
+    m_SelectedIDs: 6e390000
+    m_LastClickedID: 14702
+    m_ExpandedIDs: 000000004c3900004e390000503900005239000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -706,7 +706,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 000000004239000044390000463900005439000000ca9a3b
+    m_ExpandedIDs: 000000004c3900004e390000503900005239000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -815,7 +815,7 @@ MonoBehaviour:
   m_ObjectsLockedBeforeSerialization: []
   m_InstanceIDsLockedBeforeSerialization: 
   m_PreviewResizer:
-    m_CachedPref: 347
+    m_CachedPref: -347
     m_ControlHash: -371814159
     m_PrefName: Preview_InspectorPreview
   m_LastInspectedObjectInstanceID: -1
