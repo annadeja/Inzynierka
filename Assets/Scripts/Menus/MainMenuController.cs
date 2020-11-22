@@ -7,7 +7,6 @@ using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
 
 public class MainMenuController : MonoBehaviour
 {
@@ -18,9 +17,15 @@ public class MainMenuController : MonoBehaviour
     [SerializeField] Button leftArrow;
     [SerializeField] Button rightArrow;
 
+    private SaveDataController saveDataController;
     private SaveData currentSave;
     private List<string> saveFileNames;
     private int page = 0;
+
+    void Start()
+    {
+        saveDataController = GameObject.Find("SaveDataController").GetComponent<SaveDataController>();
+    }
 
     public void newGame()
     {
@@ -115,6 +120,7 @@ public class MainMenuController : MonoBehaviour
 
     private void startGame()
     {
-        SceneManager.LoadScene(currentSave.lastLocation);
+        saveDataController.loadedSave = currentSave;
+        saveDataController.load();
     }
 }

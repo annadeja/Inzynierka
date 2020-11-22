@@ -6,7 +6,16 @@ using UnityEngine;
 [Serializable]
 public class ChoiceData
 {
-    string choiceTitle;
-    bool wasMade;
-    NarrativePath narrativePath;
+    public string portName;
+    public string choiceTitle;
+    public bool wasMade;
+    public NarrativePath narrativePath;
+
+    public ChoiceData(string portName, string choiceTitle)
+    {
+        this.portName = portName;
+        this.choiceTitle = choiceTitle;
+        this.wasMade = true;
+        this.narrativePath = NarrativePath.None;
+    }
 }

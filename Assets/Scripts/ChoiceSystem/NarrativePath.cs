@@ -2,5 +2,6 @@
 {
     Revolution,
     Reform,
-    Conquest
+    Conquest,
+    None
 }

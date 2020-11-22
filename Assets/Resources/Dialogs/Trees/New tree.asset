@@ -13,35 +13,59 @@ MonoBehaviour:
   m_Name: New tree
   m_EditorClassIdentifier: 
   connections:
-  - NodeGuid: cc9de62c-8af2-432c-a2da-732d74ae1c29
-    PortName: jj
-    TargetGuid: 5a7f4dc2-68e9-479f-a0cd-e4e635345a40
-  - NodeGuid: c8127d16-cc45-4e92-826e-934205dd55e3
+  - NodeGuid: e30c40a9-aebe-499b-aeeb-76a829a45a91
+    PortName: 1
+    TargetGuid: 0369781a-4e44-4560-ac81-2b9cf8979766
+  - NodeGuid: 15b7bd81-f768-4bc8-bad2-c6e3b5deb165
     PortName: root
-    TargetGuid: cc9de62c-8af2-432c-a2da-732d74ae1c29
-  - NodeGuid: cc9de62c-8af2-432c-a2da-732d74ae1c29
-    PortName: New response
-    TargetGuid: e4c4349a-56bb-4051-ba24-690cb049a23f
+    TargetGuid: e30c40a9-aebe-499b-aeeb-76a829a45a91
+  - NodeGuid: e30c40a9-aebe-499b-aeeb-76a829a45a91
+    PortName: 2
+    TargetGuid: 39f57e67-6f33-4405-b586-d0ff72095ff5
+  - NodeGuid: e30c40a9-aebe-499b-aeeb-76a829a45a91
+    PortName: New response 3
+    TargetGuid: 0369781a-4e44-4560-ac81-2b9cf8979766
   nodeData:
-  - Guid: cc9de62c-8af2-432c-a2da-732d74ae1c29
-    DialogLine: jjj
-    Speaker: j
-    Position: {x: 356, y: 201}
-    OutputPorts:
-    - NodeGuid: cc9de62c-8af2-432c-a2da-732d74ae1c29
-      PortName: jj
-      TargetGuid: 5a7f4dc2-68e9-479f-a0cd-e4e635345a40
-    - NodeGuid: cc9de62c-8af2-432c-a2da-732d74ae1c29
-      PortName: New response
-      TargetGuid: e4c4349a-56bb-4051-ba24-690cb049a23f
-  - Guid: 5a7f4dc2-68e9-479f-a0cd-e4e635345a40
+  - Guid: 39f57e67-6f33-4405-b586-d0ff72095ff5
     DialogLine: SAMPLE TEXT.
     Speaker: DUMMY
-    Position: {x: 765, y: 216}
+    Position: {x: 730, y: 394}
     OutputPorts: []
-  - Guid: e4c4349a-56bb-4051-ba24-690cb049a23f
-    DialogLine: gffgh
+    IsChoice: 0
+    ChoiceOutcomes: []
+  - Guid: 0369781a-4e44-4560-ac81-2b9cf8979766
+    DialogLine: SAMPLE TEXT.
     Speaker: DUMMY
-    Position: {x: 739, y: 408}
+    Position: {x: 859, y: 195}
     OutputPorts: []
-  firstNodeGuid: cc9de62c-8af2-432c-a2da-732d74ae1c29
+    IsChoice: 0
+    ChoiceOutcomes: []
+  - Guid: e30c40a9-aebe-499b-aeeb-76a829a45a91
+    DialogLine: SAMPLE TEXT.
+    Speaker: DUMMY
+    Position: {x: 276, y: 59}
+    OutputPorts:
+    - NodeGuid: e30c40a9-aebe-499b-aeeb-76a829a45a91
+      PortName: 1
+      TargetGuid: 0369781a-4e44-4560-ac81-2b9cf8979766
+    - NodeGuid: e30c40a9-aebe-499b-aeeb-76a829a45a91
+      PortName: 2
+      TargetGuid: 39f57e67-6f33-4405-b586-d0ff72095ff5
+    - NodeGuid: e30c40a9-aebe-499b-aeeb-76a829a45a91
+      PortName: New response 3
+      TargetGuid: 0369781a-4e44-4560-ac81-2b9cf8979766
+    IsChoice: 1
+    ChoiceOutcomes:
+    - portName: 1
+      choiceTitle: Choice name
+      wasMade: 0
+      narrativePath: 3
+    - portName: 2
+      choiceTitle: Choice name
+      wasMade: 1
+      narrativePath: 3
+    - portName: New response 3
+      choiceTitle: Choice name
+      wasMade: 0
+      narrativePath: 3
+  firstNodeGuid: e30c40a9-aebe-499b-aeeb-76a829a45a91

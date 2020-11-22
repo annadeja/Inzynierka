@@ -1433,7 +1433,6 @@ MonoBehaviour:
   - {fileID: 649822649}
   - {fileID: 1768591520}
   dialogTrees:
-  - {fileID: 11400000, guid: f88d4ca02a47c98418fafccdaa5859e5, type: 2}
   - {fileID: 11400000, guid: 39929c1e603cbce43a09483991251eef, type: 2}
   cameraPosition: {x: 0, y: 0, z: 0}
   playerPosition: {x: 23, y: 0, z: -5}
@@ -1699,7 +1698,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 1729df3193cd5334798b2fbfe7a8dae5, type: 3}
       propertyPath: m_Name
-      value: Protag
+      value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 5866666021909216657, guid: 1729df3193cd5334798b2fbfe7a8dae5, type: 3}
       propertyPath: m_Controller

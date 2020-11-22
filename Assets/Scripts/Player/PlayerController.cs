@@ -73,7 +73,5 @@ public class PlayerController : MonoBehaviour
                 mainCamera.transform.LookAt(transform.position);
             }
         }
-
-
     }
 }

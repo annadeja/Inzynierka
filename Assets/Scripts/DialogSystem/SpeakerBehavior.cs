@@ -26,10 +26,11 @@ public class SpeakerBehavior : MonoBehaviour
     private PlayerController playerControl;
     private bool isInRange = false;
     private CharacterData currentCharacter;
+    private SaveDataController saveDataController;
 
-    // Start is called before the first frame update
     void Start()
     {
+        saveDataController = GameObject.Find("SaveDataController").GetComponent<SaveDataController>();
         disableUI();
         if(choiceButtons.Count == 3)
         {
@@ -39,7 +40,6 @@ public class SpeakerBehavior : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (Input.GetButtonDown("Submit"))
@@ -49,6 +49,8 @@ public class SpeakerBehavior : MonoBehaviour
     private void startDialog()
     {
         getNextTree();
+        if (currentTree == null)
+            return;
         enableUI();
         disablePlayerControls();
         displayNextDialog();
@@ -83,7 +85,9 @@ public class SpeakerBehavior : MonoBehaviour
         playerControl.animator.Rebind();
         playerControl.animator.Update(0f);
         playerControl.animator.enabled = false;
-        //playerControl.transform.position = playerPosition;
+        playerControl.gameObject.SetActive(false);
+        playerControl.transform.position = playerPosition;
+        playerControl.gameObject.SetActive(true);
         playerControl.canMove = false;
     }
 
@@ -95,6 +99,8 @@ public class SpeakerBehavior : MonoBehaviour
 
     private void displayNextDialog()
     {
+        if (currentNode == null)
+            return;
         speaker.text = currentNode.Speaker;
         dialogLine.text = "";
         currentCharacter = Resources.Load<CharacterData>("Dialogs/Character_data/" + currentNode.Speaker);
@@ -123,6 +129,8 @@ public class SpeakerBehavior : MonoBehaviour
 
     public void makeChoice(int i)
     {
+        if (currentNode.IsChoice)
+            saveDataController.saveChoice(currentNode, i);
         currentNode = currentTree.getNode(currentNode.OutputPorts[i].TargetGuid);
         displayNextDialog();
     }
@@ -144,7 +152,10 @@ public class SpeakerBehavior : MonoBehaviour
             choiceButtons[0].onClick.AddListener(delegate { makeChoice(0); });
         }
         else
+        {
             currentTree = null;
+            currentNode = null;
+        }
     }
 
     private IEnumerator typeText()
@@ -153,7 +164,7 @@ public class SpeakerBehavior : MonoBehaviour
             button.gameObject.SetActive(false);
         foreach (char character in currentNode.DialogLine.ToCharArray())
         {
-            if (Input.GetMouseButton(0))
+            if (Input.GetMouseButton(0) || Input.GetButtonDown("Submit"))
             {
                 dialogLine.text = currentNode.DialogLine;
                 yield break;
