@@ -39,8 +39,8 @@ public class SaveDataController : MonoBehaviour
     public void load()
     {
         SceneManager.LoadScene(loadedSave.lastLocation);
-        justLoaded = true;
         playerPosition = new Vector3(loadedSave.playerPosition[0], loadedSave.playerPosition[1], loadedSave.playerPosition[2]);
+        justLoaded = true;
     }
 
     public void saveChoice(NodeDataContainer currentNode, int i)

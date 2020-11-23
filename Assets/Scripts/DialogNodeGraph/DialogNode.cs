@@ -21,6 +21,11 @@ public class DialogNode: Node
     private Toggle toggleChoice;
     private List<Toggle> toggleChoiceOutcomes;
     private int noOfPorts = 0;
+    private TextField choiceName;
+    private Toggle makesChoice;
+    private TextField charismaField;
+    private TextField deceptionField;
+    private TextField thoughtfulnessField;
 
     public DialogNode()
     {
@@ -72,42 +77,37 @@ public class DialogNode: Node
         else
         {
             if(!isRoot)
-            {
-                TextField choiceName = new TextField();
-                Toggle makesChoice = new Toggle();
-                toggleChoiceOutcomes.Add(makesChoice);
-                makesChoice.text = "Makes a choice?";
-                makesChoice.value = true;
-                ChoiceData choiceData = choiceOutcomes.Find(x => x.portName == name);
-                if (choiceData == null)
-                {
-                    choiceName.value = "Choice name";
-                    choiceData = new ChoiceData(name, choiceName.value);
-                    choiceOutcomes.Add(choiceData);
-                }
-                else
-                {
-                    choiceName.value = choiceData.choiceTitle;
-                    makesChoice.value = choiceData.wasMade;
-                }
-
-                makesChoice.RegisterCallback<MouseUpEvent, int>(setChoiceOutcome, choiceOutcomes.IndexOf(choiceData));
-                choiceName.RegisterCallback<InputEvent, int>(setChoiceName, choiceOutcomes.IndexOf(choiceData));
-
-                Button removeBtn = new Button(delegate { removePort(port); });
-                removeBtn.text = "x";
-                TextField portNameField = new TextField();
-                portNameField.value = name;
-                portNameField.RegisterCallback<InputEvent, Port>(setPortName, port);
-
-                port.contentContainer.Add(portNameField);
-                port.contentContainer.Add(choiceName);
-                port.contentContainer.Add(makesChoice);
-                port.contentContainer.Add(removeBtn);
-            }
+                portControlsSetup(port);
             outputContainer.Add(port);
         }
         refreshNode();
+    }
+
+    private void portControlsSetup(Port port)
+    {
+        ChoiceData choiceData = choiceOutcomes.Find(x => x.portName == port.portName);
+        if (choiceData == null)
+        {
+            choiceData = new ChoiceData(port.portName, choiceName.value, makesChoice.value);
+            setChoiceRequirements(choiceData);
+            choiceOutcomes.Add(choiceData);
+        }
+
+        Button removeBtn = new Button(delegate { removePort(port); });
+        removeBtn.text = "x";
+        TextField portNameField = new TextField();
+        portNameField.value = port.portName;
+        portNameField.RegisterCallback<InputEvent, Port>(setPortName, port);
+
+        port.contentContainer.Add(portNameField);
+        port.contentContainer.Add(removeBtn);
+    }
+
+    private void setChoiceRequirements(ChoiceData choiceData)
+    {
+        choiceData.requiredCharisma = int.Parse(charismaField.value);
+        choiceData.requiredDeception = int.Parse(deceptionField.value);
+        choiceData.requiredThoughtfulness = int.Parse(thoughtfulnessField.value);
     }
 
     public void removePort(Port port)
@@ -140,6 +140,8 @@ public class DialogNode: Node
         createPort("input", Direction.Input, Port.Capacity.Multi);
         addOutput = new Button(createDefaultOutput);
         addOutput.text = "Add response";
+        Foldout foldout = new Foldout();
+        foldoutSetup(foldout);
 
         lineLabel = new TextField();
         lineLabel.label = "Line:";
@@ -159,8 +161,36 @@ public class DialogNode: Node
         extensionContainer.Add(speakerLabel);
         extensionContainer.Add(lineLabel);
         extensionContainer.Add(toggleChoice);
+        extensionContainer.Add(foldout);
         extensionContainer.Add(addOutput);
         refreshNode();
+    }
+
+    private void foldoutSetup(Foldout foldout)
+    {
+        foldout.value = false;
+        choiceName = new TextField();
+        choiceName.value = "Sample choice";
+        makesChoice = new Toggle();
+        toggleChoiceOutcomes.Add(makesChoice);
+        makesChoice.text = "Makes a choice?";
+        makesChoice.value = true;
+
+        charismaField = new TextField();
+        deceptionField = new TextField();
+        thoughtfulnessField = new TextField();
+        charismaField.value = "0";
+        charismaField.label = "Charisma requirement:";
+        deceptionField.value = "0";
+        deceptionField.label = "Deception requirement:";
+        thoughtfulnessField.value = "0";
+        thoughtfulnessField.label = "Thoughtfulness requirement:";
+
+        foldout.contentContainer.Add(makesChoice);
+        foldout.contentContainer.Add(choiceName);
+        foldout.contentContainer.Add(charismaField);
+        foldout.contentContainer.Add(deceptionField);
+        foldout.contentContainer.Add(thoughtfulnessField);
     }
 
     private void setDialogLine(InputEvent e)
@@ -186,16 +216,16 @@ public class DialogNode: Node
         this.isChoice = toggleChoice.value;
     }
 
-    private void setChoiceOutcome(MouseUpEvent e, int index)
-    {
-        Toggle makesChoice = (Toggle) e.target;
-        choiceOutcomes[index].wasMade = makesChoice.value;
-    }
+    //private void setChoiceOutcome(MouseUpEvent e, int index)
+    //{
+    //    Toggle makesChoice = (Toggle) e.target;
+    //    choiceOutcomes[index].wasMade = makesChoice.value;
+    //}
 
-    private void setChoiceName(InputEvent e, int index)
-    {
-        choiceOutcomes[index].choiceTitle = e.newData;
-    }
+    //private void setChoiceName(InputEvent e, int index)
+    //{
+    //    choiceOutcomes[index].choiceTitle = e.newData;
+    //}
 
     public List<Port> getOutputPorts()
     {

@@ -13,59 +13,81 @@ MonoBehaviour:
   m_Name: New tree
   m_EditorClassIdentifier: 
   connections:
-  - NodeGuid: e30c40a9-aebe-499b-aeeb-76a829a45a91
-    PortName: 1
-    TargetGuid: 0369781a-4e44-4560-ac81-2b9cf8979766
   - NodeGuid: 15b7bd81-f768-4bc8-bad2-c6e3b5deb165
     PortName: root
     TargetGuid: e30c40a9-aebe-499b-aeeb-76a829a45a91
   - NodeGuid: e30c40a9-aebe-499b-aeeb-76a829a45a91
-    PortName: 2
-    TargetGuid: 39f57e67-6f33-4405-b586-d0ff72095ff5
+    PortName: New response 1
+    TargetGuid: 0369781a-4e44-4560-ac81-2b9cf8979766
   - NodeGuid: e30c40a9-aebe-499b-aeeb-76a829a45a91
     PortName: New response 3
     TargetGuid: 0369781a-4e44-4560-ac81-2b9cf8979766
+  - NodeGuid: e30c40a9-aebe-499b-aeeb-76a829a45a91
+    PortName: New response 2
+    TargetGuid: 39f57e67-6f33-4405-b586-d0ff72095ff5
+  - NodeGuid: e30c40a9-aebe-499b-aeeb-76a829a45a91
+    PortName: New response 4
+    TargetGuid: 39f57e67-6f33-4405-b586-d0ff72095ff5
   nodeData:
-  - Guid: 39f57e67-6f33-4405-b586-d0ff72095ff5
-    DialogLine: SAMPLE TEXT.
-    Speaker: DUMMY
-    Position: {x: 730, y: 394}
-    OutputPorts: []
-    IsChoice: 0
-    ChoiceOutcomes: []
   - Guid: 0369781a-4e44-4560-ac81-2b9cf8979766
     DialogLine: SAMPLE TEXT.
     Speaker: DUMMY
-    Position: {x: 859, y: 195}
+    Position: {x: 863, y: 235}
     OutputPorts: []
     IsChoice: 0
     ChoiceOutcomes: []
   - Guid: e30c40a9-aebe-499b-aeeb-76a829a45a91
     DialogLine: SAMPLE TEXT.
     Speaker: DUMMY
-    Position: {x: 276, y: 59}
+    Position: {x: 289, y: 198}
     OutputPorts:
     - NodeGuid: e30c40a9-aebe-499b-aeeb-76a829a45a91
-      PortName: 1
+      PortName: New response 1
       TargetGuid: 0369781a-4e44-4560-ac81-2b9cf8979766
-    - NodeGuid: e30c40a9-aebe-499b-aeeb-76a829a45a91
-      PortName: 2
-      TargetGuid: 39f57e67-6f33-4405-b586-d0ff72095ff5
     - NodeGuid: e30c40a9-aebe-499b-aeeb-76a829a45a91
       PortName: New response 3
       TargetGuid: 0369781a-4e44-4560-ac81-2b9cf8979766
+    - NodeGuid: e30c40a9-aebe-499b-aeeb-76a829a45a91
+      PortName: New response 2
+      TargetGuid: 39f57e67-6f33-4405-b586-d0ff72095ff5
+    - NodeGuid: e30c40a9-aebe-499b-aeeb-76a829a45a91
+      PortName: New response 4
+      TargetGuid: 39f57e67-6f33-4405-b586-d0ff72095ff5
     IsChoice: 1
     ChoiceOutcomes:
-    - portName: 1
+    - portName: New response 1
       choiceTitle: Choice name
       wasMade: 0
       narrativePath: 3
-    - portName: 2
+      requiredCharisma: 0
+      requiredDeception: 0
+      requiredThoughtfulness: 0
+    - portName: New response 2
       choiceTitle: Choice name
       wasMade: 1
       narrativePath: 3
+      requiredCharisma: 0
+      requiredDeception: 0
+      requiredThoughtfulness: 0
     - portName: New response 3
       choiceTitle: Choice name
       wasMade: 0
       narrativePath: 3
+      requiredCharisma: 0
+      requiredDeception: 0
+      requiredThoughtfulness: 0
+    - portName: New response 4
+      choiceTitle: Sample choice
+      wasMade: 0
+      narrativePath: 3
+      requiredCharisma: 0
+      requiredDeception: 0
+      requiredThoughtfulness: 0
+  - Guid: 39f57e67-6f33-4405-b586-d0ff72095ff5
+    DialogLine: SAMPLE TEXT.
+    Speaker: DUMMY
+    Position: {x: 854, y: 434}
+    OutputPorts: []
+    IsChoice: 0
+    ChoiceOutcomes: []
   firstNodeGuid: e30c40a9-aebe-499b-aeeb-76a829a45a91

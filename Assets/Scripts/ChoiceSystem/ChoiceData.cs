@@ -10,12 +10,15 @@ public class ChoiceData
     public string choiceTitle;
     public bool wasMade;
     public NarrativePath narrativePath;
+    public int requiredCharisma = 0;
+    public int requiredDeception = 0;
+    public int requiredThoughtfulness = 0;
 
-    public ChoiceData(string portName, string choiceTitle)
+    public ChoiceData(string portName, string choiceTitle, bool wasMade = true)
     {
         this.portName = portName;
         this.choiceTitle = choiceTitle;
-        this.wasMade = true;
+        this.wasMade = wasMade;
         this.narrativePath = NarrativePath.None;
     }
 }
