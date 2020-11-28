@@ -14,7 +14,7 @@ public class ChoiceData
     public int requiredDeception = 0;
     public int requiredThoughtfulness = 0;
 
-    public ChoiceData(string portName, string choiceTitle, bool wasMade = true)
+    public ChoiceData(string portName, string choiceTitle = "Sample choice", bool wasMade = true)
     {
         this.portName = portName;
         this.choiceTitle = choiceTitle;
