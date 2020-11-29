@@ -47,6 +47,7 @@ public class SaveDataController : MonoBehaviour
     {
         string portName = currentNode.OutputPorts[i].PortName;
         ChoiceData choiceData = currentNode.ChoiceOutcomes.Find(x => x.portName == portName);
+        choiceData.skillCheck(loadedSave.playerStats);
         loadedSave.pastChoices.Add(choiceData);
     }
 }

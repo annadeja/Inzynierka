@@ -20,40 +20,29 @@ MonoBehaviour:
     PortName: New response 1
     TargetGuid: 0369781a-4e44-4560-ac81-2b9cf8979766
   - NodeGuid: e30c40a9-aebe-499b-aeeb-76a829a45a91
-    PortName: New response 3
-    TargetGuid: 0369781a-4e44-4560-ac81-2b9cf8979766
-  - NodeGuid: e30c40a9-aebe-499b-aeeb-76a829a45a91
     PortName: New response 2
     TargetGuid: 39f57e67-6f33-4405-b586-d0ff72095ff5
   - NodeGuid: e30c40a9-aebe-499b-aeeb-76a829a45a91
-    PortName: New response 4
+    PortName: New response 3
     TargetGuid: 39f57e67-6f33-4405-b586-d0ff72095ff5
   nodeData:
-  - Guid: 0369781a-4e44-4560-ac81-2b9cf8979766
-    DialogLine: SAMPLE TEXT.
-    Speaker: DUMMY
-    Position: {x: 863, y: 235}
-    OutputPorts: []
-    IsChoice: 0
-    ChoiceOutcomes: []
   - Guid: e30c40a9-aebe-499b-aeeb-76a829a45a91
     DialogLine: SAMPLE TEXT.
     Speaker: DUMMY
+    ExitLine: 
     Position: {x: 289, y: 198}
     OutputPorts:
     - NodeGuid: e30c40a9-aebe-499b-aeeb-76a829a45a91
       PortName: New response 1
       TargetGuid: 0369781a-4e44-4560-ac81-2b9cf8979766
     - NodeGuid: e30c40a9-aebe-499b-aeeb-76a829a45a91
-      PortName: New response 3
-      TargetGuid: 0369781a-4e44-4560-ac81-2b9cf8979766
-    - NodeGuid: e30c40a9-aebe-499b-aeeb-76a829a45a91
       PortName: New response 2
       TargetGuid: 39f57e67-6f33-4405-b586-d0ff72095ff5
     - NodeGuid: e30c40a9-aebe-499b-aeeb-76a829a45a91
-      PortName: New response 4
+      PortName: New response 3
       TargetGuid: 39f57e67-6f33-4405-b586-d0ff72095ff5
     IsChoice: 1
+    IsLeaf: 0
     ChoiceOutcomes:
     - portName: New response 1
       choiceTitle: Choice name
@@ -70,24 +59,28 @@ MonoBehaviour:
       requiredDeception: 0
       requiredThoughtfulness: 0
     - portName: New response 3
-      choiceTitle: Choice name
-      wasMade: 0
-      narrativePath: 3
-      requiredCharisma: 0
-      requiredDeception: 0
-      requiredThoughtfulness: 0
-    - portName: New response 4
       choiceTitle: Sample choice
-      wasMade: 0
+      wasMade: 1
       narrativePath: 3
       requiredCharisma: 0
       requiredDeception: 0
       requiredThoughtfulness: 0
+  - Guid: 0369781a-4e44-4560-ac81-2b9cf8979766
+    DialogLine: SAMPLE TEXT.
+    Speaker: DUMMY
+    ExitLine: F.
+    Position: {x: 840, y: 180}
+    OutputPorts: []
+    IsChoice: 0
+    IsLeaf: 1
+    ChoiceOutcomes: []
   - Guid: 39f57e67-6f33-4405-b586-d0ff72095ff5
     DialogLine: SAMPLE TEXT.
     Speaker: DUMMY
-    Position: {x: 854, y: 434}
+    ExitLine: lel
+    Position: {x: 837, y: 411}
     OutputPorts: []
     IsChoice: 0
+    IsLeaf: 1
     ChoiceOutcomes: []
   firstNodeGuid: e30c40a9-aebe-499b-aeeb-76a829a45a91

@@ -39,7 +39,7 @@ public class GraphIO
         {
             if (node.isRoot)
                 continue;
-            NodeDataContainer data = new NodeDataContainer(node.guid, node.dialogLine, node.speaker, node.isChoice, node.choiceOutcomes, node.GetPosition().position);
+            NodeDataContainer data = new NodeDataContainer(node.guid, node.dialogLine, node.speaker, node.exitLine, node.isChoice, node.isLeaf, node.choiceOutcomes, node.GetPosition().position);
             dialogContainer.nodeData.Add(data);
         }
 

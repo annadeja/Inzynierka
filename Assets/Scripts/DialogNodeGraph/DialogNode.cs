@@ -1,4 +1,4 @@
-﻿#if UNITY_EDITOR
+﻿//#if UNITY_EDITOR
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -12,20 +12,28 @@ public class DialogNode: Node
     public string guid;
     public string dialogLine = "SAMPLE TEXT.";
     public string speaker = "DUMMY";
+    public string exitLine = "";
     public bool isRoot = false;
     public bool isChoice = false;
+    public bool isLeaf = true;
     private int noOfPorts = 0;
     public List<ChoiceData> choiceOutcomes;
+
     private Button addOutput;
+    private Foldout foldout;
+
     private TextField speakerLabel;
     private TextField lineLabel;
-    private Toggle toggleChoice;
+
     private TextField choiceName;
-    private Toggle makesChoice;
     private TextField charismaField;
     private TextField deceptionField;
     private TextField thoughtfulnessField;
-    private Foldout foldout;
+    private TextField exitLineLabel;
+
+    private Toggle isLeafToggle;
+    private Toggle toggleChoice;
+    private Toggle makesChoice;
     private List<Toggle> narrativeTypeToggles;
 
     public DialogNode()
@@ -58,6 +66,8 @@ public class DialogNode: Node
         speaker = data.Speaker;
         guid = data.Guid;
         isChoice = data.IsChoice;
+        isLeaf = data.IsLeaf;
+        exitLine = data.ExitLine;
         if (data.ChoiceOutcomes != null)
             choiceOutcomes = new List<ChoiceData>(data.ChoiceOutcomes);
         else
@@ -67,7 +77,8 @@ public class DialogNode: Node
 
     public void createPort(string name, Direction direction, Port.Capacity capacity = Port.Capacity.Single)
     {
-        noOfPorts++;
+        if (noOfPorts > 3) //Limit odpowiedzi do trzech.
+            return;
         Port port = InstantiatePort(Orientation.Horizontal, direction, capacity, typeof(bool));
         port.portName = name;
         if (direction == Direction.Input)
@@ -75,7 +86,13 @@ public class DialogNode: Node
         else
         {
             if(!isRoot)
+            {
                 portControlsSetup(port);
+                isLeaf = false;
+                isLeafToggle.value = false;
+                isLeafToggle.SetEnabled(false);
+                exitLineLabel.SetEnabled(false);
+            }
             outputContainer.Add(port);
         }
         refreshNode();
@@ -87,7 +104,6 @@ public class DialogNode: Node
         if (choiceData == null)
         {
             choiceData = new ChoiceData(port.portName);
-            setChoiceRequirements(choiceData);
             choiceOutcomes.Add(choiceData);
         }
 
@@ -105,16 +121,15 @@ public class DialogNode: Node
         port.contentContainer.Add(removeBtn);
     }
 
-    private void setChoiceRequirements(ChoiceData choiceData)
-    {
-        choiceData.requiredCharisma = int.Parse(charismaField.value);
-        choiceData.requiredDeception = int.Parse(deceptionField.value);
-        choiceData.requiredThoughtfulness = int.Parse(thoughtfulnessField.value);
-    }
-
     public void removePort(Port port)
     {
         noOfPorts--;
+        if (noOfPorts == 0)
+        {
+            isLeafToggle.SetEnabled(true);
+            exitLineLabel.SetEnabled(true);
+        }
+
         foreach(Edge edge in port.connections)
         {
             edge.input.Disconnect(edge);
@@ -128,6 +143,7 @@ public class DialogNode: Node
 
     private void editResponse(ChoiceData choiceData)
     {
+        foldout.SetEnabled(true);
         foldout.value = true;
         choiceName.value = choiceData.choiceTitle;
         choiceName.RegisterCallback<InputEvent, ChoiceData>(setChoiceName, choiceData);
@@ -153,7 +169,7 @@ public class DialogNode: Node
 
     private void createDefaultOutput()
     {
-        createPort("New response " + noOfPorts, Direction.Output);
+        createPort("New response " + ++noOfPorts, Direction.Output);
     }
 
     private void refreshNode()
@@ -164,20 +180,48 @@ public class DialogNode: Node
 
     private void controlsSetup()
     {
+        labelsSetup();
+        togglesSetup();
+        foldoutSetup();
+
         createPort("input", Direction.Input, Port.Capacity.Multi);
         addOutput = new Button(createDefaultOutput);
         addOutput.text = "Add response";
-        foldout = new Foldout();
-        foldoutSetup();
 
+        extensionContainer.Add(foldout);
+        extensionContainer.Add(addOutput);
+        refreshNode();
+    }
+
+    private void labelsSetup()
+    {
         lineLabel = new TextField();
         lineLabel.label = "Line:";
         lineLabel.value = dialogLine;
         lineLabel.RegisterCallback<InputEvent>(setDialogLine);
+
         speakerLabel = new TextField();
         speakerLabel.label = "Speaker:";
         speakerLabel.value = speaker;
         speakerLabel.RegisterCallback<InputEvent>(setSpeaker);
+
+        extensionContainer.Add(speakerLabel);
+        extensionContainer.Add(lineLabel);
+    }
+
+    private void togglesSetup()
+    {
+        isLeafToggle = new Toggle();
+        isLeafToggle.text = "Is this a leaf node?";
+        isLeafToggle.RegisterCallback<MouseUpEvent>(setAsLeaf);
+        exitLineLabel = new TextField();
+        exitLineLabel.label = "Exit line:";
+        exitLineLabel.value = exitLine;
+        exitLineLabel.RegisterCallback<InputEvent>(setExitLine);
+        if (isLeaf)
+            isLeafToggle.value = true;
+        else
+            exitLineLabel.SetEnabled(false);
 
         toggleChoice = new Toggle();
         toggleChoice.text = "Is this a narrative choice?";
@@ -185,19 +229,16 @@ public class DialogNode: Node
             toggleChoice.value = true;
         toggleChoice.RegisterCallback<MouseUpEvent>(setAsChoice);
 
-        extensionContainer.Add(speakerLabel);
-        extensionContainer.Add(lineLabel);
+        extensionContainer.Add(isLeafToggle);
+        extensionContainer.Add(exitLineLabel);
         extensionContainer.Add(toggleChoice);
-        extensionContainer.Add(foldout);
-        extensionContainer.Add(addOutput);
-        refreshNode();
     }
 
     private void foldoutSetup()
     {
+        foldout = new Foldout();
         foldout.value = false;
         choiceName = new TextField();
-        choiceName.value = "Sample choice";
         choiceName.label = "Choice title:";
         makesChoice = new Toggle();
         makesChoice.text = "Makes a choice?";
@@ -206,11 +247,8 @@ public class DialogNode: Node
         charismaField = new TextField();
         deceptionField = new TextField();
         thoughtfulnessField = new TextField();
-        charismaField.value = "0";
         charismaField.label = "Charisma requirement:";
-        deceptionField.value = "0";
         deceptionField.label = "Deception requirement:";
-        thoughtfulnessField.value = "0";
         thoughtfulnessField.label = "Thoughtfulness requirement:";
 
         foldout.contentContainer.Add(makesChoice);
@@ -219,6 +257,8 @@ public class DialogNode: Node
         foldout.contentContainer.Add(charismaField);
         foldout.contentContainer.Add(deceptionField);
         foldout.contentContainer.Add(thoughtfulnessField);
+
+        foldout.SetEnabled(false);
     }
 
     private void narrativePathCheckboxesSetup()
@@ -251,9 +291,20 @@ public class DialogNode: Node
         port.portName = e.newData;
     }
 
+    private void setAsLeaf(MouseUpEvent e)
+    {
+        isLeaf = isLeafToggle.value;
+        exitLineLabel.SetEnabled(isLeafToggle.value);
+    }
+
+    private void setExitLine(InputEvent e)
+    {
+        this.exitLine = exitLineLabel.value;
+    }
+
     private void setAsChoice(MouseUpEvent e)
     {
-        this.isChoice = toggleChoice.value;
+        isChoice = toggleChoice.value;
     }
 
     private void setChoiceName(InputEvent e, ChoiceData choiceData)
@@ -301,4 +352,4 @@ public class DialogNode: Node
         return ports;
     }
 }
-#endif
+//#endif

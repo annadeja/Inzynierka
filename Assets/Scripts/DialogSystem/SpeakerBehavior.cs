@@ -48,12 +48,15 @@ public class SpeakerBehavior : MonoBehaviour
 
     private void startDialog()
     {
-        getNextTree();
-        if (currentTree == null)
-            return;
-        enableUI();
-        disablePlayerControls();
-        displayNextDialog();
+        if (isInRange)
+        {
+            getNextTree();
+            if (currentTree == null)
+                return;
+            enableUI();
+            disablePlayerControls();
+            displayNextDialog();
+        }
     }
 
     private void disableUI()
@@ -111,10 +114,10 @@ public class SpeakerBehavior : MonoBehaviour
         }
         StartCoroutine("typeText");
 
-        if (currentNode.isLeaf())
+        if (currentNode.IsLeaf)
         {
             choiceButtons[0].gameObject.SetActive(true);
-            choiceButtons[0].GetComponentInChildren<Text>().text = "Goodbye.";
+            choiceButtons[0].GetComponentInChildren<Text>().text = currentNode.ExitLine;
             choiceButtons[0].onClick.RemoveAllListeners();
             choiceButtons[0].onClick.AddListener(endConversation);
             return;

@@ -259,7 +259,7 @@ ScriptsOnlyBuild:
     className: TestResultRendererCallback
   - hash:
       serializedVersion: 2
-      Hash: a1020fc249878c7b307e1dcdda7fe9e4
+      Hash: e871b5a5f91654e735267a2cdcd47514
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: DialogContainer
@@ -427,7 +427,7 @@ ScriptsOnlyBuild:
     className: RawImage
   - hash:
       serializedVersion: 2
-      Hash: a1cbda85d20f6e6acda7a0ec47371e89
+      Hash: ee05c141f3aebba42d918d74f7978fbf
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: SaveDataController
