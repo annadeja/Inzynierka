@@ -1,4 +1,4 @@
-﻿//#if UNITY_EDITOR
+﻿#if UNITY_EDITOR
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -9,51 +9,60 @@ using UnityEditor.Experimental.GraphView;
 
 public class DialogNode: Node
 {
-    public string guid;
-    public string dialogLine = "SAMPLE TEXT.";
-    public string speaker = "DUMMY";
-    public string exitLine = "";
-    public bool isRoot = false;
-    public bool isChoice = false;
-    public bool isLeaf = true;
+    public string Guid { get; set; }
+    public string DialogLine { get; private set; }
+    public string Speaker { get; private set; }
+    public string ExitLine { get; private set; }
+    public bool IsRoot { get; private set; }
+    public bool IsChoice { get; private set; }
+    public bool IsLeaf { get; private set; }
+    public List<ChoiceData> ChoiceOutcomes { get; private set; }
     private int noOfPorts = 0;
-    public List<ChoiceData> choiceOutcomes;
 
     private Button addOutput;
     private Foldout foldout;
 
-    private TextField speakerLabel;
+    private TextField SpeakerLabel;
     private TextField lineLabel;
 
     private TextField choiceName;
     private TextField charismaField;
     private TextField deceptionField;
     private TextField thoughtfulnessField;
-    private TextField exitLineLabel;
+    private TextField ExitLineLabel;
 
-    private Toggle isLeafToggle;
+    private Toggle IsLeafToggle;
     private Toggle toggleChoice;
     private Toggle makesChoice;
     private List<Toggle> narrativeTypeToggles;
 
     public DialogNode()
     {
+        Guid = System.Guid.NewGuid().ToString();
         title = "New node";
-        guid = Guid.NewGuid().ToString();
-        choiceOutcomes = new List<ChoiceData>();
+        Speaker = "DUMMY";
+        DialogLine = "SAMPLE TEXT.";
+        ExitLine = "";
+        IsRoot = false;
+        IsChoice = false;
+        IsLeaf = true;
+        ChoiceOutcomes = new List<ChoiceData>();
         controlsSetup();
     }
 
     public DialogNode(bool isRoot, string speaker = "DUMMY", string dialogLine = "SAMPLE TEXT.")
     {
-        this.title = speaker;
-        this.isRoot = isRoot;
-        this.dialogLine = dialogLine;
-        this.speaker = speaker;
-        guid = Guid.NewGuid().ToString();
-        choiceOutcomes = new List<ChoiceData>();
+        Guid = System.Guid.NewGuid().ToString();
+        title = Speaker;
+        DialogLine = dialogLine;
+        Speaker = speaker;
+        IsRoot = isRoot;
+        ExitLine = "";
+        IsChoice = false;
+        IsLeaf = true;
+        ChoiceOutcomes = new List<ChoiceData>();
 
-        if (isRoot)
+        if (IsRoot)
             createPort("root", Direction.Output);
         else
             controlsSetup();
@@ -61,17 +70,17 @@ public class DialogNode: Node
 
     public DialogNode(NodeDataContainer data)
     {
+        Guid = data.Guid;
         title = data.Speaker;
-        dialogLine = data.DialogLine;
-        speaker = data.Speaker;
-        guid = data.Guid;
-        isChoice = data.IsChoice;
-        isLeaf = data.IsLeaf;
-        exitLine = data.ExitLine;
+        DialogLine = data.DialogLine;
+        Speaker = data.Speaker;
+        IsChoice = data.IsChoice;
+        IsLeaf = data.IsLeaf;
+        ExitLine = data.ExitLine;
         if (data.ChoiceOutcomes != null)
-            choiceOutcomes = new List<ChoiceData>(data.ChoiceOutcomes);
+            ChoiceOutcomes = new List<ChoiceData>(data.ChoiceOutcomes);
         else
-            choiceOutcomes = new List<ChoiceData>();
+            ChoiceOutcomes = new List<ChoiceData>();
         controlsSetup();
     }
 
@@ -85,13 +94,13 @@ public class DialogNode: Node
             inputContainer.Add(port);
         else
         {
-            if(!isRoot)
+            if(!IsRoot)
             {
                 portControlsSetup(port);
-                isLeaf = false;
-                isLeafToggle.value = false;
-                isLeafToggle.SetEnabled(false);
-                exitLineLabel.SetEnabled(false);
+                IsLeaf = false;
+                IsLeafToggle.value = false;
+                IsLeafToggle.SetEnabled(false);
+                ExitLineLabel.SetEnabled(false);
             }
             outputContainer.Add(port);
         }
@@ -100,11 +109,11 @@ public class DialogNode: Node
 
     private void portControlsSetup(Port port)
     {
-        ChoiceData choiceData = choiceOutcomes.Find(x => x.portName == port.portName);
+        ChoiceData choiceData = ChoiceOutcomes.Find(x => x.PortName == port.portName);
         if (choiceData == null)
         {
             choiceData = new ChoiceData(port.portName);
-            choiceOutcomes.Add(choiceData);
+            ChoiceOutcomes.Add(choiceData);
         }
 
         Button removeBtn = new Button(delegate { removePort(port); });
@@ -126,8 +135,8 @@ public class DialogNode: Node
         noOfPorts--;
         if (noOfPorts == 0)
         {
-            isLeafToggle.SetEnabled(true);
-            exitLineLabel.SetEnabled(true);
+            IsLeafToggle.SetEnabled(true);
+            ExitLineLabel.SetEnabled(true);
         }
 
         foreach(Edge edge in port.connections)
@@ -136,8 +145,8 @@ public class DialogNode: Node
             edge.RemoveFromHierarchy();
         }
         outputContainer.Remove(port);
-        ChoiceData choiceData = choiceOutcomes.Find(x => x.portName == port.portName); //Nie można do fukcji przekazać po prostu choiceData, gdyż wywoływana jest także poza tą klasą.
-        choiceOutcomes.Remove(choiceData);
+        ChoiceData choiceData = ChoiceOutcomes.Find(x => x.PortName == port.portName); //Nie można do fukcji przekazać po prostu choiceData, gdyż wywoływana jest także poza tą klasą.
+        ChoiceOutcomes.Remove(choiceData);
         refreshNode();
     }
 
@@ -145,25 +154,25 @@ public class DialogNode: Node
     {
         foldout.SetEnabled(true);
         foldout.value = true;
-        choiceName.value = choiceData.choiceTitle;
+        choiceName.value = choiceData.ChoiceTitle;
         choiceName.RegisterCallback<InputEvent, ChoiceData>(setChoiceName, choiceData);
-        makesChoice.value = choiceData.wasMade;
+        makesChoice.value = choiceData.WasMade;
         makesChoice.RegisterCallback<MouseUpEvent, ChoiceData>(setChoiceOutcome, choiceData);
 
         foreach(Toggle narrativeType in narrativeTypeToggles)
         {
             narrativeType.RegisterCallback<MouseUpEvent, ChoiceData>(setNarrativePath, choiceData);
-            if (choiceData.narrativePath.ToString() == narrativeType.text)
+            if (choiceData.NarrativePath.ToString() == narrativeType.text)
                 narrativeType.value = true;
             else
                 narrativeType.value = false;
         }
 
-        charismaField.value = choiceData.requiredCharisma.ToString();
+        charismaField.value = choiceData.RequiredCharisma.ToString();
         charismaField.RegisterCallback<InputEvent, ChoiceData>(setCharismaRequirement, choiceData);
-        deceptionField.value = choiceData.requiredDeception.ToString();
+        deceptionField.value = choiceData.RequiredDeception.ToString();
         deceptionField.RegisterCallback<InputEvent, ChoiceData>(setDeceptionRequirement, choiceData);
-        thoughtfulnessField.value = choiceData.requiredThoughtfulness.ToString();
+        thoughtfulnessField.value = choiceData.RequiredThoughtfulness.ToString();
         thoughtfulnessField.RegisterCallback<InputEvent, ChoiceData>(setThoughtfulnessRequirement, choiceData);
     }
 
@@ -197,40 +206,40 @@ public class DialogNode: Node
     {
         lineLabel = new TextField();
         lineLabel.label = "Line:";
-        lineLabel.value = dialogLine;
+        lineLabel.value = DialogLine;
         lineLabel.RegisterCallback<InputEvent>(setDialogLine);
 
-        speakerLabel = new TextField();
-        speakerLabel.label = "Speaker:";
-        speakerLabel.value = speaker;
-        speakerLabel.RegisterCallback<InputEvent>(setSpeaker);
+        SpeakerLabel = new TextField();
+        SpeakerLabel.label = "Speaker:";
+        SpeakerLabel.value = Speaker;
+        SpeakerLabel.RegisterCallback<InputEvent>(setSpeaker);
 
-        extensionContainer.Add(speakerLabel);
+        extensionContainer.Add(SpeakerLabel);
         extensionContainer.Add(lineLabel);
     }
 
     private void togglesSetup()
     {
-        isLeafToggle = new Toggle();
-        isLeafToggle.text = "Is this a leaf node?";
-        isLeafToggle.RegisterCallback<MouseUpEvent>(setAsLeaf);
-        exitLineLabel = new TextField();
-        exitLineLabel.label = "Exit line:";
-        exitLineLabel.value = exitLine;
-        exitLineLabel.RegisterCallback<InputEvent>(setExitLine);
-        if (isLeaf)
-            isLeafToggle.value = true;
+        IsLeafToggle = new Toggle();
+        IsLeafToggle.text = "Is this a leaf node?";
+        IsLeafToggle.RegisterCallback<MouseUpEvent>(setAsLeaf);
+        ExitLineLabel = new TextField();
+        ExitLineLabel.label = "Exit line:";
+        ExitLineLabel.value = ExitLine;
+        ExitLineLabel.RegisterCallback<InputEvent>(setExitLine);
+        if (IsLeaf)
+            IsLeafToggle.value = true;
         else
-            exitLineLabel.SetEnabled(false);
+            ExitLineLabel.SetEnabled(false);
 
         toggleChoice = new Toggle();
         toggleChoice.text = "Is this a narrative choice?";
-        if (isChoice)
+        if (IsChoice)
             toggleChoice.value = true;
         toggleChoice.RegisterCallback<MouseUpEvent>(setAsChoice);
 
-        extensionContainer.Add(isLeafToggle);
-        extensionContainer.Add(exitLineLabel);
+        extensionContainer.Add(IsLeafToggle);
+        extensionContainer.Add(ExitLineLabel);
         extensionContainer.Add(toggleChoice);
     }
 
@@ -275,61 +284,62 @@ public class DialogNode: Node
 
     private void setDialogLine(InputEvent e)
     {
-        this.dialogLine = lineLabel.value;
+        this.DialogLine = lineLabel.value;
     }
 
     private void setSpeaker(InputEvent e)
     {
-        this.speaker = speakerLabel.value;
-        this.title = speakerLabel.value;
+        this.Speaker = SpeakerLabel.value;
+        this.title = SpeakerLabel.value;
     }
 
     private void setPortName(InputEvent e, Port port)
     {
-        ChoiceData choiceData = choiceOutcomes.Find(x => x.portName == e.previousData);
-        choiceData.portName = e.newData;
+        ChoiceData choiceData = ChoiceOutcomes.Find(x => x.PortName == e.previousData);
+        if (choiceData != null)
+            choiceData.PortName = e.newData;
         port.portName = e.newData;
     }
 
     private void setAsLeaf(MouseUpEvent e)
     {
-        isLeaf = isLeafToggle.value;
-        exitLineLabel.SetEnabled(isLeafToggle.value);
+        IsLeaf = IsLeafToggle.value;
+        ExitLineLabel.SetEnabled(IsLeafToggle.value);
     }
 
     private void setExitLine(InputEvent e)
     {
-        this.exitLine = exitLineLabel.value;
+        this.ExitLine = ExitLineLabel.value;
     }
 
     private void setAsChoice(MouseUpEvent e)
     {
-        isChoice = toggleChoice.value;
+        IsChoice = toggleChoice.value;
     }
 
     private void setChoiceName(InputEvent e, ChoiceData choiceData)
     {
-        choiceData.choiceTitle = e.newData;
+        choiceData.ChoiceTitle = e.newData;
     }
 
     private void setChoiceOutcome(MouseUpEvent e, ChoiceData choiceData)
     {
-        choiceData.wasMade = makesChoice.value;
+        choiceData.WasMade = makesChoice.value;
     }
 
     private void setCharismaRequirement(InputEvent e, ChoiceData choiceData)
     {
-        choiceData.requiredCharisma = int.Parse(charismaField.value);
+        choiceData.RequiredCharisma = int.Parse(charismaField.value);
     }
 
     private void setDeceptionRequirement(InputEvent e, ChoiceData choiceData)
     {
-        choiceData.requiredDeception = int.Parse(deceptionField.value);
+        choiceData.RequiredDeception = int.Parse(deceptionField.value);
     }
 
     private void setThoughtfulnessRequirement(InputEvent e, ChoiceData choiceData)
     {
-        choiceData.requiredThoughtfulness = int.Parse(thoughtfulnessField.value);
+        choiceData.RequiredThoughtfulness = int.Parse(thoughtfulnessField.value);
     }
 
     private void setNarrativePath(MouseUpEvent e, ChoiceData choiceData)
@@ -337,7 +347,7 @@ public class DialogNode: Node
         Toggle narrativeType = (Toggle) e.target;
         if (narrativeType.value)
         {
-            choiceData.narrativePath = (NarrativePath) Enum.Parse(typeof(NarrativePath), narrativeType.text);
+            choiceData.NarrativePath = (NarrativePath) Enum.Parse(typeof(NarrativePath), narrativeType.text);
             foreach (Toggle toggle in narrativeTypeToggles)
                 if (toggle != narrativeType)
                     toggle.value = false;
@@ -352,4 +362,4 @@ public class DialogNode: Node
         return ports;
     }
 }
-//#endif
+#endif

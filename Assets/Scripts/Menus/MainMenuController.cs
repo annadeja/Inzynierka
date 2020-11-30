@@ -30,7 +30,7 @@ public class MainMenuController : MonoBehaviour
     public void newGame()
     {
         currentSave = new SaveData();
-        FileStream saveFile = File.Create(Application.persistentDataPath + "/" + currentSave.lastLocation + " " + DateTime.Now.ToString("dd/MM/yyyy hh/mm/ss tt") + ".save");
+        FileStream saveFile = File.Create(Application.persistentDataPath + "/" + currentSave.LastLocation + " " + DateTime.Now.ToString("dd/MM/yyyy hh/mm/ss tt") + ".save");
         BinaryFormatter binaryFormatter = new BinaryFormatter();
         binaryFormatter.Serialize(saveFile, currentSave);
         startGame();

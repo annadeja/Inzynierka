@@ -6,17 +6,23 @@ using UnityEngine;
 [Serializable]
 public class DialogContainer : ScriptableObject
 {
-    public List<NodeConnection> connections = new List<NodeConnection>();
-    public List<NodeDataContainer> nodeData = new List<NodeDataContainer>();
-    public string firstNodeGuid;
+    public List<NodeConnection> Connections { get; private set; }
+    public List<NodeDataContainer> NodeData { get; private set; }
+    public string FirstNodeGuid { get; set; }
+
+    public DialogContainer()
+    {
+        Connections = new List<NodeConnection>();
+        NodeData = new List<NodeDataContainer>();
+    }
 
     public NodeDataContainer getFirstNode()
     {
-        return nodeData.Find(x => x.Guid == firstNodeGuid);
+        return NodeData.Find(x => x.Guid == FirstNodeGuid);
     }
 
     public NodeDataContainer getNode(string guid)
     {
-        return nodeData.Find(x => x.Guid == guid);
+        return NodeData.Find(x => x.Guid == guid);
     }
 }

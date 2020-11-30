@@ -6,22 +6,22 @@ using UnityEngine;
 [Serializable]
 public class SaveData
 {
-    public CharacterStats playerStats;
-    public List<ChoiceData> pastChoices;
-    public string lastLocation;
-    public int[] playerPosition;
-    public int revolutionChoices;
-    public int reformChoices;
-    public int conquestChoices;
+    public CharacterStats PlayerStats;
+    public List<ChoiceData> PastChoices;
+    public string LastLocation;
+    public int[] PlayerPosition;
+    public int RevolutionChoices;
+    public int ReformChoices;
+    public int ConquestChoices;
 
     public SaveData()
     {
-        playerStats = new CharacterStats();
-        pastChoices = new List<ChoiceData>();
-        lastLocation = "SampleScene";
-        playerPosition = new int[3] {0, 10, 0};
-        revolutionChoices = 0;
-        reformChoices = 0;
-        conquestChoices = 0;
+        PlayerStats = new CharacterStats();
+        PastChoices = new List<ChoiceData>();
+        LastLocation = "SampleScene";
+        PlayerPosition = new int[3] {0, 10, 0};
+        RevolutionChoices = 0;
+        ReformChoices = 0;
+        ConquestChoices = 0;
     }
 }

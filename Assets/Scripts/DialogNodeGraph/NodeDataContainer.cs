@@ -6,7 +6,7 @@ using UnityEngine;
 [Serializable]
 public class NodeDataContainer
 {
-    public string Guid;
+    public string Guid { get; private set; }
     public string DialogLine;
     public string Speaker;
     public string ExitLine;
@@ -30,18 +30,5 @@ public class NodeDataContainer
             this.ChoiceOutcomes = new List<ChoiceData>(ChoiceOutcomes);
         else
             this.ChoiceOutcomes = null;
-    }
-
-    //public bool isLeaf()
-    //{
-    //    if (OutputPorts.Count == 0)
-    //        return true;
-    //    else
-    //        return false;
-    //}
-
-    public void makeChoice()
-    {
-
     }
 }

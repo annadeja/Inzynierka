@@ -6,26 +6,30 @@ using UnityEngine;
 [Serializable]
 public class ChoiceData
 {
-    public string portName;
-    public string choiceTitle;
-    public bool wasMade;
-    public bool wasFailed = false;
-    public NarrativePath narrativePath;
-    public int requiredCharisma = 0;
-    public int requiredDeception = 0;
-    public int requiredThoughtfulness = 0;
+    public string PortName;
+    public string ChoiceTitle;
+    public bool WasMade;
+    public bool WasFailed;
+    public NarrativePath NarrativePath;
+    public int RequiredCharisma;
+    public int RequiredDeception;
+    public int RequiredThoughtfulness;
 
     public ChoiceData(string portName, string choiceTitle = "Sample choice", bool wasMade = true)
     {
-        this.portName = portName;
-        this.choiceTitle = choiceTitle;
-        this.wasMade = wasMade;
-        this.narrativePath = NarrativePath.None;
+        this.PortName = portName;
+        this.ChoiceTitle = choiceTitle;
+        this.WasMade = wasMade;
+        this.NarrativePath = NarrativePath.None;
+        WasFailed = false;
+        RequiredCharisma = 0;
+        RequiredDeception = 0;
+        RequiredThoughtfulness = 0;
     }
 
     public void skillCheck(CharacterStats playerStats)
     {
-        if (!(playerStats.charisma >= requiredCharisma && playerStats.deception >= requiredDeception && playerStats.thoughtfulness >= requiredThoughtfulness))
-            wasFailed = true;
+        if (!(playerStats.charisma >= RequiredCharisma && playerStats.deception >= RequiredDeception && playerStats.thoughtfulness >= RequiredThoughtfulness))
+            WasFailed = true;
     }
 }

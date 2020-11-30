@@ -38,16 +38,16 @@ public class SaveDataController : MonoBehaviour
 
     public void load()
     {
-        SceneManager.LoadScene(loadedSave.lastLocation);
-        playerPosition = new Vector3(loadedSave.playerPosition[0], loadedSave.playerPosition[1], loadedSave.playerPosition[2]);
+        SceneManager.LoadScene(loadedSave.LastLocation);
+        playerPosition = new Vector3(loadedSave.PlayerPosition[0], loadedSave.PlayerPosition[1], loadedSave.PlayerPosition[2]);
         justLoaded = true;
     }
 
     public void saveChoice(NodeDataContainer currentNode, int i)
     {
         string portName = currentNode.OutputPorts[i].PortName;
-        ChoiceData choiceData = currentNode.ChoiceOutcomes.Find(x => x.portName == portName);
-        choiceData.skillCheck(loadedSave.playerStats);
-        loadedSave.pastChoices.Add(choiceData);
+        ChoiceData choiceData = currentNode.ChoiceOutcomes.Find(x => x.PortName == portName);
+        choiceData.skillCheck(loadedSave.PlayerStats);
+        loadedSave.PastChoices.Add(choiceData);
     }
 }

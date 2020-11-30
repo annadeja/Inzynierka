@@ -37,10 +37,10 @@ public class GraphIO
 
         foreach(DialogNode node in nodes)
         {
-            if (node.isRoot)
+            if (node.IsRoot)
                 continue;
-            NodeDataContainer data = new NodeDataContainer(node.guid, node.dialogLine, node.speaker, node.exitLine, node.isChoice, node.isLeaf, node.choiceOutcomes, node.GetPosition().position);
-            dialogContainer.nodeData.Add(data);
+            NodeDataContainer data = new NodeDataContainer(node.Guid, node.DialogLine, node.Speaker, node.ExitLine, node.IsChoice, node.IsLeaf, node.ChoiceOutcomes, node.GetPosition().position);
+            dialogContainer.NodeData.Add(data);
         }
 
         foreach(Edge edge in connectedPorts)
@@ -48,13 +48,13 @@ public class GraphIO
             DialogNode outputNode = (DialogNode)edge.output.node;
             DialogNode inputNode = (DialogNode)edge.input.node;
 
-            NodeConnection connection = new NodeConnection(outputNode.guid, edge.output.portName, inputNode.guid);
-            dialogContainer.connections.Add(connection);
+            NodeConnection connection = new NodeConnection(outputNode.Guid, edge.output.portName, inputNode.Guid);
+            dialogContainer.Connections.Add(connection);
 
             if (edge.output.portName == "root")
-                dialogContainer.firstNodeGuid = inputNode.guid;
+                dialogContainer.FirstNodeGuid = inputNode.Guid;
             else
-                dialogContainer.nodeData.Find(x => x.Guid == outputNode.guid).OutputPorts.Add(connection);
+                dialogContainer.NodeData.Find(x => x.Guid == outputNode.Guid).OutputPorts.Add(connection);
         }
 
         AssetDatabase.CreateAsset(dialogContainer, "Assets/Resources/Dialogs/Trees/" + fileName + ".asset");
@@ -69,10 +69,10 @@ public class GraphIO
 
         deleteNodes(dialogContainer);
 
-        foreach (NodeDataContainer data in dialogContainer.nodeData)
+        foreach (NodeDataContainer data in dialogContainer.NodeData)
         {
             DialogNode node = new DialogNode(data);
-            foreach (NodeConnection portConnection in dialogContainer.connections)
+            foreach (NodeConnection portConnection in dialogContainer.Connections)
             {
                 if (portConnection.NodeGuid == data.Guid)
                     node.createPort(portConnection.PortName, Direction.Output);
@@ -82,10 +82,10 @@ public class GraphIO
         }
         nodes = view.nodes.ToList().Cast<DialogNode>().ToList();
 
-        foreach (NodeConnection portConnection in dialogContainer.connections)
+        foreach (NodeConnection portConnection in dialogContainer.Connections)
         {
-            DialogNode output = nodes.Find(x => x.guid == portConnection.NodeGuid);
-            DialogNode input = nodes.Find(x => x.guid == portConnection.TargetGuid);
+            DialogNode output = nodes.Find(x => x.Guid == portConnection.NodeGuid);
+            DialogNode input = nodes.Find(x => x.Guid == portConnection.TargetGuid);
             List<Port> ports = output.getOutputPorts();
             Port outputPort = ports.Find(x => x.portName == portConnection.PortName);
             view.Add(outputPort.ConnectTo((Port)input.inputContainer[0]));
@@ -96,9 +96,9 @@ public class GraphIO
     {
         foreach (DialogNode node in nodes)
         {
-            if (node.isRoot)
+            if (node.IsRoot)
             {
-                node.guid = dialogContainer.connections.Find(x => x.PortName == "root").NodeGuid;
+                node.Guid = dialogContainer.Connections.Find(x => x.PortName == "root").NodeGuid;
             }
             else
             {
