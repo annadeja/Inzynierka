@@ -91,7 +91,7 @@ public class DialogNode: Node
         Port port = InstantiatePort(Orientation.Horizontal, direction, capacity, typeof(bool));
         port.portName = name;
         if (direction == Direction.Input)
-            inputContainer.Add(port);
+                inputContainer.Add(port);
         else
         {
             if(!IsRoot)
@@ -189,11 +189,12 @@ public class DialogNode: Node
 
     private void controlsSetup()
     {
+        createPort("input", Direction.Input, Port.Capacity.Multi);
+        
         labelsSetup();
         togglesSetup();
         foldoutSetup();
 
-        createPort("input", Direction.Input, Port.Capacity.Multi);
         addOutput = new Button(createDefaultOutput);
         addOutput.text = "Add response";
 

@@ -12,3 +12,63 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19ef2412fbc7fcf449de924ea016efe5, type: 3}
   m_Name: New tree
   m_EditorClassIdentifier: 
+  Connections:
+  - NodeGuid: 82d3d0fa-08b7-4747-8744-6e0b3030ace6
+    PortName: root
+    TargetGuid: 4eb5f57a-34fd-4db0-ab6c-42236878696e
+  - NodeGuid: 4eb5f57a-34fd-4db0-ab6c-42236878696e
+    PortName: New response 1
+    TargetGuid: bbbdb2af-9b22-4cef-b41a-1ac3fff53ed5
+  - NodeGuid: 4eb5f57a-34fd-4db0-ab6c-42236878696e
+    PortName: New response 2
+    TargetGuid: 3822147e-ae67-48d0-9d41-7d14282254c5
+  NodeData:
+  - Guid: bbbdb2af-9b22-4cef-b41a-1ac3fff53ed5
+    DialogLine: w
+    Speaker: DUMMY
+    ExitLine: f
+    Position: {x: 733, y: 148}
+    OutputPorts: []
+    IsChoice: 0
+    IsLeaf: 1
+    ChoiceOutcomes: []
+  - Guid: 3822147e-ae67-48d0-9d41-7d14282254c5
+    DialogLine: wfwf
+    Speaker: DUMMY
+    ExitLine: w
+    Position: {x: 752, y: 381}
+    OutputPorts: []
+    IsChoice: 0
+    IsLeaf: 1
+    ChoiceOutcomes: []
+  - Guid: 4eb5f57a-34fd-4db0-ab6c-42236878696e
+    DialogLine: SAMPLE TEXT.
+    Speaker: DUMMY
+    ExitLine: 
+    Position: {x: 294, y: 163}
+    OutputPorts:
+    - NodeGuid: 4eb5f57a-34fd-4db0-ab6c-42236878696e
+      PortName: New response 1
+      TargetGuid: bbbdb2af-9b22-4cef-b41a-1ac3fff53ed5
+    - NodeGuid: 4eb5f57a-34fd-4db0-ab6c-42236878696e
+      PortName: New response 2
+      TargetGuid: 3822147e-ae67-48d0-9d41-7d14282254c5
+    IsChoice: 1
+    IsLeaf: 0
+    ChoiceOutcomes:
+    - PortName: New response 1
+      ChoiceTitle: Sample choice
+      WasMade: 1
+      WasFailed: 0
+      NarrativePath: 3
+      RequiredCharisma: 0
+      RequiredDeception: 0
+      RequiredThoughtfulness: 0
+    - PortName: New response 2
+      ChoiceTitle: Sample choice
+      WasMade: 1
+      WasFailed: 0
+      NarrativePath: 3
+      RequiredCharisma: 0
+      RequiredDeception: 0
+      RequiredThoughtfulness: 0

@@ -1,19 +1,20 @@
-﻿using System.Collections;
+﻿using System;
+using System.IO;
+using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.Serialization;
+using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class SaveDataController : MonoBehaviour
 {
+    public static SaveDataController instance;
     public SaveData loadedSave;
+    public string filePath;
     private Vector3 playerPosition;
     private GameObject player;
     private bool justLoaded = false;
-
-    void Start()
-    {
-        
-    }
 
     void Update()
     {
@@ -33,7 +34,21 @@ public class SaveDataController : MonoBehaviour
 
     void Awake()
     {
+        if (instance == null)
+            instance = this;
         DontDestroyOnLoad(this.gameObject);
+    }
+
+    public void loadSaveFile()
+    {
+        FileStream saveFile;
+        if (File.Exists(filePath))
+            saveFile = File.OpenRead(filePath);
+        else
+            return;
+        BinaryFormatter binaryFormatter = new BinaryFormatter();
+        loadedSave = (SaveData)binaryFormatter.Deserialize(saveFile);
+        saveFile.Close();
     }
 
     public void load()

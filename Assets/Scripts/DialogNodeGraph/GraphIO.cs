@@ -107,7 +107,6 @@ public class GraphIO
                         view.RemoveElement(edge);
                 view.RemoveElement(node);
             }
-
         }
     }
 }

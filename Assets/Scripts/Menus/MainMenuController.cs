@@ -11,11 +11,11 @@ using UnityEngine.UI;
 public class MainMenuController : MonoBehaviour
 {
     [Header("UI elements")]
-    [SerializeField] GameObject mainCanvas;
-    [SerializeField] GameObject loadGameCanvas;
-    [SerializeField] List<Button> saveButtons;
-    [SerializeField] Button leftArrow;
-    [SerializeField] Button rightArrow;
+    [SerializeField] private GameObject mainCanvas;
+    [SerializeField] private GameObject loadGameCanvas;
+    [SerializeField] private List<Button> saveButtons;
+    [SerializeField] private Button leftArrow;
+    [SerializeField] private Button rightArrow;
 
     private SaveDataController saveDataController;
     private SaveData currentSave;
@@ -24,16 +24,18 @@ public class MainMenuController : MonoBehaviour
 
     void Start()
     {
-        saveDataController = GameObject.Find("SaveDataController").GetComponent<SaveDataController>();
+        saveDataController = SaveDataController.instance;
     }
 
     public void newGame()
     {
         currentSave = new SaveData();
-        FileStream saveFile = File.Create(Application.persistentDataPath + "/" + currentSave.LastLocation + " " + DateTime.Now.ToString("dd/MM/yyyy hh/mm/ss tt") + ".save");
+        string filePath = Application.persistentDataPath + "/" + currentSave.LastLocation + " " + DateTime.Now.ToString("dd/MM/yyyy hh/mm/ss tt") + ".save";
+        FileStream saveFile = File.Create(filePath);
         BinaryFormatter binaryFormatter = new BinaryFormatter();
         binaryFormatter.Serialize(saveFile, currentSave);
-        startGame();
+        saveDataController.filePath = filePath;
+        saveDataController.load();
     }
 
     public void loadGame()
@@ -100,16 +102,9 @@ public class MainMenuController : MonoBehaviour
 
     public void loadSave(Button button)
     {
-        string filePath = Application.persistentDataPath + "/" + button.GetComponentInChildren<Text>().text + ".save";
-        FileStream saveFile;
-        if (File.Exists(filePath))
-            saveFile = File.OpenRead(filePath);
-        else
-            return;
-        BinaryFormatter binaryFormatter = new BinaryFormatter();
-        currentSave = (SaveData) binaryFormatter.Deserialize(saveFile);
-        saveFile.Close();
-        startGame();
+        saveDataController.filePath = Application.persistentDataPath + "/" + button.GetComponentInChildren<Text>().text + ".save";
+        saveDataController.loadSaveFile();
+        saveDataController.load();
     }
 
     public void backToMainMenu(GameObject currentCanvas)
@@ -118,9 +113,4 @@ public class MainMenuController : MonoBehaviour
         mainCanvas.SetActive(true);
     }
 
-    private void startGame()
-    {
-        saveDataController.loadedSave = currentSave;
-        saveDataController.load();
-    }
 }

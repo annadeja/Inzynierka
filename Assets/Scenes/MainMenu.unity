@@ -1183,19 +1183,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   loadedSave:
-    playerStats:
+    PlayerStats:
       maxHP: 20
       currentHP: 20
       attack: 10
       defense: 10
+      attackCooldown: 2
+      maxCooldown: 2
       charisma: 10
       deception: 10
       thoughtfulness: 10
-    lastLocation: SampleScene
-    playerPosition: 000000000000000000000000
-    revolutionChoices: 0
-    reformChoices: 0
-    conquestChoices: 0
+    PastChoices: []
+    LastLocation: SampleScene
+    PlayerPosition: 000000000a00000000000000
+    RevolutionChoices: 0
+    ReformChoices: 0
+    ConquestChoices: 0
 --- !u!4 &933045556
 Transform:
   m_ObjectHideFlags: 0

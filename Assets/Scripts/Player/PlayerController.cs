@@ -33,6 +33,17 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        processInputs();
+        calculateDisplacement();
+        if(canMove)
+        {
+            movePlayer();
+            moveCamera();
+        }
+    }
+
+    private void processInputs()
+    {
         if(animator)
         {
             if ((displacement.x != 0 || displacement.z > 0) && Input.GetKey("left shift"))
@@ -53,7 +64,10 @@ public class PlayerController : MonoBehaviour
                 animator.SetBool("isRunning", false);
             }
         }
+    }
 
+    private void calculateDisplacement()
+    {
         displacement.x = Input.GetAxis("Horizontal") * currentSpeed;
         if (charControl.isGrounded)
             displacement.y = 0;
@@ -61,17 +75,21 @@ public class PlayerController : MonoBehaviour
             displacement.y -= 4 * Time.deltaTime;
         displacement.z = Input.GetAxis("Vertical") * currentSpeed;
         displacement = transform.TransformDirection(displacement);
+    }
 
-        if(canMove)
+    private void movePlayer()
+    {
+        charControl.Move(displacement * Time.deltaTime);
+        transform.Rotate(0, Input.GetAxis("Mouse X") * rotationSpeed * Time.deltaTime, 0);
+    }
+
+    private void moveCamera()
+    {
+        if (mainCamera)
         {
-            charControl.Move(displacement * Time.deltaTime);
-            transform.Rotate(0, Input.GetAxis("Mouse X") * rotationSpeed * Time.deltaTime, 0);
-            if (mainCamera)
-            {
-                camDiff = Quaternion.AngleAxis(Input.GetAxis("Mouse X") * rotationSpeed * Time.deltaTime, Vector3.up) * camDiff;
-                mainCamera.transform.position = transform.position + camDiff;
-                mainCamera.transform.LookAt(transform.position);
-            }
+            camDiff = Quaternion.AngleAxis(Input.GetAxis("Mouse X") * rotationSpeed * Time.deltaTime, Vector3.up) * camDiff;
+            mainCamera.transform.position = transform.position + camDiff;
+            mainCamera.transform.LookAt(transform.position);
         }
     }
 }

@@ -6,7 +6,7 @@ using UnityEngine;
 [Serializable]
 public class NodeDataContainer
 {
-    public string Guid { get; private set; }
+    public string Guid; //{ get; private set; } //To sprawia problemy z ładowaniem do narzędzia edycji gdy jest właściwością.
     public string DialogLine;
     public string Speaker;
     public string ExitLine;

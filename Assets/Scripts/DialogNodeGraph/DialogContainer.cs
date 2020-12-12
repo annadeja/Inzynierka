@@ -6,8 +6,8 @@ using UnityEngine;
 [Serializable]
 public class DialogContainer : ScriptableObject
 {
-    public List<NodeConnection> Connections { get; private set; }
-    public List<NodeDataContainer> NodeData { get; private set; }
+    public List<NodeConnection> Connections; //{ get; private set; } //To sprawia problemy z ładowaniem do narzędzia edycji gdy jest właściwością.
+    public List<NodeDataContainer> NodeData; //{ get; private set; } //To sprawia problemy z ładowaniem do narzędzia edycji gdy jest właściwością.
     public string FirstNodeGuid { get; set; }
 
     public DialogContainer()
