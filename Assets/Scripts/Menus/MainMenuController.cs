@@ -24,7 +24,7 @@ public class MainMenuController : MonoBehaviour
 
     void Start()
     {
-        saveDataController = SaveDataController.instance;
+        saveDataController = SaveDataController.getInstance();
     }
 
     public void newGame()

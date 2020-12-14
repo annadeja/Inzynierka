@@ -372,12 +372,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32c624cc59016ce42b3fe394dc49b107, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  patrollingRadius: 30
   enemyStats:
     maxHP: 20
     currentHP: 20
-    attack: 10
+    attack: 8
     defense: 10
+    attackCooldown: 2
+    maxCooldown: 2
     charisma: 10
     deception: 10
     thoughtfulness: 10
@@ -2020,6 +2021,18 @@ Animator:
   m_CorrespondingSourceObject: {fileID: 5866666021909216657, guid: 1729df3193cd5334798b2fbfe7a8dae5, type: 3}
   m_PrefabInstance: {fileID: 2095545372}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1943139858
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1943139856}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 39240bc9faa123445958e11f9691affc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1943139859
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2056,6 +2069,19 @@ CharacterController:
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
+  m_Center: {x: 0, y: 9, z: 0}
+--- !u!135 &1943139861
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1943139856}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 10
   m_Center: {x: 0, y: 9, z: 0}
 --- !u!1001 &2095545372
 PrefabInstance:

@@ -9,7 +9,7 @@ using UnityEngine.SceneManagement;
 
 public class SaveDataController : MonoBehaviour
 {
-    public static SaveDataController instance;
+    private static SaveDataController instance;
     public SaveData loadedSave;
     public string filePath;
     private Vector3 playerPosition;
@@ -37,6 +37,11 @@ public class SaveDataController : MonoBehaviour
         if (instance == null)
             instance = this;
         DontDestroyOnLoad(this.gameObject);
+    }
+
+    public static SaveDataController getInstance()
+    {
+        return instance;
     }
 
     public void loadSaveFile()

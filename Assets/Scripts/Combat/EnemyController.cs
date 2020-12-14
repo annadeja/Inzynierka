@@ -3,12 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
-using UnityEngine.SceneManagement;
 
 public class EnemyController : MonoBehaviour
 {
-    //public float patrollingRadius = 30f;
-    [SerializeField] CharacterStats enemyStats;
+    [SerializeField] public CharacterStats enemyStats;
     [SerializeField] private List<Transform> patrolPoints;
 
     private CombatController combatController;
@@ -65,13 +63,9 @@ public class EnemyController : MonoBehaviour
     {
         distance = Vector3.Distance(transform.position, player.transform.position);
         if (distance <= navMeshAgent.stoppingDistance)
-        {
             attack();
-        }
         else
-        {
             navMeshAgent.SetDestination(player.transform.position);
-        }
     }
 
     private void turnToPlayer()
@@ -84,15 +78,14 @@ public class EnemyController : MonoBehaviour
     private void attack()
     {
         bool killedPlayer = combatController.attack(enemyStats, playerStats);
-        if (killedPlayer)
-            SceneManager.LoadScene("GameOverScreen");
+        combatController.killPlayer(killedPlayer);
     }
 
     private void OnTriggerEnter(Collider other)
     {
         isInCombat = true;
         player = other.gameObject;
-        playerStats = SaveDataController.instance.loadedSave.PlayerStats;
+        playerStats = SaveDataController.getInstance().loadedSave.PlayerStats;
     }
 
     private void OnTriggerExit(Collider other)

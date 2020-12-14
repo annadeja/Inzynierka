@@ -13,46 +13,46 @@ MonoBehaviour:
   m_Name: New tree
   m_EditorClassIdentifier: 
   Connections:
-  - NodeGuid: 82d3d0fa-08b7-4747-8744-6e0b3030ace6
+  - NodeGuid: 4cbb84ac-d603-4dde-bd75-5671a6456602
     PortName: root
-    TargetGuid: 4eb5f57a-34fd-4db0-ab6c-42236878696e
-  - NodeGuid: 4eb5f57a-34fd-4db0-ab6c-42236878696e
+    TargetGuid: 230d3419-7f62-4100-be70-6a04f9338872
+  - NodeGuid: 230d3419-7f62-4100-be70-6a04f9338872
     PortName: New response 1
-    TargetGuid: bbbdb2af-9b22-4cef-b41a-1ac3fff53ed5
-  - NodeGuid: 4eb5f57a-34fd-4db0-ab6c-42236878696e
+    TargetGuid: d090d53d-f6fe-43dc-9372-b9712955530f
+  - NodeGuid: 230d3419-7f62-4100-be70-6a04f9338872
     PortName: New response 2
-    TargetGuid: 3822147e-ae67-48d0-9d41-7d14282254c5
+    TargetGuid: 45392eca-5327-4b42-b6a6-29a1ece69a3c
   NodeData:
-  - Guid: bbbdb2af-9b22-4cef-b41a-1ac3fff53ed5
-    DialogLine: w
+  - Guid: d090d53d-f6fe-43dc-9372-b9712955530f
+    DialogLine: sd
     Speaker: DUMMY
-    ExitLine: f
-    Position: {x: 733, y: 148}
+    ExitLine: s
+    Position: {x: 740, y: 98}
     OutputPorts: []
     IsChoice: 0
     IsLeaf: 1
     ChoiceOutcomes: []
-  - Guid: 3822147e-ae67-48d0-9d41-7d14282254c5
-    DialogLine: wfwf
+  - Guid: 45392eca-5327-4b42-b6a6-29a1ece69a3c
+    DialogLine: ds
     Speaker: DUMMY
-    ExitLine: w
-    Position: {x: 752, y: 381}
+    ExitLine: d
+    Position: {x: 735, y: 345}
     OutputPorts: []
     IsChoice: 0
     IsLeaf: 1
     ChoiceOutcomes: []
-  - Guid: 4eb5f57a-34fd-4db0-ab6c-42236878696e
+  - Guid: 230d3419-7f62-4100-be70-6a04f9338872
     DialogLine: SAMPLE TEXT.
     Speaker: DUMMY
     ExitLine: 
-    Position: {x: 294, y: 163}
+    Position: {x: 329, y: 186}
     OutputPorts:
-    - NodeGuid: 4eb5f57a-34fd-4db0-ab6c-42236878696e
+    - NodeGuid: 230d3419-7f62-4100-be70-6a04f9338872
       PortName: New response 1
-      TargetGuid: bbbdb2af-9b22-4cef-b41a-1ac3fff53ed5
-    - NodeGuid: 4eb5f57a-34fd-4db0-ab6c-42236878696e
+      TargetGuid: d090d53d-f6fe-43dc-9372-b9712955530f
+    - NodeGuid: 230d3419-7f62-4100-be70-6a04f9338872
       PortName: New response 2
-      TargetGuid: 3822147e-ae67-48d0-9d41-7d14282254c5
+      TargetGuid: 45392eca-5327-4b42-b6a6-29a1ece69a3c
     IsChoice: 1
     IsLeaf: 0
     ChoiceOutcomes:
@@ -72,3 +72,4 @@ MonoBehaviour:
       RequiredCharisma: 0
       RequiredDeception: 0
       RequiredThoughtfulness: 0
+  FirstNodeGuid: 230d3419-7f62-4100-be70-6a04f9338872

@@ -23,14 +23,14 @@ public class SpeakerBehavior : MonoBehaviour
     [SerializeField] Vector3 cameraPosition;
     [SerializeField] Vector3 playerPosition;
 
-    private PlayerController playerControl;
+    private PlayerMovementController playerControl;
     private bool isInRange = false;
     private CharacterData currentCharacter;
     private SaveDataController saveDataController;
 
     void Start()
     {
-        saveDataController = SaveDataController.instance;
+        saveDataController = SaveDataController.getInstance();
         disableUI();
         if(choiceButtons.Count == 3)
         {
@@ -182,7 +182,7 @@ public class SpeakerBehavior : MonoBehaviour
         if (dialogTrees.Count != 0)
             popup.gameObject.SetActive(true);
         isInRange = true;
-        playerControl = other.gameObject.GetComponentInChildren<PlayerController>();
+        playerControl = other.gameObject.GetComponentInChildren<PlayerMovementController>();
     }
 
     private void OnTriggerExit(Collider other)

@@ -6,7 +6,7 @@ ScriptsOnlyBuild:
     - EnemyController
     - GameOverScreenController
     - MainMenuController
-    - PlayerController
+    - PlayerMovementController
     - SaveDataController
     - SpeakerBehavior
     Unity.Rider.Editor.dll:
@@ -56,13 +56,13 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 12460}
     - Class: 114
-      Script: {instanceID: 12930}
+      Script: {instanceID: 12776}
     - Class: 114
-      Script: {instanceID: 13470}
+      Script: {instanceID: 12932}
     - Class: 114
-      Script: {instanceID: 13860}
+      Script: {instanceID: 13472}
     - Class: 114
-      Script: {instanceID: 65208}
+      Script: {instanceID: 13864}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -117,17 +117,17 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 12460}
     - Class: 114
-      Script: {instanceID: 12930}
+      Script: {instanceID: 12932}
     - Class: 114
-      Script: {instanceID: 12988}
+      Script: {instanceID: 12990}
     - Class: 114
-      Script: {instanceID: 13170}
+      Script: {instanceID: 13172}
     - Class: 114
-      Script: {instanceID: 13470}
+      Script: {instanceID: 13472}
     - Class: 114
-      Script: {instanceID: 13848}
+      Script: {instanceID: 13852}
     - Class: 114
-      Script: {instanceID: 13860}
+      Script: {instanceID: 13864}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -194,15 +194,15 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 12570}
     - Class: 114
-      Script: {instanceID: 12930}
+      Script: {instanceID: 12932}
     - Class: 114
-      Script: {instanceID: 13470}
+      Script: {instanceID: 13472}
     - Class: 114
-      Script: {instanceID: 13520}
+      Script: {instanceID: 13522}
     - Class: 114
-      Script: {instanceID: 13714}
+      Script: {instanceID: 13716}
     - Class: 114
-      Script: {instanceID: 13860}
+      Script: {instanceID: 13864}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -435,7 +435,7 @@ ScriptsOnlyBuild:
       Hash: f5155ee4fc369dd9d1e6090cbfb73263
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
-    className: PlayerController
+    className: PlayerMovementController
   - hash:
       serializedVersion: 2
       Hash: 040dd48e3a027d5424519a5fa2009df4
@@ -454,6 +454,12 @@ ScriptsOnlyBuild:
     assemblyName: Unity.Timeline.dll
     namespaceName: UnityEngine.Timeline
     className: SignalTrack
+  - hash:
+      serializedVersion: 2
+      Hash: b368c16f34f8e0999ab63dad2d417b1f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: GameOverScreenController
   - hash:
       serializedVersion: 2
       Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
@@ -700,12 +706,6 @@ ScriptsOnlyBuild:
     assemblyName: Unity.Timeline.dll
     namespaceName: UnityEngine.Timeline
     className: PlayableTrack
-  - hash:
-      serializedVersion: 2
-      Hash: b368c16f34f8e0999ab63dad2d417b1f
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: GameOverScreenController
   platform: 19
   scenePathNames:
   - Assets/Scenes/MainMenu.unity

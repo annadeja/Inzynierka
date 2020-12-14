@@ -1,6 +1,8 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class CombatController
 {
@@ -22,8 +24,9 @@ public class CombatController
     {
         if (attacker.attackCooldown <= 0.0f)
         {
-            int damage = (int)(attackModifier * attacker.attack) - target.defense;
+            int damage = Math.Max(0, (int)(attackModifier * attacker.attack) - target.defense);
             target.takeDamage(damage);
+            Debug.Log(attacker.attack);
             Debug.Log("Damage: " + damage);
             attacker.attackCooldown = attacker.maxCooldown;
             Debug.Log("HP left: " + target.currentHP);
@@ -32,5 +35,20 @@ public class CombatController
             return true;
         else
             return false;
+    }
+
+    public void killPlayer(bool killedPlayer)
+    {
+        if (killedPlayer)
+            SceneManager.LoadScene("GameOverScreen");
+    }
+
+    public void killEnemy(bool killedEnemy, GameObject enemy)
+    {
+        if (killedEnemy)
+        {
+            Debug.Log("Killed enemy");
+            enemy.SetActive(false);
+        }
     }
 }

@@ -16,7 +16,7 @@ public class GameOverScreenController : MonoBehaviour
     {
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
-        saveDataController = SaveDataController.instance;
+        saveDataController = SaveDataController.getInstance();
     }
 
     public void loadLastSave()
