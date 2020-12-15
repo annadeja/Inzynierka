@@ -35,6 +35,7 @@ public class EnemyController : MonoBehaviour
 
     void Update()
     {
+        enemyStats.decreaseCooldown(Time.deltaTime);
         if (isInCombat)
             engage();
         else
@@ -43,10 +44,12 @@ public class EnemyController : MonoBehaviour
 
     private void engage()
     {
-        enemyStats.decreaseCooldown(Time.deltaTime);
-        navMeshAgent.autoBraking = true;
-        followPlayer();
-        turnToPlayer();
+        if (player != null)
+        {
+            navMeshAgent.autoBraking = true;
+            followPlayer();
+            turnToPlayer();
+        }
     }
 
     private void patrol()
@@ -77,15 +80,22 @@ public class EnemyController : MonoBehaviour
 
     private void attack()
     {
-        bool killedPlayer = combatController.attack(enemyStats, playerStats);
-        combatController.killPlayer(killedPlayer);
+        if (playerStats != null)
+        {
+            bool killedPlayer = combatController.attack(enemyStats, playerStats);
+            combatController.killPlayer(killedPlayer);
+        }
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        isInCombat = true;
-        player = other.gameObject;
-        playerStats = SaveDataController.getInstance().loadedSave.PlayerStats;
+        PlayerCombatController playerCombatController = other.gameObject.GetComponent<PlayerCombatController>();
+        if (playerCombatController != null)
+        {
+            isInCombat = true;
+            player = other.gameObject;
+            playerStats = SaveDataController.getInstance().loadedSave.PlayerStats;
+        }
     }
 
     private void OnTriggerExit(Collider other)

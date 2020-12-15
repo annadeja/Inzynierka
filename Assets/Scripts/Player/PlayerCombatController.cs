@@ -28,18 +28,21 @@ public class PlayerCombatController : MonoBehaviour
         if (isInRange)
         {
             bool killedEnemy = combatController.attack(playerStats, enemyStats);
-            combatController.killEnemy(killedEnemy, enemy);
+            combatController.killEnemy(killedEnemy, enemy, playerStats, enemyStats);
         }
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        EnemyController enemyController = other.gameObject.GetComponent<EnemyController>();
-        if (enemyController != null)
+        if (!other.isTrigger) //Sprawdza czy wchodzi się w faktyczny collider przeciwnika.
         {
-            isInRange = true;
-            enemy = other.gameObject;
-            enemyStats = enemyController.enemyStats;
+            EnemyController enemyController = other.gameObject.GetComponent<EnemyController>();
+            if (enemyController != null)
+            {
+                isInRange = true;
+                enemy = other.gameObject;
+                enemyStats = enemyController.enemyStats;
+            }
         }
     }
 

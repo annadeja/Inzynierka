@@ -27,14 +27,24 @@ public class MainMenuController : MonoBehaviour
         saveDataController = SaveDataController.getInstance();
     }
 
+    public void loadDialogRoom()
+    {
+        currentSave = new SaveData("DialogDemonstration");
+        newGame();
+    }
+
+    public void loadCombatRoom()
+    {
+        currentSave = new SaveData("CombatDemonstration");
+        newGame();
+    }
+
     public void newGame()
     {
-        currentSave = new SaveData();
         string filePath = Application.persistentDataPath + "/" + currentSave.LastLocation + " " + DateTime.Now.ToString("dd/MM/yyyy hh/mm/ss tt") + ".save";
-        FileStream saveFile = File.Create(filePath);
-        BinaryFormatter binaryFormatter = new BinaryFormatter();
-        binaryFormatter.Serialize(saveFile, currentSave);
         saveDataController.filePath = filePath;
+        saveDataController.loadedSave = currentSave;
+        saveDataController.saveToFile();
         saveDataController.load();
     }
 

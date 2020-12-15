@@ -9,7 +9,7 @@ public class SaveData
     public CharacterStats PlayerStats;
     public List<ChoiceData> PastChoices;
     public string LastLocation;
-    public int[] PlayerPosition;
+    public float[] PlayerPosition;
     public int RevolutionChoices;
     public int ReformChoices;
     public int ConquestChoices;
@@ -18,8 +18,19 @@ public class SaveData
     {
         PlayerStats = new CharacterStats();
         PastChoices = new List<ChoiceData>();
-        LastLocation = "SampleScene";
-        PlayerPosition = new int[3] {0, 10, 0};
+        LastLocation = "DialogDemonstration";
+        PlayerPosition = new float[3] {0, 10, 0};
+        RevolutionChoices = 0;
+        ReformChoices = 0;
+        ConquestChoices = 0;
+    }
+
+    public SaveData(string lastLocation)
+    {
+        PlayerStats = new CharacterStats();
+        PastChoices = new List<ChoiceData>();
+        LastLocation = lastLocation;
+        PlayerPosition = new float[3] { 0, 10, 0 };
         RevolutionChoices = 0;
         ReformChoices = 0;
         ConquestChoices = 0;

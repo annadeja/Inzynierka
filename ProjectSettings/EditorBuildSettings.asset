@@ -9,9 +9,12 @@ EditorBuildSettings:
     path: Assets/Scenes/MainMenu.unity
     guid: 61ed85a43095d7443bcc84a3415492f3
   - enabled: 1
-    path: Assets/Scenes/SampleScene.unity
+    path: Assets/Scenes/DialogDemonstration.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
   - enabled: 1
     path: Assets/Scenes/GameOverScreen.unity
     guid: 0cfc2f5b09ced1b499a87765ce68109a
+  - enabled: 1
+    path: Assets/Scenes/CombatDemonstration.unity
+    guid: 7e8007cc88fc7104f8ebf6e8c2650955
   m_configObjects: {}

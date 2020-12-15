@@ -44,6 +44,14 @@ public class SaveDataController : MonoBehaviour
         return instance;
     }
 
+    public void updateSaveData()
+    {
+        loadedSave.LastLocation = SceneManager.GetActiveScene().name;
+        loadedSave.PlayerPosition[0] = player.transform.position.x;
+        loadedSave.PlayerPosition[1] = player.transform.position.y;
+        loadedSave.PlayerPosition[2] = player.transform.position.z;
+    }
+
     public void loadSaveFile()
     {
         FileStream saveFile;
@@ -53,6 +61,15 @@ public class SaveDataController : MonoBehaviour
             return;
         BinaryFormatter binaryFormatter = new BinaryFormatter();
         loadedSave = (SaveData)binaryFormatter.Deserialize(saveFile);
+        saveFile.Close();
+    }
+
+    public void saveToFile()
+    {
+        FileStream saveFile;
+        saveFile = File.OpenWrite(filePath);
+        BinaryFormatter binaryFormatter = new BinaryFormatter();
+        binaryFormatter.Serialize(saveFile, loadedSave);
         saveFile.Close();
     }
 

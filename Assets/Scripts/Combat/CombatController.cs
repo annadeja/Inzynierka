@@ -22,16 +22,16 @@ public class CombatController
 
     public bool attack(CharacterStats attacker, CharacterStats target)
     {
-        if (attacker.attackCooldown <= 0.0f)
+        if (attacker.AttackCooldown <= 0.0f)
         {
-            int damage = Math.Max(0, (int)(attackModifier * attacker.attack) - target.defense);
+            int damage = Math.Max(0, (int)(attackModifier * attacker.Attack) - target.Defense);
             target.takeDamage(damage);
-            Debug.Log(attacker.attack);
+            Debug.Log(attacker.Attack);
             Debug.Log("Damage: " + damage);
-            attacker.attackCooldown = attacker.maxCooldown;
-            Debug.Log("HP left: " + target.currentHP);
+            attacker.AttackCooldown = attacker.MaxCooldown;
+            Debug.Log("HP left: " + target.CurrentHP);
         }
-        if (target.currentHP <= 0)
+        if (target.CurrentHP <= 0)
             return true;
         else
             return false;
@@ -43,12 +43,13 @@ public class CombatController
             SceneManager.LoadScene("GameOverScreen");
     }
 
-    public void killEnemy(bool killedEnemy, GameObject enemy)
+    public void killEnemy(bool killedEnemy, GameObject enemy, CharacterStats playerStats, CharacterStats enemyStats)
     {
         if (killedEnemy)
         {
             Debug.Log("Killed enemy");
             enemy.SetActive(false);
+            playerStats.levelUp(enemyStats.RewardXP);
         }
     }
 }

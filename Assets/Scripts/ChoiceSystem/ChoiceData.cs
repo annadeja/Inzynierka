@@ -29,7 +29,7 @@ public class ChoiceData
 
     public void skillCheck(CharacterStats playerStats)
     {
-        if (!(playerStats.charisma >= RequiredCharisma && playerStats.deception >= RequiredDeception && playerStats.thoughtfulness >= RequiredThoughtfulness))
+        if (!(playerStats.Charisma >= RequiredCharisma && playerStats.Deception >= RequiredDeception && playerStats.Thoughtfulness >= RequiredThoughtfulness))
             WasFailed = true;
     }
 }
