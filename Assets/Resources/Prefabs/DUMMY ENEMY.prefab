@@ -172,7 +172,7 @@ MonoBehaviour:
     RewardXP: 10
     MaxHP: 20
     CurrentHP: 20
-    Attack: 7
+    Attack: 8
     Defense: 5
     AttackCooldown: 2
     MaxCooldown: 2

@@ -11,6 +11,7 @@ public class CharacterStats
     public int CurrentXP;
     public int ToNextLevel;
     public int RewardXP;
+    public int SkillPoints;
 
     [Header("Combat stats")]
     public int MaxHP;
@@ -31,6 +32,7 @@ public class CharacterStats
         CurrentXP = 0;
         ToNextLevel = 10;
         RewardXP = 10;
+        SkillPoints = 0;
 
         MaxHP = 20;
         CurrentHP = MaxHP;
@@ -61,7 +63,9 @@ public class CharacterStats
         {
             Level++;
             CurrentXP = 0;
-            ToNextLevel = 2 * ToNextLevel;
+            ToNextLevel *= 2;
+            MaxHP = (int)((float)MaxHP * 1.25);
+            SkillPoints = 3;
             Debug.Log("Leveled up.");
         }
     }

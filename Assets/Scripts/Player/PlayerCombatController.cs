@@ -29,6 +29,12 @@ public class PlayerCombatController : MonoBehaviour
         {
             bool killedEnemy = combatController.attack(playerStats, enemyStats);
             combatController.killEnemy(killedEnemy, enemy, playerStats, enemyStats);
+            if (killedEnemy)
+            {
+                isInRange = false;
+                enemy = null;
+                enemyStats = null;
+            }
         }
     }
 

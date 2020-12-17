@@ -15,9 +15,12 @@ public class CharacterMenuController : MonoBehaviour
     [SerializeField] private Text charismaText;
     [SerializeField] private Text deceptionText;
     [SerializeField] private Text thoughtfulnessText;
+    [SerializeField] private List<Button> leftArrows;
+    [SerializeField] private List<Button> rightArrows;
 
     private SaveDataController saveDataController;
     private CharacterStats playerStats;
+    private List<int> modifiedIndexes = new List<int>();
 
     void Start()
     {
@@ -56,6 +59,29 @@ public class CharacterMenuController : MonoBehaviour
         charismaText.text = playerStats.Charisma.ToString();
         deceptionText.text = playerStats.Deception.ToString();
         thoughtfulnessText.text = playerStats.Thoughtfulness.ToString();
+
+        if (playerStats.SkillPoints == 0)
+        {
+            setLeftArrowsActive(false);
+            setRightArrowsActive(false);
+        }
+        else
+        {
+            setLeftArrowsActive(false);
+            setRightArrowsActive(true);
+        }
+    }
+
+    private void setLeftArrowsActive(bool isActive)
+    {
+        foreach (Button arrow in leftArrows)
+            arrow.gameObject.SetActive(isActive);
+    }
+
+    private void setRightArrowsActive(bool isActive)
+    {
+        foreach (Button arrow in rightArrows)
+            arrow.gameObject.SetActive(isActive);
     }
 
     public void backToMainMenu()
@@ -67,5 +93,86 @@ public class CharacterMenuController : MonoBehaviour
     {
         saveDataController.updateSaveData();
         saveDataController.saveToFile();
+    }
+
+    public void changeAttack(bool increase)
+    {
+        if (increase)
+            increaseStat(ref playerStats.Attack, 0);
+        else
+            decreaseStat(ref playerStats.Attack, 0);
+        attackText.text = playerStats.Attack.ToString();
+    }
+
+    public void changeDefense(bool increase)
+    {
+        if (increase)
+            increaseStat(ref playerStats.Defense, 1);
+        else
+            decreaseStat(ref playerStats.Defense, 1);
+        defenseText.text = playerStats.Defense.ToString();
+    }
+
+    public void changeCharisma(bool increase)
+    {
+        if (increase)
+            increaseStat(ref playerStats.Charisma, 2);
+        else
+            decreaseStat(ref playerStats.Charisma, 2);
+        charismaText.text = playerStats.Charisma.ToString();
+    }
+
+    public void changeDeception(bool increase)
+    {
+        if (increase)
+            increaseStat(ref playerStats.Deception, 3);
+        else
+            decreaseStat(ref playerStats.Deception, 3);
+        deceptionText.text = playerStats.Deception.ToString();
+    }
+
+    public void changeThoughtfulness(bool increase)
+    {
+        if (increase)
+            increaseStat(ref playerStats.Thoughtfulness, 4);
+        else
+            decreaseStat(ref playerStats.Thoughtfulness, 4);
+        thoughtfulnessText.text = playerStats.Thoughtfulness.ToString();
+    }
+
+    private void increaseStat(ref int stat, int index)
+    {
+        if (playerStats.SkillPoints > 0)
+        {
+            stat++;
+            playerStats.SkillPoints--;
+            modifiedIndexes.Add(index);
+            updateArrows(index);
+        }
+    }
+
+    private void decreaseStat(ref int stat, int index)
+    {
+        if (playerStats.SkillPoints < 3)
+        {
+            stat--;
+            playerStats.SkillPoints++;
+            modifiedIndexes.Remove(index);
+            updateArrows(index);
+        }
+    }
+
+    private void updateArrows(int index)
+    {
+        if (playerStats.SkillPoints == 0)
+            setRightArrowsActive(false);
+        else
+            setRightArrowsActive(true);
+            setLeftArrowsActive(false);
+        if (playerStats.SkillPoints == 3)
+            modifiedIndexes.Clear();
+        else
+            foreach (int modifiedIndex in modifiedIndexes)
+                leftArrows[modifiedIndex].gameObject.SetActive(true);
     }
 }
