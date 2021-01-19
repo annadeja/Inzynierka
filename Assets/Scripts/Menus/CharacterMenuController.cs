@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
-
-public class CharacterMenuController : MonoBehaviour
+//!Skrypt obsługujący menu postaci.
+public class CharacterMenuController : MonoBehaviour 
 {
-    [SerializeField] private GameObject panel;
+    [SerializeField] private GameObject panel; //Elementy UI menu postaci.
     [SerializeField] private Text levelText;
     [SerializeField] private Text xpText;
     [SerializeField] private Text hpText;
@@ -18,20 +18,20 @@ public class CharacterMenuController : MonoBehaviour
     [SerializeField] private List<Button> leftArrows;
     [SerializeField] private List<Button> rightArrows;
 
-    private SaveDataController saveDataController;
-    private CharacterStats playerStats;
-    private List<int> modifiedIndexes = new List<int>();
+    private SaveDataController saveDataController; //!<Kontroler stanu gry.
+    private CharacterStats playerStats; //!<Statystyki gracza.
+    private List<int> modifiedIndexes = new List<int>(); //!<Indeksy zmodyfikowanych statystyk.
 
     void Start()
     {
         saveDataController = SaveDataController.getInstance();
-        playerStats = saveDataController.loadedSave.PlayerStats;
+        playerStats = saveDataController.LoadedSave.PlayerStats;
         panel.SetActive(false);
     }
 
     void Update()
     {
-        if (Input.GetButtonDown("Menu"))
+        if (Input.GetButtonDown("Menu")) //Aktywuje lub deaktywuje menu gdy gracz naciska przycisk.
         {
             if (panel.activeSelf)
             {
@@ -47,8 +47,8 @@ public class CharacterMenuController : MonoBehaviour
             }
         }
     }
-
-    private void enableMenu()
+    //!Aktywuje menu.
+    private void enableMenu() 
     {
         panel.SetActive(true);
         levelText.text = playerStats.Level.ToString();
@@ -71,30 +71,31 @@ public class CharacterMenuController : MonoBehaviour
             setRightArrowsActive(true);
         }
     }
-
-    private void setLeftArrowsActive(bool isActive)
+    //!Aktywuje lub deaktywuje strzałki w lewo. 
+    private void setLeftArrowsActive(bool isActive) 
     {
         foreach (Button arrow in leftArrows)
             arrow.gameObject.SetActive(isActive);
     }
-
-    private void setRightArrowsActive(bool isActive)
+    //!Aktywuje lub deaktywuje strzałki w prawo. 
+    private void setRightArrowsActive(bool isActive) 
     {
         foreach (Button arrow in rightArrows)
             arrow.gameObject.SetActive(isActive);
     }
-
-    public void backToMainMenu()
+    //!Przenosi do menu głównego.
+    public void backToMainMenu() 
     {
         SceneManager.LoadScene("MainMenu");
     }
-
-    public void saveGame()
+    //!Zapisuje grę.
+    public void saveGame() 
     {
         saveDataController.updateSaveData();
         saveDataController.saveToFile();
     }
 
+    //Funkcje zmiany statystyk.
     public void changeAttack(bool increase)
     {
         if (increase)
@@ -139,8 +140,8 @@ public class CharacterMenuController : MonoBehaviour
             decreaseStat(ref playerStats.Thoughtfulness, 4);
         thoughtfulnessText.text = playerStats.Thoughtfulness.ToString();
     }
-
-    private void increaseStat(ref int stat, int index)
+    //!Inkrementuje statystykę.
+    private void increaseStat(ref int stat, int index) 
     {
         if (playerStats.SkillPoints > 0)
         {
@@ -150,8 +151,8 @@ public class CharacterMenuController : MonoBehaviour
             updateArrows(index);
         }
     }
-
-    private void decreaseStat(ref int stat, int index)
+    //!Dekrementuje statystykę.
+    private void decreaseStat(ref int stat, int index) 
     {
         if (playerStats.SkillPoints < 3)
         {
@@ -161,8 +162,8 @@ public class CharacterMenuController : MonoBehaviour
             updateArrows(index);
         }
     }
-
-    private void updateArrows(int index)
+    //!Aktualizuje stan strzałek.
+    private void updateArrows(int index) 
     {
         if (playerStats.SkillPoints == 0)
             setRightArrowsActive(false);

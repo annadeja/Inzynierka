@@ -4,6 +4,7 @@ ScriptsOnlyBuild:
     - CharacterData
     - CharacterMenuController
     - DialogContainer
+    - EndingController
     - EnemyController
     - GameOverScreenController
     - MainMenuController
@@ -70,25 +71,25 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 11776}
     - Class: 114
-      Script: {instanceID: 11800}
+      Script: {instanceID: 11802}
     - Class: 114
-      Script: {instanceID: 11980}
+      Script: {instanceID: 11982}
     - Class: 114
-      Script: {instanceID: 12020}
+      Script: {instanceID: 12022}
     - Class: 114
-      Script: {instanceID: 12062}
+      Script: {instanceID: 12064}
     - Class: 114
-      Script: {instanceID: 12464}
+      Script: {instanceID: 12466}
     - Class: 114
-      Script: {instanceID: 12574}
+      Script: {instanceID: 12576}
     - Class: 114
-      Script: {instanceID: 13124}
+      Script: {instanceID: 13126}
     - Class: 114
-      Script: {instanceID: 13476}
+      Script: {instanceID: 13478}
     - Class: 114
-      Script: {instanceID: 13526}
+      Script: {instanceID: 13528}
     - Class: 114
-      Script: {instanceID: 13868}
+      Script: {instanceID: 13870}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -153,27 +154,27 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 11776}
     - Class: 114
-      Script: {instanceID: 11800}
+      Script: {instanceID: 11802}
     - Class: 114
-      Script: {instanceID: 11980}
+      Script: {instanceID: 11982}
     - Class: 114
-      Script: {instanceID: 12020}
+      Script: {instanceID: 12022}
     - Class: 114
-      Script: {instanceID: 12044}
+      Script: {instanceID: 12046}
     - Class: 114
-      Script: {instanceID: 12062}
+      Script: {instanceID: 12064}
     - Class: 114
-      Script: {instanceID: 12464}
+      Script: {instanceID: 12466}
     - Class: 114
-      Script: {instanceID: 12574}
+      Script: {instanceID: 12576}
     - Class: 114
-      Script: {instanceID: 13124}
+      Script: {instanceID: 13126}
     - Class: 114
-      Script: {instanceID: 13476}
+      Script: {instanceID: 13478}
     - Class: 114
-      Script: {instanceID: 13720}
+      Script: {instanceID: 13722}
     - Class: 114
-      Script: {instanceID: 13868}
+      Script: {instanceID: 13870}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -198,7 +199,60 @@ ScriptsOnlyBuild:
       Script: {instanceID: 0}
     - Class: 224
       Script: {instanceID: 0}
-    - Class: 238
+    Assets/Scenes/Ending.unity:
+    - Class: 1
+      Script: {instanceID: 0}
+    - Class: 4
+      Script: {instanceID: 0}
+    - Class: 20
+      Script: {instanceID: 0}
+    - Class: 21
+      Script: {instanceID: 0}
+    - Class: 28
+      Script: {instanceID: 0}
+    - Class: 48
+      Script: {instanceID: 0}
+    - Class: 81
+      Script: {instanceID: 0}
+    - Class: 104
+      Script: {instanceID: 0}
+    - Class: 114
+      Script: {instanceID: 11776}
+    - Class: 114
+      Script: {instanceID: 11782}
+    - Class: 114
+      Script: {instanceID: 11802}
+    - Class: 114
+      Script: {instanceID: 11982}
+    - Class: 114
+      Script: {instanceID: 12022}
+    - Class: 114
+      Script: {instanceID: 12046}
+    - Class: 114
+      Script: {instanceID: 12466}
+    - Class: 114
+      Script: {instanceID: 13478}
+    - Class: 114
+      Script: {instanceID: 13722}
+    - Class: 114
+      Script: {instanceID: 13870}
+    - Class: 115
+      Script: {instanceID: 0}
+    - Class: 128
+      Script: {instanceID: 0}
+    - Class: 136
+      Script: {instanceID: 0}
+    - Class: 157
+      Script: {instanceID: 0}
+    - Class: 196
+      Script: {instanceID: 0}
+    - Class: 213
+      Script: {instanceID: 0}
+    - Class: 222
+      Script: {instanceID: 0}
+    - Class: 223
+      Script: {instanceID: 0}
+    - Class: 224
       Script: {instanceID: 0}
     Assets/Scenes/GameOverScreen.unity:
     - Class: 1
@@ -220,19 +274,19 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 11776}
     - Class: 114
-      Script: {instanceID: 11800}
+      Script: {instanceID: 11802}
     - Class: 114
-      Script: {instanceID: 11980}
+      Script: {instanceID: 11982}
     - Class: 114
-      Script: {instanceID: 12020}
+      Script: {instanceID: 12022}
     - Class: 114
-      Script: {instanceID: 12464}
+      Script: {instanceID: 12466}
     - Class: 114
-      Script: {instanceID: 12780}
+      Script: {instanceID: 12782}
     - Class: 114
-      Script: {instanceID: 13476}
+      Script: {instanceID: 13478}
     - Class: 114
-      Script: {instanceID: 13868}
+      Script: {instanceID: 13870}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -283,35 +337,35 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 11776}
     - Class: 114
-      Script: {instanceID: 11800}
+      Script: {instanceID: 11802}
     - Class: 114
-      Script: {instanceID: 11980}
+      Script: {instanceID: 11982}
     - Class: 114
-      Script: {instanceID: 12020}
+      Script: {instanceID: 12022}
     - Class: 114
-      Script: {instanceID: 12044}
+      Script: {instanceID: 12046}
     - Class: 114
-      Script: {instanceID: 12062}
+      Script: {instanceID: 12064}
     - Class: 114
-      Script: {instanceID: 12464}
+      Script: {instanceID: 12466}
     - Class: 114
-      Script: {instanceID: 12574}
+      Script: {instanceID: 12576}
     - Class: 114
-      Script: {instanceID: 12992}
+      Script: {instanceID: 12994}
     - Class: 114
-      Script: {instanceID: 13124}
+      Script: {instanceID: 13126}
     - Class: 114
-      Script: {instanceID: 13176}
+      Script: {instanceID: 13178}
     - Class: 114
-      Script: {instanceID: 13476}
+      Script: {instanceID: 13478}
     - Class: 114
-      Script: {instanceID: 13526}
+      Script: {instanceID: 13528}
     - Class: 114
-      Script: {instanceID: 13720}
+      Script: {instanceID: 13722}
     - Class: 114
-      Script: {instanceID: 13856}
+      Script: {instanceID: 13858}
     - Class: 114
-      Script: {instanceID: 13868}
+      Script: {instanceID: 13870}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -345,6 +399,12 @@ ScriptsOnlyBuild:
     assemblyName: UnityEngine.UI.dll
     namespaceName: UnityEngine.UI
     className: Button
+  - hash:
+      serializedVersion: 2
+      Hash: 112cc70af165410dd432f6dde2268e34
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: EndingController
   - hash:
       serializedVersion: 2
       Hash: 4bc4346a71a8df53a6b106f68ef3a190
@@ -431,7 +491,7 @@ ScriptsOnlyBuild:
     className: TestResultRendererCallback
   - hash:
       serializedVersion: 2
-      Hash: 8c7eca5a7af8f6fb2fbfaf5d4a853f05
+      Hash: 7c84a3ec9bfedf42a6569712c95dd14a
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: DialogContainer
@@ -551,7 +611,7 @@ ScriptsOnlyBuild:
     className: Selectable
   - hash:
       serializedVersion: 2
-      Hash: f5155ee4fc369dd9d1e6090cbfb73263
+      Hash: b9d0e175d837068c311671232b6b796e
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: PlayerMovementController
@@ -605,7 +665,7 @@ ScriptsOnlyBuild:
     className: RawImage
   - hash:
       serializedVersion: 2
-      Hash: 7262171b3be492a150fedb4defd48caf
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: SaveDataController
@@ -831,4 +891,5 @@ ScriptsOnlyBuild:
   - Assets/Scenes/DialogDemonstration.unity
   - Assets/Scenes/GameOverScreen.unity
   - Assets/Scenes/CombatDemonstration.unity
+  - Assets/Scenes/Ending.unity
   playerPath: "D:/Program Files/Unity/In\u017Cynierka/Build/In\u017Cynierka.exe"

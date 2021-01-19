@@ -6,9 +6,10 @@ using UnityEngine.UI;
 
 [CreateAssetMenu(fileName = "New Character Data", menuName = "CharacterData")]
 [Serializable]
-public class CharacterData : ScriptableObject
+//!Przechowuje dane dotyczące formatowania okna dialogowego na podstawie danej postaci.
+public class CharacterData : ScriptableObject 
 {
-    public string Name;
-    public Sprite Icon;
-    public Color TextColor;
+    public string Name; //!<Imię mówcy.
+    public Sprite Icon; //!<Portret mówcy.
+    public Color TextColor; //!<Kolor tekstu mówcy.
 }

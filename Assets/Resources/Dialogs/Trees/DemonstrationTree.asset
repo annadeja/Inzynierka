@@ -1,0 +1,436 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 19ef2412fbc7fcf449de924ea016efe5, type: 3}
+  m_Name: DemonstrationTree
+  m_EditorClassIdentifier: 
+  Connections:
+  - NodeGuid: 1f4925fb-68a9-4df3-9c5e-ae3c3185a6bb
+    PortName: root
+    TargetGuid: 50848a77-660d-4618-a994-78387f1bf89a
+  - NodeGuid: 50848a77-660d-4618-a994-78387f1bf89a
+    PortName: Oh really?
+    TargetGuid: 3bab8b0d-2a96-4182-9868-06a8624df64a
+  - NodeGuid: 50848a77-660d-4618-a994-78387f1bf89a
+    PortName: Okay, keep going.
+    TargetGuid: 83fcaacb-f5dd-4e47-99ea-746a5dab1959
+  - NodeGuid: 3bab8b0d-2a96-4182-9868-06a8624df64a
+    PortName: All right then.
+    TargetGuid: 83fcaacb-f5dd-4e47-99ea-746a5dab1959
+  - NodeGuid: 83fcaacb-f5dd-4e47-99ea-746a5dab1959
+    PortName: '>'
+    TargetGuid: 716eb77d-0ecb-4206-8614-94fd98326e35
+  - NodeGuid: 716eb77d-0ecb-4206-8614-94fd98326e35
+    PortName: Uh, 1?
+    TargetGuid: 1e055b70-af88-4fc4-81dd-e00b390db59d
+  - NodeGuid: 716eb77d-0ecb-4206-8614-94fd98326e35
+    PortName: 2, I guess?
+    TargetGuid: 0e092077-189a-46c1-ae90-98bac76cc2ae
+  - NodeGuid: 716eb77d-0ecb-4206-8614-94fd98326e35
+    PortName: Let's go with 3.
+    TargetGuid: bc40ddd5-b05b-42fb-8d75-3c978277fd74
+  - NodeGuid: 1e055b70-af88-4fc4-81dd-e00b390db59d
+    PortName: Why not?
+    TargetGuid: 27c5da4e-7fca-4643-8bf3-be1ab42ce98c
+  - NodeGuid: 1e055b70-af88-4fc4-81dd-e00b390db59d
+    PortName: Give me 2 instead.
+    TargetGuid: 27c5da4e-7fca-4643-8bf3-be1ab42ce98c
+  - NodeGuid: 1e055b70-af88-4fc4-81dd-e00b390db59d
+    PortName: Let's settle for 3.
+    TargetGuid: 27c5da4e-7fca-4643-8bf3-be1ab42ce98c
+  - NodeGuid: 0e092077-189a-46c1-ae90-98bac76cc2ae
+    PortName: Yes, I am.
+    TargetGuid: 80fac846-4c51-4b99-b166-d35c893344b3
+  - NodeGuid: 0e092077-189a-46c1-ae90-98bac76cc2ae
+    PortName: No, give me 1.
+    TargetGuid: 80fac846-4c51-4b99-b166-d35c893344b3
+  - NodeGuid: 0e092077-189a-46c1-ae90-98bac76cc2ae
+    PortName: Nah, 3.
+    TargetGuid: 80fac846-4c51-4b99-b166-d35c893344b3
+  - NodeGuid: bc40ddd5-b05b-42fb-8d75-3c978277fd74
+    PortName: Yes, get on with it.
+    TargetGuid: 3023d72f-54cb-4ecd-a339-ef8ba46b243e
+  - NodeGuid: bc40ddd5-b05b-42fb-8d75-3c978277fd74
+    PortName: Gimme that 1.
+    TargetGuid: 3023d72f-54cb-4ecd-a339-ef8ba46b243e
+  - NodeGuid: bc40ddd5-b05b-42fb-8d75-3c978277fd74
+    PortName: Number 2, please.
+    TargetGuid: 3023d72f-54cb-4ecd-a339-ef8ba46b243e
+  - NodeGuid: 80fac846-4c51-4b99-b166-d35c893344b3
+    PortName: '>'
+    TargetGuid: d7e6b0b7-e768-4aef-8897-f67f43156088
+  - NodeGuid: 27c5da4e-7fca-4643-8bf3-be1ab42ce98c
+    PortName: '>'
+    TargetGuid: d7e6b0b7-e768-4aef-8897-f67f43156088
+  - NodeGuid: 3023d72f-54cb-4ecd-a339-ef8ba46b243e
+    PortName: '>'
+    TargetGuid: d7e6b0b7-e768-4aef-8897-f67f43156088
+  - NodeGuid: d7e6b0b7-e768-4aef-8897-f67f43156088
+    PortName: Red?
+    TargetGuid: 0b220b25-65f3-407f-939a-e4ffc095ffa9
+  - NodeGuid: d7e6b0b7-e768-4aef-8897-f67f43156088
+    PortName: Mint?
+    TargetGuid: 0b220b25-65f3-407f-939a-e4ffc095ffa9
+  - NodeGuid: d7e6b0b7-e768-4aef-8897-f67f43156088
+    PortName: Violet?
+    TargetGuid: 0b220b25-65f3-407f-939a-e4ffc095ffa9
+  NodeData:
+  - Guid: 3bab8b0d-2a96-4182-9868-06a8624df64a
+    DialogLine: Yes, really.
+    Speaker: DUMMY
+    ExitLine: 
+    Position: {x: 1020, y: -59}
+    OutputPorts:
+    - NodeGuid: 3bab8b0d-2a96-4182-9868-06a8624df64a
+      PortName: All right then.
+      TargetGuid: 83fcaacb-f5dd-4e47-99ea-746a5dab1959
+    IsChoice: 0
+    IsLeaf: 0
+    IsEnding: 0
+    ChoiceOutcomes: []
+  - Guid: 83fcaacb-f5dd-4e47-99ea-746a5dab1959
+    DialogLine: You will be able to determine an ending based on the choices you
+      make.
+    Speaker: DUMMY
+    ExitLine: 
+    Position: {x: 1395, y: 187}
+    OutputPorts:
+    - NodeGuid: 83fcaacb-f5dd-4e47-99ea-746a5dab1959
+      PortName: '>'
+      TargetGuid: 716eb77d-0ecb-4206-8614-94fd98326e35
+    IsChoice: 0
+    IsLeaf: 0
+    IsEnding: 0
+    ChoiceOutcomes: []
+  - Guid: 716eb77d-0ecb-4206-8614-94fd98326e35
+    DialogLine: Due to this being a simple demonstration, there isn't much room for
+      complex choices, so let's choose a number instead.
+    Speaker: DUMMY
+    ExitLine: 
+    Position: {x: 2047, y: 187}
+    OutputPorts:
+    - NodeGuid: 716eb77d-0ecb-4206-8614-94fd98326e35
+      PortName: Uh, 1?
+      TargetGuid: 1e055b70-af88-4fc4-81dd-e00b390db59d
+    - NodeGuid: 716eb77d-0ecb-4206-8614-94fd98326e35
+      PortName: 2, I guess?
+      TargetGuid: 0e092077-189a-46c1-ae90-98bac76cc2ae
+    - NodeGuid: 716eb77d-0ecb-4206-8614-94fd98326e35
+      PortName: Let's go with 3.
+      TargetGuid: bc40ddd5-b05b-42fb-8d75-3c978277fd74
+    IsChoice: 1
+    IsLeaf: 0
+    IsEnding: 0
+    ChoiceOutcomes:
+    - PortName: Uh, 1?
+      ChoiceTitle: First number one.
+      WasMade: 1
+      WasFailed: 0
+      Path: 0
+      RequiredCharisma: 0
+      RequiredDeception: 0
+      RequiredThoughtfulness: 0
+    - PortName: 2, I guess?
+      ChoiceTitle: First number two.
+      WasMade: 1
+      WasFailed: 0
+      Path: 1
+      RequiredCharisma: 0
+      RequiredDeception: 0
+      RequiredThoughtfulness: 0
+    - PortName: Let's go with 3.
+      ChoiceTitle: First number three
+      WasMade: 1
+      WasFailed: 0
+      Path: 2
+      RequiredCharisma: 0
+      RequiredDeception: 0
+      RequiredThoughtfulness: 0
+  - Guid: 50848a77-660d-4618-a994-78387f1bf89a
+    DialogLine: Welcome to the dialog demonstration! In it you will experience a
+      branching dialog!
+    Speaker: DUMMY
+    ExitLine: 
+    Position: {x: 302, y: 159}
+    OutputPorts:
+    - NodeGuid: 50848a77-660d-4618-a994-78387f1bf89a
+      PortName: Oh really?
+      TargetGuid: 3bab8b0d-2a96-4182-9868-06a8624df64a
+    - NodeGuid: 50848a77-660d-4618-a994-78387f1bf89a
+      PortName: Okay, keep going.
+      TargetGuid: 83fcaacb-f5dd-4e47-99ea-746a5dab1959
+    IsChoice: 0
+    IsLeaf: 0
+    IsEnding: 0
+    ChoiceOutcomes: []
+  - Guid: bc40ddd5-b05b-42fb-8d75-3c978277fd74
+    DialogLine: You got three there. Are you willing to confirm that choice?
+    Speaker: DUMMY
+    ExitLine: 
+    Position: {x: 2910, y: 945}
+    OutputPorts:
+    - NodeGuid: bc40ddd5-b05b-42fb-8d75-3c978277fd74
+      PortName: Yes, get on with it.
+      TargetGuid: 3023d72f-54cb-4ecd-a339-ef8ba46b243e
+    - NodeGuid: bc40ddd5-b05b-42fb-8d75-3c978277fd74
+      PortName: Gimme that 1.
+      TargetGuid: 3023d72f-54cb-4ecd-a339-ef8ba46b243e
+    - NodeGuid: bc40ddd5-b05b-42fb-8d75-3c978277fd74
+      PortName: Number 2, please.
+      TargetGuid: 3023d72f-54cb-4ecd-a339-ef8ba46b243e
+    IsChoice: 1
+    IsLeaf: 0
+    IsEnding: 0
+    ChoiceOutcomes:
+    - PortName: Yes, get on with it.
+      ChoiceTitle: Second number three
+      WasMade: 1
+      WasFailed: 0
+      Path: 2
+      RequiredCharisma: 0
+      RequiredDeception: 0
+      RequiredThoughtfulness: 0
+    - PortName: Gimme that 1.
+      ChoiceTitle: Second number one
+      WasMade: 1
+      WasFailed: 0
+      Path: 0
+      RequiredCharisma: 0
+      RequiredDeception: 0
+      RequiredThoughtfulness: 0
+    - PortName: Number 2, please.
+      ChoiceTitle: Second number two
+      WasMade: 1
+      WasFailed: 0
+      Path: 1
+      RequiredCharisma: 0
+      RequiredDeception: 0
+      RequiredThoughtfulness: 0
+  - Guid: 0e092077-189a-46c1-ae90-98bac76cc2ae
+    DialogLine: So you have chosen two. Are you certain there?
+    Speaker: DUMMY
+    ExitLine: 
+    Position: {x: 2937, y: 386}
+    OutputPorts:
+    - NodeGuid: 0e092077-189a-46c1-ae90-98bac76cc2ae
+      PortName: Yes, I am.
+      TargetGuid: 80fac846-4c51-4b99-b166-d35c893344b3
+    - NodeGuid: 0e092077-189a-46c1-ae90-98bac76cc2ae
+      PortName: No, give me 1.
+      TargetGuid: 80fac846-4c51-4b99-b166-d35c893344b3
+    - NodeGuid: 0e092077-189a-46c1-ae90-98bac76cc2ae
+      PortName: Nah, 3.
+      TargetGuid: 80fac846-4c51-4b99-b166-d35c893344b3
+    IsChoice: 1
+    IsLeaf: 0
+    IsEnding: 0
+    ChoiceOutcomes:
+    - PortName: Why would I not be?
+      ChoiceTitle: Second number two.
+      WasMade: 1
+      WasFailed: 0
+      Path: 0
+      RequiredCharisma: 0
+      RequiredDeception: 0
+      RequiredThoughtfulness: 0
+    - PortName: I am not.
+      ChoiceTitle: Was indecisive.
+      WasMade: 1
+      WasFailed: 0
+      Path: 0
+      RequiredCharisma: 0
+      RequiredDeception: 0
+      RequiredThoughtfulness: 0
+    - PortName: Yes, I am.
+      ChoiceTitle: Second number two
+      WasMade: 1
+      WasFailed: 0
+      Path: 1
+      RequiredCharisma: 0
+      RequiredDeception: 0
+      RequiredThoughtfulness: 0
+    - PortName: No, give me 1.
+      ChoiceTitle: Second number one
+      WasMade: 1
+      WasFailed: 0
+      Path: 0
+      RequiredCharisma: 0
+      RequiredDeception: 0
+      RequiredThoughtfulness: 0
+    - PortName: Nah, 3.
+      ChoiceTitle: Second number three
+      WasMade: 1
+      WasFailed: 0
+      Path: 2
+      RequiredCharisma: 0
+      RequiredDeception: 0
+      RequiredThoughtfulness: 0
+  - Guid: 1e055b70-af88-4fc4-81dd-e00b390db59d
+    DialogLine: 1 it is then. Are you absolutely sure about this?
+    Speaker: DUMMY
+    ExitLine: 
+    Position: {x: 2950, y: -98}
+    OutputPorts:
+    - NodeGuid: 1e055b70-af88-4fc4-81dd-e00b390db59d
+      PortName: Why not?
+      TargetGuid: 27c5da4e-7fca-4643-8bf3-be1ab42ce98c
+    - NodeGuid: 1e055b70-af88-4fc4-81dd-e00b390db59d
+      PortName: Give me 2 instead.
+      TargetGuid: 27c5da4e-7fca-4643-8bf3-be1ab42ce98c
+    - NodeGuid: 1e055b70-af88-4fc4-81dd-e00b390db59d
+      PortName: Let's settle for 3.
+      TargetGuid: 27c5da4e-7fca-4643-8bf3-be1ab42ce98c
+    IsChoice: 1
+    IsLeaf: 0
+    IsEnding: 0
+    ChoiceOutcomes:
+    - PortName: Yeah, why not.
+      ChoiceTitle: Second number one.
+      WasMade: 1
+      WasFailed: 0
+      Path: 0
+      RequiredCharisma: 0
+      RequiredDeception: 0
+      RequiredThoughtfulness: 0
+    - PortName: Give me 2 then.
+      ChoiceTitle: Second number two.
+      WasMade: 1
+      WasFailed: 0
+      Path: 0
+      RequiredCharisma: 0
+      RequiredDeception: 0
+      RequiredThoughtfulness: 0
+    - PortName: Let's settle for 3.
+      ChoiceTitle: Second number three.
+      WasMade: 1
+      WasFailed: 0
+      Path: 2
+      RequiredCharisma: 0
+      RequiredDeception: 0
+      RequiredThoughtfulness: 0
+    - PortName: Why not?
+      ChoiceTitle: Second number one
+      WasMade: 1
+      WasFailed: 0
+      Path: 0
+      RequiredCharisma: 0
+      RequiredDeception: 0
+      RequiredThoughtfulness: 0
+    - PortName: Give me 2 instead.
+      ChoiceTitle: Second number two
+      WasMade: 1
+      WasFailed: 0
+      Path: 1
+      RequiredCharisma: 0
+      RequiredDeception: 0
+      RequiredThoughtfulness: 0
+    - PortName: Let's settle for 3.
+      ChoiceTitle: Second number three
+      WasMade: 1
+      WasFailed: 0
+      Path: 0
+      RequiredCharisma: 0
+      RequiredDeception: 0
+      RequiredThoughtfulness: 0
+  - Guid: 3023d72f-54cb-4ecd-a339-ef8ba46b243e
+    DialogLine: All right there, irritable one. Let's go to our final choice.
+    Speaker: DUMMY
+    ExitLine: 
+    Position: {x: 3697, y: 945}
+    OutputPorts:
+    - NodeGuid: 3023d72f-54cb-4ecd-a339-ef8ba46b243e
+      PortName: '>'
+      TargetGuid: d7e6b0b7-e768-4aef-8897-f67f43156088
+    IsChoice: 0
+    IsLeaf: 0
+    IsEnding: 0
+    ChoiceOutcomes: []
+  - Guid: 27c5da4e-7fca-4643-8bf3-be1ab42ce98c
+    DialogLine: All right there, feisty one. Let's go to our final choice.
+    Speaker: DUMMY
+    ExitLine: 
+    Position: {x: 3697, y: -68}
+    OutputPorts:
+    - NodeGuid: 27c5da4e-7fca-4643-8bf3-be1ab42ce98c
+      PortName: '>'
+      TargetGuid: d7e6b0b7-e768-4aef-8897-f67f43156088
+    IsChoice: 0
+    IsLeaf: 0
+    IsEnding: 0
+    ChoiceOutcomes: []
+  - Guid: 80fac846-4c51-4b99-b166-d35c893344b3
+    DialogLine: All right there, rational one. Let's go to our final choice.
+    Speaker: DUMMY
+    ExitLine: 
+    Position: {x: 3676, y: 389}
+    OutputPorts:
+    - NodeGuid: 80fac846-4c51-4b99-b166-d35c893344b3
+      PortName: '>'
+      TargetGuid: d7e6b0b7-e768-4aef-8897-f67f43156088
+    IsChoice: 0
+    IsLeaf: 0
+    IsEnding: 0
+    ChoiceOutcomes: []
+  - Guid: d7e6b0b7-e768-4aef-8897-f67f43156088
+    DialogLine: Choose your favorite color.
+    Speaker: DUMMY
+    ExitLine: 
+    Position: {x: 4512, y: 396}
+    OutputPorts:
+    - NodeGuid: d7e6b0b7-e768-4aef-8897-f67f43156088
+      PortName: Red?
+      TargetGuid: 0b220b25-65f3-407f-939a-e4ffc095ffa9
+    - NodeGuid: d7e6b0b7-e768-4aef-8897-f67f43156088
+      PortName: Mint?
+      TargetGuid: 0b220b25-65f3-407f-939a-e4ffc095ffa9
+    - NodeGuid: d7e6b0b7-e768-4aef-8897-f67f43156088
+      PortName: Violet?
+      TargetGuid: 0b220b25-65f3-407f-939a-e4ffc095ffa9
+    IsChoice: 1
+    IsLeaf: 0
+    IsEnding: 0
+    ChoiceOutcomes:
+    - PortName: Red?
+      ChoiceTitle: Revolution color
+      WasMade: 1
+      WasFailed: 0
+      Path: 0
+      RequiredCharisma: 0
+      RequiredDeception: 0
+      RequiredThoughtfulness: 0
+    - PortName: Mint?
+      ChoiceTitle: Reform color
+      WasMade: 1
+      WasFailed: 0
+      Path: 1
+      RequiredCharisma: 0
+      RequiredDeception: 0
+      RequiredThoughtfulness: 0
+    - PortName: Violet?
+      ChoiceTitle: Conquest color
+      WasMade: 1
+      WasFailed: 0
+      Path: 2
+      RequiredCharisma: 0
+      RequiredDeception: 0
+      RequiredThoughtfulness: 0
+  - Guid: 0b220b25-65f3-407f-939a-e4ffc095ffa9
+    DialogLine: Thanks for taking part in the demonstration! You will now be taken
+      to the ending.
+    Speaker: DUMMY
+    ExitLine: Goodbye, I guess.
+    Position: {x: 5010, y: 412}
+    OutputPorts: []
+    IsChoice: 0
+    IsLeaf: 1
+    IsEnding: 1
+    ChoiceOutcomes: []
+  FirstNodeGuid: 50848a77-660d-4618-a994-78387f1bf89a

@@ -13,63 +13,50 @@ MonoBehaviour:
   m_Name: New tree
   m_EditorClassIdentifier: 
   Connections:
-  - NodeGuid: 4cbb84ac-d603-4dde-bd75-5671a6456602
+  - NodeGuid: 47fce15e-ffd4-4130-8e7c-9edbf0ddae45
     PortName: root
-    TargetGuid: 230d3419-7f62-4100-be70-6a04f9338872
-  - NodeGuid: 230d3419-7f62-4100-be70-6a04f9338872
-    PortName: New response 1
-    TargetGuid: d090d53d-f6fe-43dc-9372-b9712955530f
-  - NodeGuid: 230d3419-7f62-4100-be70-6a04f9338872
-    PortName: New response 2
-    TargetGuid: 45392eca-5327-4b42-b6a6-29a1ece69a3c
+    TargetGuid: 7c5908e5-d8d8-4570-8fac-f1c0a83233a2
+  - NodeGuid: 7c5908e5-d8d8-4570-8fac-f1c0a83233a2
+    PortName: Glad to hear it.
+    TargetGuid: 8fbf1d5e-9123-4313-9d41-56edacbc044c
+  - NodeGuid: 7c5908e5-d8d8-4570-8fac-f1c0a83233a2
+    PortName: Oh really?
+    TargetGuid: c2e677ef-185f-4dc5-b854-ea889fd75265
   NodeData:
-  - Guid: d090d53d-f6fe-43dc-9372-b9712955530f
-    DialogLine: sd
-    Speaker: DUMMY
-    ExitLine: s
-    Position: {x: 740, y: 98}
-    OutputPorts: []
-    IsChoice: 0
-    IsLeaf: 1
-    ChoiceOutcomes: []
-  - Guid: 45392eca-5327-4b42-b6a6-29a1ece69a3c
-    DialogLine: ds
-    Speaker: DUMMY
-    ExitLine: d
-    Position: {x: 735, y: 345}
-    OutputPorts: []
-    IsChoice: 0
-    IsLeaf: 1
-    ChoiceOutcomes: []
-  - Guid: 230d3419-7f62-4100-be70-6a04f9338872
-    DialogLine: SAMPLE TEXT.
+  - Guid: 7c5908e5-d8d8-4570-8fac-f1c0a83233a2
+    DialogLine: This is a sample dialog!
     Speaker: DUMMY
     ExitLine: 
-    Position: {x: 329, y: 186}
+    Position: {x: 315, y: 147}
     OutputPorts:
-    - NodeGuid: 230d3419-7f62-4100-be70-6a04f9338872
-      PortName: New response 1
-      TargetGuid: d090d53d-f6fe-43dc-9372-b9712955530f
-    - NodeGuid: 230d3419-7f62-4100-be70-6a04f9338872
-      PortName: New response 2
-      TargetGuid: 45392eca-5327-4b42-b6a6-29a1ece69a3c
-    IsChoice: 1
+    - NodeGuid: 7c5908e5-d8d8-4570-8fac-f1c0a83233a2
+      PortName: Glad to hear it.
+      TargetGuid: 8fbf1d5e-9123-4313-9d41-56edacbc044c
+    - NodeGuid: 7c5908e5-d8d8-4570-8fac-f1c0a83233a2
+      PortName: Oh really?
+      TargetGuid: c2e677ef-185f-4dc5-b854-ea889fd75265
+    IsChoice: 0
     IsLeaf: 0
-    ChoiceOutcomes:
-    - PortName: New response 1
-      ChoiceTitle: Sample choice
-      WasMade: 1
-      WasFailed: 0
-      NarrativePath: 3
-      RequiredCharisma: 0
-      RequiredDeception: 0
-      RequiredThoughtfulness: 0
-    - PortName: New response 2
-      ChoiceTitle: Sample choice
-      WasMade: 1
-      WasFailed: 0
-      NarrativePath: 3
-      RequiredCharisma: 0
-      RequiredDeception: 0
-      RequiredThoughtfulness: 0
-  FirstNodeGuid: 230d3419-7f62-4100-be70-6a04f9338872
+    IsEnding: 0
+    ChoiceOutcomes: []
+  - Guid: 8fbf1d5e-9123-4313-9d41-56edacbc044c
+    DialogLine: SAMPLE TEXT.
+    Speaker: DUMMY
+    ExitLine: Hm.
+    Position: {x: 812, y: 345}
+    OutputPorts: []
+    IsChoice: 0
+    IsLeaf: 1
+    IsEnding: 0
+    ChoiceOutcomes: []
+  - Guid: c2e677ef-185f-4dc5-b854-ea889fd75265
+    DialogLine: SAMPLE TEXT.
+    Speaker: DUMMY
+    ExitLine: Eh.
+    Position: {x: 823, y: 65}
+    OutputPorts: []
+    IsChoice: 0
+    IsLeaf: 1
+    IsEnding: 0
+    ChoiceOutcomes: []
+  FirstNodeGuid: 7c5908e5-d8d8-4570-8fac-f1c0a83233a2

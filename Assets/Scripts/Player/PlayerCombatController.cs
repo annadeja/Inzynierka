@@ -1,28 +1,28 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class PlayerCombatController : MonoBehaviour
+//!Skrypt obsługujący walkę gracza.
+public class PlayerCombatController : MonoBehaviour 
 {
-    private CombatController combatController;
-    private CharacterStats playerStats;
-    private bool isInRange = false;
-    private GameObject enemy;
-    private CharacterStats enemyStats;
+    private CombatController combatController; //!<Przechowuje uniwersalny kontroler walki.
+    private CharacterStats playerStats; //!<Statystyki gracza.
+    private bool isInRange = false; //!<Czy przeciwnik jest w zasięgu ataku?
+    private GameObject enemy; //!<Przechowuje obiekt przeciwnika.
+    private CharacterStats enemyStats; //!<Przechowuje statystyki przeciwnika.
 
     void Start()
     {
         combatController = CombatController.getInstance();
-        playerStats = SaveDataController.getInstance().loadedSave.PlayerStats;
+        playerStats = SaveDataController.getInstance().LoadedSave.PlayerStats;
     }
 
     void Update()
     {
-        playerStats.decreaseCooldown(Time.deltaTime);
-        if (Input.GetButtonDown("Attack"))
+        playerStats.decreaseCooldown(Time.deltaTime); //Zmniejszanie czasu odświeżania ataku.
+        if (Input.GetButtonDown("Attack")) //Wyprowadzenie ataku przy naciśnięciu przycisku.
             attack();
     }
-
+    //!Funkcja ataku.
     private void attack()
     {
         if (isInRange)
@@ -37,8 +37,8 @@ public class PlayerCombatController : MonoBehaviour
             }
         }
     }
-
-    private void OnTriggerEnter(Collider other)
+    //!Sprawdza czy przeciwnik wszedł w zasięg gracza.
+    private void OnTriggerEnter(Collider other) 
     {
         if (!other.isTrigger) //Sprawdza czy wchodzi się w faktyczny collider przeciwnika.
         {
@@ -51,7 +51,7 @@ public class PlayerCombatController : MonoBehaviour
             }
         }
     }
-
+    //!Wyłącza flagę zasiegu gdy przeciwnik się wystarczająco oddali.
     private void OnTriggerExit(Collider other)
     {
         isInRange = false;

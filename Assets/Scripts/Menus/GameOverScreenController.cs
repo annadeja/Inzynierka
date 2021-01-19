@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
-
-public class GameOverScreenController : MonoBehaviour
+//!Skrypt obsługujący menu końca gry.
+public class GameOverScreenController : MonoBehaviour 
 {
-    [Header("UI elements")]
+    [Header("UI elements")] //Elementy UI menu końca gry.
     [SerializeField] private Button LastSaveBtn;
     [SerializeField] private Button mainMenuBtn;
 
-    private SaveDataController saveDataController;
+    private SaveDataController saveDataController; //!<Kontroler stanu gry.
 
     void Start()
     {
@@ -18,14 +18,14 @@ public class GameOverScreenController : MonoBehaviour
         Cursor.lockState = CursorLockMode.None;
         saveDataController = SaveDataController.getInstance();
     }
-
-    public void loadLastSave()
+    //!Ładuje ostatni zapis.
+    public void loadLastSave() 
     {
         saveDataController.loadSaveFile();
         saveDataController.load();
     }
-
-    public void goToMainMenu()
+    //!Wraca do menu głównego.
+    public void goToMainMenu() 
     {
         SceneManager.LoadScene("MainMenu");
     }

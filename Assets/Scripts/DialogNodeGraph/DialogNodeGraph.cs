@@ -4,21 +4,22 @@ using UnityEngine.UIElements;
 using UnityEditor;
 using UnityEditor.Experimental.GraphView;
 using UnityEditor.UIElements;
-
-public class DialogNodeGraph : GraphViewEditorWindow
+//!Klasa okna edytora węzłów.
+public class DialogNodeGraph : GraphViewEditorWindow 
 {
-    private DialogNodeView view;
-    private string fileName = "New tree";
-    private TextField fileNameField;
+    private DialogNodeView view; //!<Widok edytora.
+    private string fileName = "New tree"; //!<Nazwa pliku.
+    private TextField fileNameField; //!<Pole na nazwę pliku.
 
     [MenuItem("Dialog Tree/Dialog Node Graph")]
+    //!Otwiera okno edytora i dodaje tą opcje do paska edytora Unity.
     public static void openWindow()
     {
         DialogNodeGraph window = GetWindow<DialogNodeGraph>();
         window.titleContent = new GUIContent("Dialog Node Graph.");
     }
-
-    private void createMenubar()
+    //!Definiuje pasek edytora grafów.
+    private void createMenubar() 
     {
         Toolbar menuBar = new Toolbar();
         Button newNodeBtn = new Button(view.createNode);
@@ -39,37 +40,39 @@ public class DialogNodeGraph : GraphViewEditorWindow
 
         rootVisualElement.Add(menuBar);
     }
-
-    private void createMinimap()
+    //!Definiuję minimapę grafu.
+    private void createMinimap() 
     {
         MiniMap minimap = new MiniMap();
         minimap.anchored = true;
         minimap.SetPosition(new Rect(10, 30, 200, 150));
         view.Add(minimap);
     }
-
-    private void setFileName(InputEvent e)
+    //!Ustawia nazwę pliku.
+    private void setFileName(InputEvent e) 
     {
         fileName = fileNameField.value;
     }
-
-    private void save()
+    //!Zapisuje plik.
+    private void save() 
     {
         if (fileName == "" || fileName == null)
             return;
-        GraphIO graphIO = GraphIO.getInstance(view);
+        GraphIO graphIO = GraphIO.getInstance();
+        graphIO.refreshData(view);
         graphIO.save(fileName);
     }
-
-    private void load()
+    //!Wczytuje plik.
+    private void load() 
     {
         if (fileName == "" || fileName == null)
             return;
-        GraphIO graphIO = GraphIO.getInstance(view);
+        GraphIO graphIO = GraphIO.getInstance();
+        graphIO.refreshData(view);
         graphIO.load(fileName);
     }
-
-    void OnEnable()
+    //!Ustawia parametry okna po jego aktywacji.
+    void OnEnable() 
     {
         view = new DialogNodeView();
         VisualElementExtensions.StretchToParentSize(view);
@@ -77,8 +80,8 @@ public class DialogNodeGraph : GraphViewEditorWindow
         createMenubar();
         createMinimap();
     }
-
-    void OnDisable()
+    //!Czyści widok po deaktywacji okna.
+    void OnDisable() 
     {
         rootVisualElement.Remove(view);
     }

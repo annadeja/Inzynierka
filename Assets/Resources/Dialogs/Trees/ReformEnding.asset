@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 19ef2412fbc7fcf449de924ea016efe5, type: 3}
+  m_Name: ReformEnding
+  m_EditorClassIdentifier: 
+  Connections:
+  - NodeGuid: d53ea911-03c9-4130-929d-1dab1d78f0ec
+    PortName: root
+    TargetGuid: fd017536-e799-4d1b-aaa8-1b9b130bd6a0
+  NodeData:
+  - Guid: fd017536-e799-4d1b-aaa8-1b9b130bd6a0
+    DialogLine: You got the cold, calculated ending to be named "Reform" in the completed
+      game.
+    Speaker: Ending Proxy
+    ExitLine: Okay.
+    Position: {x: 409, y: 192}
+    OutputPorts: []
+    IsChoice: 0
+    IsLeaf: 1
+    IsEnding: 0
+    ChoiceOutcomes: []
+  FirstNodeGuid: fd017536-e799-4d1b-aaa8-1b9b130bd6a0

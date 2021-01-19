@@ -6,19 +6,19 @@ using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-
-public class SaveDataController : MonoBehaviour
+//!Klasa o strukturze pseudo-singletona, która przechowuje i obsługuje dane nt. stanu gry.
+public class SaveDataController : MonoBehaviour 
 {
-    private static SaveDataController instance;
-    public SaveData loadedSave;
-    public string filePath;
-    private Vector3 playerPosition;
-    private GameObject player;
-    private bool justLoaded = false;
+    private static SaveDataController instance; //!<Instancja klasy.
+    public SaveData LoadedSave { get; set; } //!<Obecnie wczytany zapis gry.
+    public string FilePath { get; set; } //!<Ścieżka do zapisu lub wczytania pliku stanu gry.
+    private Vector3 playerPosition; //!<Pozycja gracza.
+    private GameObject player; //!<Obiekt gracza.
+    private bool justLoaded = false; //!<Określa czy właśnie wczytano nową scenę.
 
     void Update()
     {
-        if (justLoaded)
+        if (justLoaded) //Jeżeli dopiero co wczytano zapis gry, to skrypt odnajduje obiekt gracza zawarty w scenie i dopasowuje jego pozycję do tej zapisanej.
         {
             player = GameObject.Find("Player");
             if (player)
@@ -31,60 +31,77 @@ public class SaveDataController : MonoBehaviour
             }
         }
     }
-
-    void Awake()
+    //!Tworzy instancję przy uruchomieniu gry.
+    void Awake() 
     {
         if (instance == null)
             instance = this;
         DontDestroyOnLoad(this.gameObject);
     }
-
-    public static SaveDataController getInstance()
+    //!Zwraca instację.
+    public static SaveDataController getInstance() 
     {
         return instance;
     }
-
-    public void updateSaveData()
+    //!Aktualizuje dane zapisu gry.
+    public void updateSaveData() 
     {
-        loadedSave.LastLocation = SceneManager.GetActiveScene().name;
-        loadedSave.PlayerPosition[0] = player.transform.position.x;
-        loadedSave.PlayerPosition[1] = player.transform.position.y;
-        loadedSave.PlayerPosition[2] = player.transform.position.z;
+        LoadedSave.LastLocation = SceneManager.GetActiveScene().name;
+        LoadedSave.PlayerPosition[0] = player.transform.position.x;
+        LoadedSave.PlayerPosition[1] = player.transform.position.y;
+        LoadedSave.PlayerPosition[2] = player.transform.position.z;
     }
-
-    public void loadSaveFile()
+    //!Wczytuje zapis gry z pliku.
+    public void loadSaveFile() 
     {
         FileStream saveFile;
-        if (File.Exists(filePath))
-            saveFile = File.OpenRead(filePath);
+        if (File.Exists(FilePath))
+            saveFile = File.OpenRead(FilePath);
         else
             return;
         BinaryFormatter binaryFormatter = new BinaryFormatter();
-        loadedSave = (SaveData)binaryFormatter.Deserialize(saveFile);
+        LoadedSave = (SaveData)binaryFormatter.Deserialize(saveFile);
         saveFile.Close();
     }
-
-    public void saveToFile()
+    //!Zapisuje stan gry do pliku.
+    public void saveToFile() 
     {
         FileStream saveFile;
-        saveFile = File.OpenWrite(filePath);
+        saveFile = File.OpenWrite(FilePath);
         BinaryFormatter binaryFormatter = new BinaryFormatter();
-        binaryFormatter.Serialize(saveFile, loadedSave);
+        binaryFormatter.Serialize(saveFile, LoadedSave);
         saveFile.Close();
     }
-
-    public void load()
+    //!Wczytuje zapis gry.
+    public void load() 
     {
-        SceneManager.LoadScene(loadedSave.LastLocation);
-        playerPosition = new Vector3(loadedSave.PlayerPosition[0], loadedSave.PlayerPosition[1], loadedSave.PlayerPosition[2]);
+        SceneManager.LoadScene(LoadedSave.LastLocation);
+        playerPosition = new Vector3(LoadedSave.PlayerPosition[0], LoadedSave.PlayerPosition[1], LoadedSave.PlayerPosition[2]);
         justLoaded = true;
     }
-
-    public void saveChoice(NodeDataContainer currentNode, int i)
+    //!Zapisuje pojedynczy wybór gracza.
+    public void saveChoice(NodeDataContainer currentNode, int i) 
     {
         string portName = currentNode.OutputPorts[i].PortName;
         ChoiceData choiceData = currentNode.ChoiceOutcomes.Find(x => x.PortName == portName);
-        choiceData.skillCheck(loadedSave.PlayerStats);
-        loadedSave.PastChoices.Add(choiceData);
+        choiceData.skillCheck(LoadedSave.PlayerStats);
+        LoadedSave.PastChoices.Add(choiceData);
+        identifyChoicePath(choiceData);
+    }
+    //!Sprawdza do jakiej ścieżki przynależy dany wybór i inkrementuje odpowiadający mu licznik.
+    private void identifyChoicePath(ChoiceData choiceData)
+    {
+        if (choiceData.Path == NarrativePath.Revolution)
+            LoadedSave.RevolutionChoices++;
+        else if (choiceData.Path == NarrativePath.Reform)
+            LoadedSave.ReformChoices++;
+        else
+            LoadedSave.ConquestChoices++;
+    }
+
+    //!Wczytuje sekwencję zakończenia gry.
+    public void loadEnding()
+    {
+        SceneManager.LoadScene("Ending");
     }
 }

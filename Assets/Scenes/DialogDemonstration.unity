@@ -749,6 +749,10 @@ PrefabInstance:
       propertyPath: choiceButtons.Array.data[2]
       value: 
       objectReference: {fileID: 1768591520}
+    - target: {fileID: 3645500720577550952, guid: 714ac7e112b53b345aa9734d88e471ec, type: 3}
+      propertyPath: dialogTrees.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: b003bac1d74c37e4d8b03f79b9e2ef08, type: 2}
     - target: {fileID: 3645500720577550959, guid: 714ac7e112b53b345aa9734d88e471ec, type: 3}
       propertyPath: m_LocalPosition.x
       value: 21.24
@@ -900,7 +904,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7609926202148097405, guid: ceb90ac7fb92d4649b03409fc2cdbe59, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ceb90ac7fb92d4649b03409fc2cdbe59, type: 3}

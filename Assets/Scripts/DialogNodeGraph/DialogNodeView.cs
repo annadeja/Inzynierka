@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine.UIElements;
-
-public class DialogNodeView : GraphView
+//!Klasa widoku edytora grafów.
+public class DialogNodeView : GraphView 
 {
     public DialogNodeView()
     {
@@ -16,8 +16,8 @@ public class DialogNodeView : GraphView
 
         createRootNode();
     }
-
-    private void createRootNode()
+    //!Tworzy węzeł-korzeń.
+    private void createRootNode() 
     {
         DialogNode root = new DialogNode(true, "root");
         root.SetPosition(new Rect(200, 200, 200, 200));
@@ -25,15 +25,15 @@ public class DialogNodeView : GraphView
         root.capabilities &= ~Capabilities.Deletable;
         AddElement(root);
     }
-
-    public void createNode()
+    //!Tworzy nowy węzeł.
+    public void createNode() 
     {
         DialogNode node = new DialogNode();
         node.SetPosition(new Rect(200, 200, 200, 200));
         AddElement(node);
     }
-
-    public override List<Port> GetCompatiblePorts(Port startPort, NodeAdapter nodeAdapter)
+    //!Umożliwia podłączanie dowolnych węzłów ze sobą.
+    public override List<Port> GetCompatiblePorts(Port startPort, NodeAdapter nodeAdapter) 
     {
         List<Port> compatiblePorts = new List<Port>();
         ports.ForEach(port =>

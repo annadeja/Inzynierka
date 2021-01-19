@@ -2,27 +2,27 @@
 using System.Collections.Generic;
 using System.Threading;
 using UnityEngine;
-
+//!Skrypt obsługujący ruch gracza.
 public class PlayerMovementController : MonoBehaviour
 {
-    public Animator animator;
-    private CharacterController charControl;
-    private Transform transform;
-    private Vector3 displacement;
+    [SerializeField] public Animator animator; //!<Pole to nie może stanowić właściwości, gdyż inaczej nie byłoby możliwe przypisanie odpowiedniej referencji w edytorze Unity.
+    private CharacterController charControl; //!<Kontroler ruchu postaci.
+    private Transform transform; //!<Pozycja i transformacje pozycji gracza.
+    private Vector3 displacement; //!<Ostatnia zmiana pozycji gracza.
 
-    [SerializeField] Vector3 camDiff;
-    public Camera mainCamera;
+    [SerializeField] private Vector3 camDiff; //!<Różnica pomiędzy pozycją kamery a gracza.
+    [SerializeField] private Camera mainCamera; //!<Referencja kamery w scenie.
 
     [Header("Speed settings")]
-    [SerializeField] int walkingSpeed;
-    [SerializeField] int runningSpeed;
-    [SerializeField] int rotationSpeed = 100;
-    private int currentSpeed;
-    public bool canMove = true;
+    [SerializeField] private int walkingSpeed; //!<Szybkość chodu.
+    [SerializeField] private int runningSpeed; //!<Szybkość biegu.
+    [SerializeField] private int rotationSpeed = 100; //!<Szybkość obrotu.
+    private int currentSpeed; //!<Obecna szybkość.
+    public bool CanMove { get; set; } //!<Czy gracz może się poruszać?
 
-    // Start is called before the first frame update
     void Start()
     {
+        CanMove = true;
         charControl = gameObject.GetComponentInChildren<CharacterController>();
         transform = gameObject.GetComponentInChildren<Transform>();
         displacement = new Vector3(0, 0, 0);
@@ -30,18 +30,17 @@ public class PlayerMovementController : MonoBehaviour
         Cursor.visible = false;
     }
 
-    // Update is called once per frame
     void Update()
     {
         processInputs();
         calculateDisplacement();
-        if(canMove)
+        if(CanMove)
         {
             movePlayer();
             moveCamera();
         }
     }
-
+    //!Interpretuje dane wprowadzane przez gracza.
     private void processInputs()
     {
         if(animator)
@@ -65,7 +64,7 @@ public class PlayerMovementController : MonoBehaviour
             }
         }
     }
-
+    //!Oblicza zmianę pozycji.
     private void calculateDisplacement()
     {
         displacement.x = Input.GetAxis("Horizontal") * currentSpeed;
@@ -76,13 +75,13 @@ public class PlayerMovementController : MonoBehaviour
         displacement.z = Input.GetAxis("Vertical") * currentSpeed;
         displacement = transform.TransformDirection(displacement);
     }
-
+    //!Porusza graczem.
     private void movePlayer()
     {
         charControl.Move(displacement * Time.deltaTime);
         transform.Rotate(0, Input.GetAxis("Mouse X") * rotationSpeed * Time.deltaTime, 0);
     }
-
+    //!Porusza kamerą.
     private void moveCamera()
     {
         if (mainCamera)

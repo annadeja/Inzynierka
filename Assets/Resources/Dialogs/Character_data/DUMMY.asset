@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: DUMMY
   m_EditorClassIdentifier: 
   Name: DUMMY
-  Icon: {fileID: 21300000, guid: 16ece05c4b5c9a84195f937c8b988e46, type: 3}
-  TextColor: {r: 0.8584906, g: 0.48183563, b: 0.13363297, a: 1}
+  Icon: {fileID: 21300000, guid: 0142a632ab542ca49ba7b20dd93a6a82, type: 3}
+  TextColor: {r: 0.12971699, g: 0.5, b: 0.49259585, a: 1}

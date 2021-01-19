@@ -6,20 +6,21 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.UIElements;
 using UnityEditor.Experimental.GraphView;
-
-public class DialogNode: Node
+//!Klasa reprezentująca węzeł w edytorze grafów.
+public class DialogNode: Node 
 {
-    public string Guid { get; set; }
-    public string DialogLine { get; private set; }
-    public string Speaker { get; private set; }
-    public string ExitLine { get; private set; }
-    public bool IsRoot { get; private set; }
-    public bool IsChoice { get; private set; }
-    public bool IsLeaf { get; private set; }
-    public List<ChoiceData> ChoiceOutcomes { get; private set; }
-    private int noOfPorts = 0;
+    public string Guid; //!<ID węzła.
+    public string DialogLine; //!<Kwestia dialogowa.
+    public string Speaker; //!<Mówca.
+    public string ExitLine; //!<Kwestia na zakończenie dialogu.
+    public bool IsRoot; //!<Czy jest korzeniem?
+    public bool IsChoice; //!<Czy jest zapisywalnym wyborem?
+    public bool IsLeaf; //!<Czy jest liściem/ostatnim węzłem w drzewie?
+    public bool IsEnding; //!<Czy prowadzi do zakończenia?
+    public List<ChoiceData> ChoiceOutcomes; //!<Dane dotyczące wyborów zapisywalnych.
+    private int noOfPorts = 0; //!<Liczba portów.
 
-    private Button addOutput;
+    private Button addOutput; //Elementy interfejsu graficznego węzła.
     private Foldout foldout;
 
     private TextField SpeakerLabel;
@@ -31,7 +32,8 @@ public class DialogNode: Node
     private TextField thoughtfulnessField;
     private TextField ExitLineLabel;
 
-    private Toggle IsLeafToggle;
+    private Toggle isLeafToggle;
+    private Toggle isEndingToggle;
     private Toggle toggleChoice;
     private Toggle makesChoice;
     private List<Toggle> narrativeTypeToggles;
@@ -46,6 +48,7 @@ public class DialogNode: Node
         IsRoot = false;
         IsChoice = false;
         IsLeaf = true;
+        IsEnding = false;
         ChoiceOutcomes = new List<ChoiceData>();
         controlsSetup();
     }
@@ -60,6 +63,7 @@ public class DialogNode: Node
         ExitLine = "";
         IsChoice = false;
         IsLeaf = true;
+        IsEnding = false;
         ChoiceOutcomes = new List<ChoiceData>();
 
         if (IsRoot)
@@ -75,7 +79,8 @@ public class DialogNode: Node
         DialogLine = data.DialogLine;
         Speaker = data.Speaker;
         IsChoice = data.IsChoice;
-        IsLeaf = data.IsLeaf;
+        IsLeaf = true;
+        IsEnding = data.IsEnding;
         ExitLine = data.ExitLine;
         if (data.ChoiceOutcomes != null)
             ChoiceOutcomes = new List<ChoiceData>(data.ChoiceOutcomes);
@@ -83,8 +88,8 @@ public class DialogNode: Node
             ChoiceOutcomes = new List<ChoiceData>();
         controlsSetup();
     }
-
-    public void createPort(string name, Direction direction, Port.Capacity capacity = Port.Capacity.Single)
+    //!Tworzy nowy port.
+    public void createPort(string name, Direction direction, Port.Capacity capacity = Port.Capacity.Single) 
     {
         if (noOfPorts > 3) //Limit odpowiedzi do trzech.
             return;
@@ -98,16 +103,19 @@ public class DialogNode: Node
             {
                 portControlsSetup(port);
                 IsLeaf = false;
-                IsLeafToggle.value = false;
-                IsLeafToggle.SetEnabled(false);
+                isLeafToggle.value = false;
+                //isLeafToggle.SetEnabled(false);
+                IsEnding = false;
+                isEndingToggle.value = false;
+                isEndingToggle.SetEnabled(false);
                 ExitLineLabel.SetEnabled(false);
             }
             outputContainer.Add(port);
         }
         refreshNode();
     }
-
-    private void portControlsSetup(Port port)
+    //!Definiuje UI portu.
+    private void portControlsSetup(Port port) 
     {
         ChoiceData choiceData = ChoiceOutcomes.Find(x => x.PortName == port.portName);
         if (choiceData == null)
@@ -129,13 +137,16 @@ public class DialogNode: Node
         port.contentContainer.Add(editBtn);
         port.contentContainer.Add(removeBtn);
     }
-
-    public void removePort(Port port)
+    //!Usuwa port.
+    public void removePort(Port port) 
     {
         noOfPorts--;
-        if (noOfPorts == 0)
+        if (noOfPorts <= 0)
         {
-            IsLeafToggle.SetEnabled(true);
+            noOfPorts = 0;
+            IsLeaf = true;
+            isLeafToggle.value = true;
+            isEndingToggle.SetEnabled(true);
             ExitLineLabel.SetEnabled(true);
         }
 
@@ -149,8 +160,8 @@ public class DialogNode: Node
         ChoiceOutcomes.Remove(choiceData);
         refreshNode();
     }
-
-    private void editResponse(ChoiceData choiceData)
+    //!Umożliwia edycję właściwości portu/odpowiedzi.
+    private void editResponse(ChoiceData choiceData) 
     {
         foldout.SetEnabled(true);
         foldout.value = true;
@@ -162,7 +173,7 @@ public class DialogNode: Node
         foreach(Toggle narrativeType in narrativeTypeToggles)
         {
             narrativeType.RegisterCallback<MouseUpEvent, ChoiceData>(setNarrativePath, choiceData);
-            if (choiceData.NarrativePath.ToString() == narrativeType.text)
+            if (choiceData.Path.ToString() == narrativeType.text)
                 narrativeType.value = true;
             else
                 narrativeType.value = false;
@@ -175,19 +186,19 @@ public class DialogNode: Node
         thoughtfulnessField.value = choiceData.RequiredThoughtfulness.ToString();
         thoughtfulnessField.RegisterCallback<InputEvent, ChoiceData>(setThoughtfulnessRequirement, choiceData);
     }
-
-    private void createDefaultOutput()
+    //!Tworzy domyślną odpowiedź.
+    private void createDefaultOutput() 
     {
         createPort("New response " + ++noOfPorts, Direction.Output);
     }
-
-    private void refreshNode()
+    //!Odświeża węzeł.
+    private void refreshNode() 
     {
         RefreshExpandedState();
         RefreshPorts();
     }
-
-    private void controlsSetup()
+    //!Definiuje UI węzła.
+    private void controlsSetup() 
     {
         createPort("input", Direction.Input, Port.Capacity.Multi);
         
@@ -202,8 +213,8 @@ public class DialogNode: Node
         extensionContainer.Add(addOutput);
         refreshNode();
     }
-
-    private void labelsSetup()
+    //!Definiuje UI kwestii i mówcy.
+    private void labelsSetup() 
     {
         lineLabel = new TextField();
         lineLabel.label = "Line:";
@@ -218,20 +229,26 @@ public class DialogNode: Node
         extensionContainer.Add(SpeakerLabel);
         extensionContainer.Add(lineLabel);
     }
-
-    private void togglesSetup()
+    //!Definiuje UI checkboxów.
+    private void togglesSetup() 
     {
-        IsLeafToggle = new Toggle();
-        IsLeafToggle.text = "Is this a leaf node?";
-        IsLeafToggle.RegisterCallback<MouseUpEvent>(setAsLeaf);
+        isLeafToggle = new Toggle();
+        isLeafToggle.text = "Is this a leaf node?";
+        isLeafToggle.RegisterCallback<MouseUpEvent>(setAsLeaf);
+        isEndingToggle = new Toggle();
+        isEndingToggle.text = "Is this the end of the game?";
+        if (IsEnding)
+            isEndingToggle.value = true;
+        isEndingToggle.RegisterCallback<MouseUpEvent>(setAsEnding);
         ExitLineLabel = new TextField();
         ExitLineLabel.label = "Exit line:";
         ExitLineLabel.value = ExitLine;
         ExitLineLabel.RegisterCallback<InputEvent>(setExitLine);
         if (IsLeaf)
-            IsLeafToggle.value = true;
+            isLeafToggle.value = true;
         else
             ExitLineLabel.SetEnabled(false);
+        isLeafToggle.SetEnabled(false);
 
         toggleChoice = new Toggle();
         toggleChoice.text = "Is this a narrative choice?";
@@ -239,12 +256,13 @@ public class DialogNode: Node
             toggleChoice.value = true;
         toggleChoice.RegisterCallback<MouseUpEvent>(setAsChoice);
 
-        extensionContainer.Add(IsLeafToggle);
+        extensionContainer.Add(isLeafToggle);
+        extensionContainer.Add(isEndingToggle);
         extensionContainer.Add(ExitLineLabel);
         extensionContainer.Add(toggleChoice);
     }
-
-    private void foldoutSetup()
+    //!Definiuje UI części zwijanej.
+    private void foldoutSetup() 
     {
         foldout = new Foldout();
         foldout.value = false;
@@ -270,8 +288,8 @@ public class DialogNode: Node
 
         foldout.SetEnabled(false);
     }
-
-    private void narrativePathCheckboxesSetup()
+    //!Definiuje UI checkboxów opisujących ścieżki fabularne.
+    private void narrativePathCheckboxesSetup() 
     {
         narrativeTypeToggles = new List<Toggle>();
         foreach(NarrativePath narrativePath in Enum.GetValues(typeof(NarrativePath)))
@@ -282,73 +300,78 @@ public class DialogNode: Node
             foldout.contentContainer.Add(narrativeType);
         }
     }
-
-    private void setDialogLine(InputEvent e)
+    //!Ustawia kwestię.
+    private void setDialogLine(InputEvent e) 
     {
         this.DialogLine = lineLabel.value;
     }
-
-    private void setSpeaker(InputEvent e)
+    //!Ustawia mówcę.
+    private void setSpeaker(InputEvent e) 
     {
         this.Speaker = SpeakerLabel.value;
         this.title = SpeakerLabel.value;
     }
-
-    private void setPortName(InputEvent e, Port port)
+    //!Ustawia nazwę portu.
+    private void setPortName(InputEvent e, Port port) 
     {
         ChoiceData choiceData = ChoiceOutcomes.Find(x => x.PortName == e.previousData);
         if (choiceData != null)
             choiceData.PortName = e.newData;
         port.portName = e.newData;
     }
-
-    private void setAsLeaf(MouseUpEvent e)
+    //!Ustawia flagę IsLeaf.
+    private void setAsLeaf(MouseUpEvent e) 
     {
-        IsLeaf = IsLeafToggle.value;
-        ExitLineLabel.SetEnabled(IsLeafToggle.value);
+        IsLeaf = isLeafToggle.value;
+        ExitLineLabel.SetEnabled(isLeafToggle.value);
     }
-
-    private void setExitLine(InputEvent e)
+    //!Ustawia flagę IsEnding.
+    private void setAsEnding(MouseUpEvent e) 
+    {
+        IsEnding = isEndingToggle.value;
+    }
+    //!Ustawia kwestię wyjściową.
+    private void setExitLine(InputEvent e) 
     {
         this.ExitLine = ExitLineLabel.value;
     }
-
-    private void setAsChoice(MouseUpEvent e)
+    //!Ustawia flagę IsChoice.
+    private void setAsChoice(MouseUpEvent e) 
     {
         IsChoice = toggleChoice.value;
     }
-
-    private void setChoiceName(InputEvent e, ChoiceData choiceData)
+    //!Ustawia nazwę wyboru.
+    private void setChoiceName(InputEvent e, ChoiceData choiceData) 
     {
         choiceData.ChoiceTitle = e.newData;
     }
-
-    private void setChoiceOutcome(MouseUpEvent e, ChoiceData choiceData)
+    //!Ustawia flagę WasMade wyboru.
+    private void setChoiceOutcome(MouseUpEvent e, ChoiceData choiceData) 
     {
         choiceData.WasMade = makesChoice.value;
     }
-
-    private void setCharismaRequirement(InputEvent e, ChoiceData choiceData)
+    //!Ustawia wymagania wyboru co do charyzmy.
+    private void setCharismaRequirement(InputEvent e, ChoiceData choiceData) 
     {
         choiceData.RequiredCharisma = int.Parse(charismaField.value);
     }
-
-    private void setDeceptionRequirement(InputEvent e, ChoiceData choiceData)
+    //!Ustawia wymagania wyboru co do oszustwa.
+    private void setDeceptionRequirement(InputEvent e, ChoiceData choiceData) 
     {
         choiceData.RequiredDeception = int.Parse(deceptionField.value);
     }
-
-    private void setThoughtfulnessRequirement(InputEvent e, ChoiceData choiceData)
+    //!Ustawia wymagania wyboru co do pomyślunku.
+    private void setThoughtfulnessRequirement(InputEvent e, ChoiceData choiceData) 
     {
         choiceData.RequiredThoughtfulness = int.Parse(thoughtfulnessField.value);
     }
-
-    private void setNarrativePath(MouseUpEvent e, ChoiceData choiceData)
+    //!Ustawia typ ścieżki fabularnej wyboru.
+    private void setNarrativePath(MouseUpEvent e, ChoiceData choiceData) 
     {
         Toggle narrativeType = (Toggle) e.target;
         if (narrativeType.value)
         {
-            choiceData.NarrativePath = (NarrativePath) Enum.Parse(typeof(NarrativePath), narrativeType.text);
+            choiceData.Path = (NarrativePath) Enum.Parse(typeof(NarrativePath), narrativeType.text);
             foreach (Toggle toggle in narrativeTypeToggles)
                 if (toggle != narrativeType)
                     toggle.value = false;
@@ -356,8 +379,8 @@ public class DialogNode: Node
         else
             narrativeType.value = true;
     }
-
-    public List<Port> getOutputPorts()
+    //!Zwraca listę odpowiedzi.
+    public List<Port> getOutputPorts() 
     {
         List<Port> ports = outputContainer.Children().ToList().Cast<Port>().ToList();
         return ports;

@@ -7,73 +7,73 @@ using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
 using UnityEngine.UI;
-
-public class MainMenuController : MonoBehaviour
+//!Skrypt obsługujący menu główne.
+public class MainMenuController : MonoBehaviour 
 {
-    [Header("UI elements")]
+    [Header("UI elements")] //Elementu UI menu głównego.
     [SerializeField] private GameObject mainCanvas;
     [SerializeField] private GameObject loadGameCanvas;
     [SerializeField] private List<Button> saveButtons;
     [SerializeField] private Button leftArrow;
     [SerializeField] private Button rightArrow;
 
-    private SaveDataController saveDataController;
-    private SaveData currentSave;
-    private List<string> saveFileNames;
-    private int page = 0;
+    private SaveDataController saveDataController; //!<Kontroler stanu gry.
+    private SaveData currentSave; //!<Obecny zapis gry.
+    private List<string> saveFileNames; //!<Nazwy plików zapisu.
+    private int page = 0; //!<Numer strony zapisów w podmenu ładowania gry.
 
     void Start()
     {
         saveDataController = SaveDataController.getInstance();
     }
-
-    public void loadDialogRoom()
+    //!Ładuje demonstrację dialogu.
+    public void loadDialogRoom() 
     {
         currentSave = new SaveData("DialogDemonstration");
         newGame();
     }
-
-    public void loadCombatRoom()
+    //!Ładuje demonstację walki.
+    public void loadCombatRoom() 
     {
         currentSave = new SaveData("CombatDemonstration");
         newGame();
     }
-
-    public void newGame()
+    //!Tworzy nowy zapis gry.
+    public void newGame() 
     {
         string filePath = Application.persistentDataPath + "/" + currentSave.LastLocation + " " + DateTime.Now.ToString("dd/MM/yyyy hh/mm/ss tt") + ".save";
-        saveDataController.filePath = filePath;
-        saveDataController.loadedSave = currentSave;
+        saveDataController.FilePath = filePath;
+        saveDataController.LoadedSave = currentSave;
         saveDataController.saveToFile();
         saveDataController.load();
     }
-
-    public void loadGame()
+    //!Przechodzi do podmenu ładowania zapisów gry.
+    public void loadGame() 
     {
         mainCanvas.SetActive(false);
         loadGameCanvas.SetActive(true);
         saveFileNames = Directory.EnumerateFiles(Application.persistentDataPath, "*.save").ToList();
         showSaves();
     }
-
-    public void exitGame()
+    //!Wychodzi z gry.
+    public void exitGame() 
     {
         Application.Quit(1);
     }
-
-    public void previousPage()
+    //!Przechodzi na poprzednią stronę.
+    public void previousPage() 
     {
         page--;
         showSaves();
     }
-
-    public void nextPage()
+    //!Przechodzi na następną stronę.
+    public void nextPage() 
     {
         page++;
         showSaves();
     }
-
-    private void showSaves()
+    //!Pokazuje zapisy gry.
+    private void showSaves() 
     {
         if (saveFileNames.Count < 7)
         {
@@ -109,15 +109,15 @@ public class MainMenuController : MonoBehaviour
             }
         }
     }
-
-    public void loadSave(Button button)
+    //!Ładuje zapis gry.
+    public void loadSave(Button button) 
     {
-        saveDataController.filePath = Application.persistentDataPath + "/" + button.GetComponentInChildren<Text>().text + ".save";
+        saveDataController.FilePath = Application.persistentDataPath + "/" + button.GetComponentInChildren<Text>().text + ".save";
         saveDataController.loadSaveFile();
         saveDataController.load();
     }
-
-    public void backToMainMenu(GameObject currentCanvas)
+    //!Wraca do menu głównego z podmenu ładowania zapisów gry.
+    public void backToMainMenu(GameObject currentCanvas) 
     {
         currentCanvas.SetActive(false);
         mainCanvas.SetActive(true);

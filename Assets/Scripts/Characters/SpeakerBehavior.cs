@@ -2,37 +2,40 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
-public class SpeakerBehavior : MonoBehaviour
+using UnityEngine.SceneManagement;
+//!Klasa zarządzająca zachowaniem postaci niezależnej w ramach dialogu.
+public class SpeakerBehavior : MonoBehaviour 
 {
-    [Header("UI elements")]
-    [SerializeField] Text popup;
-    [SerializeField] Image dialogBackground;
-    [SerializeField] Text speaker;
-    [SerializeField] Text dialogLine;
-    [SerializeField] Image icon;
-    [SerializeField] float textDelay = 0.1f;
-    [SerializeField] List<Button> choiceButtons;
+    [Header("UI elements")] //Elementy interfejsu graficznego dialogu.
+    [SerializeField] private Text popup;
+    [SerializeField] private Image dialogBackground;
+    [SerializeField] private Text speaker;
+    [SerializeField] private Text dialogLine;
+    [SerializeField] private Image icon;
+    [SerializeField] private float textDelay = 0.1f; //!<Opóźnienie pomiędzy kolejnymi literami w kwestii.
+    [SerializeField] private List<Button> choiceButtons;
 
-    [Header("Dialog trees")]
-    [SerializeField] List<DialogContainer> dialogTrees;
-    private DialogContainer currentTree;
-    private NodeDataContainer currentNode;
+    [Header("Dialog trees")] 
+    [SerializeField] private List<DialogContainer> dialogTrees; //!<Lista przechowująca drzewa dialogowe.
+    private DialogContainer currentTree; //!<Obecnie załadowane drzewo.
+    private NodeDataContainer currentNode; //!<Obecnie załadowany węzeł.
 
-    [Header("Positions")]
-    [SerializeField] Vector3 cameraPosition;
-    [SerializeField] Vector3 playerPosition;
+    [Header("Positions")] //Zmienne pozwalające na ustalenie konkretnej pozycji gracza oraz kamery podczas dialogu.
+    [SerializeField] private Vector3 cameraPosition; //!<Pozycja kamery podczas dialogu.
+    [SerializeField] private Vector3 playerPosition; //!<Pozycja gracza podczas dialogu.
 
-    private PlayerMovementController playerControl;
-    private bool isInRange = false;
-    private CharacterData currentCharacter;
-    private SaveDataController saveDataController;
+    private PlayerMovementController playerControl; //!<Kontroler ruchu gracza.
+    private bool isInRange = false; //?<Czy jest w zasiegu postaci niezależnej?
+    private bool isDisplayingEnding = false; //!<Czy wyświetlana jest sekwencja zakończenia?
+    private CharacterData currentCharacter; //!<Obiekt z informacjami o obecnym mówcy.
+    private SaveDataController saveDataController; //!<Kontroler stanu gry.
 
     void Start()
     {
         saveDataController = SaveDataController.getInstance();
-        disableUI();
-        if(choiceButtons.Count == 3)
+        if (!isDisplayingEnding)
+            disableUI();
+        if(choiceButtons.Count == 3) //Wykorzystanie pętli do przypisania delegatów okazało sie w praktyce niemożliwe.
         {
             choiceButtons[0].onClick.AddListener(delegate { makeChoice(0); });
             choiceButtons[1].onClick.AddListener(delegate { makeChoice(1); });
@@ -42,24 +45,24 @@ public class SpeakerBehavior : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetButtonDown("Submit"))
+        if (Input.GetButtonDown("Submit") || isDisplayingEnding) //Sprawdzanie czy gracz wszczyna dialog.
             startDialog();
     }
-
-    private void startDialog()
+    //!Zaczyna dialog tylko wtedy gdy gracz jest w zasiegu postaci niezależnej lub gdy odbywa się sekwencja zakończenia gry.
+    public void startDialog()
     {
-        if (isInRange)
+        if (isInRange || isDisplayingEnding) 
         {
             getNextTree();
-            if (currentTree == null)
+            if (currentTree == null) //Przerywa dialog jeżeli obecne drzewo jest puste.
                 return;
             enableUI();
             disablePlayerControls();
             displayNextDialog();
         }
     }
-
-    private void disableUI()
+    //!Wyłącza interfejs dialogu.
+    private void disableUI() 
     {
         popup.gameObject.SetActive(false);
         foreach(Button button in choiceButtons)
@@ -71,8 +74,8 @@ public class SpeakerBehavior : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }
-
-    private void enableUI()
+    //!Włącza interfejs dialogu.
+    private void enableUI() 
     {
         popup.gameObject.SetActive(false);
         dialogBackground.gameObject.SetActive(true);
@@ -82,39 +85,45 @@ public class SpeakerBehavior : MonoBehaviour
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
     }
-
-    private void disablePlayerControls()
+    //!Odbiera graczowi kontrolę nad jego postacią oraz przygotowuje do zmiany sterowania odpowiedniej dla interfejsu dialogu.
+    private void disablePlayerControls() 
     {
+        if (playerControl == null)
+            return;
         playerControl.animator.Rebind();
         playerControl.animator.Update(0f);
         playerControl.animator.enabled = false;
         playerControl.gameObject.SetActive(false);
         playerControl.transform.position = playerPosition;
         playerControl.gameObject.SetActive(true);
-        playerControl.canMove = false;
+        playerControl.CanMove = false;
     }
-
-    private void enablePlayerControls()
+    //!Przywraca graczowi kontrolę nad bohaterem.
+    private void enablePlayerControls() 
     {
+        if (playerControl == null)
+            return;
         playerControl.animator.enabled = true;
-        playerControl.canMove = true;
+        playerControl.CanMove = true;
     }
-
-    private void displayNextDialog()
+    //!Przygotowuje do wyświetlania obecnej kwestii dialogowej.
+    private void displayNextDialog() 
     {
         if (currentNode == null)
             return;
-        speaker.text = currentNode.Speaker;
         dialogLine.text = "";
         currentCharacter = Resources.Load<CharacterData>("Dialogs/Character_data/" + currentNode.Speaker);
         if (currentCharacter)
         {
+            speaker.text = currentCharacter.Name;
             icon.sprite = currentCharacter.Icon;
             dialogLine.color = currentCharacter.TextColor;
         }
         StartCoroutine("typeText");
 
-        if (currentNode.IsLeaf)
+        if (currentNode.IsEnding) //Wszczyna sekwencję zakończenia jeżeli dialog ma ustawiona odpowiednią flagę.
+            saveDataController.loadEnding();
+        else if (currentNode.IsLeaf) //Przygotowuje do zakończenia dialogu.
         {
             choiceButtons[0].gameObject.SetActive(true);
             choiceButtons[0].GetComponentInChildren<Text>().text = currentNode.ExitLine;
@@ -122,29 +131,34 @@ public class SpeakerBehavior : MonoBehaviour
             choiceButtons[0].onClick.AddListener(endConversation);
             return;
         }
-        else
+        else //Domyślny przypadek, zakłada dalszą kontynuację dialogu.
             for (int i = 0; i < currentNode.OutputPorts.Count; i++)
             {
                 choiceButtons[i].gameObject.SetActive(true);
                 choiceButtons[i].GetComponentInChildren<Text>().text = currentNode.OutputPorts[i].PortName;
             }
     }
-
-    public void makeChoice(int i)
+    //!Wywoływana po naciśnięciu przycisku z odpowiedzią. Zapisuje wybór jeżeli takowy istnieje oraz przygotowuje kolejny węzeł dialogu.
+    public void makeChoice(int i) 
     {
         if (currentNode.IsChoice)
             saveDataController.saveChoice(currentNode, i);
         currentNode = currentTree.getNode(currentNode.OutputPorts[i].TargetGuid);
         displayNextDialog();
     }
-
-    private void endConversation()
+    //!Kończy dialog.
+    private void endConversation() 
     {
+        if (isDisplayingEnding)
+        {
+            SceneManager.LoadScene("MainMenu");
+            return;
+        }
         disableUI();
         enablePlayerControls();
     }
-
-    private void getNextTree()
+    //!Przygotowuje kolkejne drzewo dialogowe.
+    private void getNextTree() 
     {
         if (dialogTrees.Count != 0)
         {
@@ -160,14 +174,20 @@ public class SpeakerBehavior : MonoBehaviour
             currentNode = null;
         }
     }
-
-    private IEnumerator typeText()
+    //!Ustala treść zakończenia poprzez wybór odpowiedniego drzewa.
+    public void setEndingDialog(DialogContainer endingDialog) 
+    {
+        dialogTrees.Add(endingDialog);
+        isDisplayingEnding = true;
+    }
+    //!Wyświetla tekst dialogu litera po literze.
+    private IEnumerator typeText() 
     {
         foreach (Button button in choiceButtons)
             button.gameObject.SetActive(false);
         foreach (char character in currentNode.DialogLine.ToCharArray())
         {
-            if (Input.GetMouseButton(0) || Input.GetButtonDown("Submit"))
+            if ((Input.GetMouseButton(0) || Input.GetButtonDown("Submit")) && !isDisplayingEnding)
             {
                 dialogLine.text = currentNode.DialogLine;
                 yield break;
@@ -176,16 +196,16 @@ public class SpeakerBehavior : MonoBehaviour
             yield return new WaitForSeconds(textDelay);
         }
     }
-
-    private void OnTriggerEnter(Collider other)
+    //!Wykrywa gdy gracz jest wystarczająco blisko postaci niezależnej by podjąć dialog.
+    private void OnTriggerEnter(Collider other) 
     {
         if (dialogTrees.Count != 0)
             popup.gameObject.SetActive(true);
         isInRange = true;
         playerControl = other.gameObject.GetComponentInChildren<PlayerMovementController>();
     }
-
-    private void OnTriggerExit(Collider other)
+    //!Resetuje odpowiednie flagi gdy gracz się oddala.
+    private void OnTriggerExit(Collider other) 
     {
         popup.gameObject.SetActive(false);
         isInRange = false;
