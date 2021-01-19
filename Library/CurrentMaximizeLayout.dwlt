@@ -21,10 +21,10 @@ MonoBehaviour:
     y: 30
     width: 1920
     height: 947
-  m_MinSize: {x: 576, y: 450}
+  m_MinSize: {x: 578, y: 471}
   m_MaxSize: {x: 14000, y: 14021}
   vertical: 0
-  controlID: 1741
+  controlID: 659
 --- !u!114 &2
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -135,10 +135,10 @@ MonoBehaviour:
     y: 0
     width: 1246
     height: 947
-  m_MinSize: {x: 301, y: 450}
+  m_MinSize: {x: 303, y: 471}
   m_MaxSize: {x: 10000, y: 14021}
   vertical: 1
-  controlID: 1701
+  controlID: 633
 --- !u!114 &4
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -160,10 +160,10 @@ MonoBehaviour:
     y: 0
     width: 1246
     height: 671
-  m_MinSize: {x: 301, y: 200}
-  m_MaxSize: {x: 8001, y: 4021}
+  m_MinSize: {x: 303, y: 221}
+  m_MaxSize: {x: 8003, y: 4021}
   vertical: 0
-  controlID: 1680
+  controlID: 634
 --- !u!114 &5
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -229,9 +229,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 513.18427, y: 336.42453, z: 79.79175}
+    m_Target: {x: 278.12833, y: 314.30707, z: 88.591064}
     speed: 2
-    m_Value: {x: 513.18427, y: 336.42453, z: 79.79175}
+    m_Value: {x: 278.12833, y: 314.30707, z: 88.591064}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -282,9 +282,9 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: 0.1611965, y: 0.034040626, z: -0.0055622673, w: 0.9863195}
   m_Size:
-    m_Target: 426.98224
+    m_Target: 487.25766
     speed: 2
-    m_Value: 426.98224
+    m_Value: 487.25766
   m_Ortho:
     m_Target: 0
     speed: 2
@@ -414,8 +414,8 @@ MonoBehaviour:
     y: 0
     width: 445
     height: 671
-  m_MinSize: {x: 200, y: 200}
-  m_MaxSize: {x: 4000, y: 4000}
+  m_MinSize: {x: 202, y: 221}
+  m_MaxSize: {x: 4002, y: 4021}
   m_ActualView: {fileID: 10}
   m_Panes:
   - {fileID: 10}
@@ -451,7 +451,7 @@ MonoBehaviour:
       scrollPos: {x: 0, y: 0}
       m_SelectedIDs: 
       m_LastClickedID: 0
-      m_ExpandedIDs: 08dfffff28dfffff20e0ffff72e3ffff7ce3ffffd8e6ffffe0e6ffff08f3ffff6afaffff60fbffff
+      m_ExpandedIDs: 4ee9ffff6ee9ffff66eaffffb8edffffc2edffff1ef1ffff26f1ffff60fbffff
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -540,20 +540,20 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Resources/Dialogs/Trees
+    - Assets/Resources/Dialogs/Character_data
     m_Globs: []
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Resources/Dialogs/Trees
+  - Assets/Resources/Dialogs/Character_data
   m_LastFoldersGridSize: -1
   m_LastProjectPath: "D:\\Program Files\\Unity\\In\u017Cynierka\\Inzynierka"
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 33}
-    m_SelectedIDs: 94380000
-    m_LastClickedID: 14484
+    scrollPos: {x: 0, y: 0}
+    m_SelectedIDs: 92380000
+    m_LastClickedID: 14482
     m_ExpandedIDs: 000000008438000086380000883800008a38000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
@@ -607,8 +607,8 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_ListAreaState:
-    m_SelectedInstanceIDs: 1e3a0000
-    m_LastClickedInstanceID: 14878
+    m_SelectedInstanceIDs: 
+    m_LastClickedInstanceID: 0
     m_HadKeyboardFocusLastEvent: 0
     m_ExpandedInstanceIDs: c6230000dcd90000743f00000c3700001e3a000098380000e4360000c838000000000000
     m_RenameOverlay:
@@ -721,7 +721,7 @@ MonoBehaviour:
     m_CachedPref: -347
     m_ControlHash: -371814159
     m_PrefName: Preview_InspectorPreview
-  m_LastInspectedObjectInstanceID: 14878
+  m_LastInspectedObjectInstanceID: -1
   m_LastVerticalScrollValue: 0
   m_AssetGUID: 
   m_InstanceID: 0
